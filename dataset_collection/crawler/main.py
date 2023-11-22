@@ -1,20 +1,24 @@
-"""
-Copyright 2018 YoongiKim
+#!/usr/bin/env python3
+# -*- coding:utf-8 -*-
+###
+# File: /workspace/temp_feedback/Temp_Feedback/dataset_collection/crawler/main.py
+# Project: /workspace/temp_feedback/Temp_Feedback/dataset_collection/crawler
+# Created Date: Tuesday November 21st 2023
+# Author: Kaixu Chen
+# -----
+# Last Modified: Tuesday November 21st 2023 2:07:54 pm
+# Modified By: the developer formerly known as Kaixu Chen at <chenkaixusan@gmail.com>
+# -----
+# Copyright (c) 2023 The University of Tsukuba
+# -----
+# HISTORY:
+# Date      	By	Comments
+# ----------	---	---------------------------------------------------------
+# 
+# 22-11-2023	Kaixu Chen	we need change the keywords.yaml file type, and load the different key words in different group.
+###
 
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-"""
-
-import os
+import os, yaml
 import requests
 import shutil
 from multiprocessing import Pool
@@ -54,7 +58,7 @@ class Sites:
 
 class AutoCrawler:
     def __init__(self, skip_already_exist=True, n_threads=4, do_google=True, do_naver=True, download_path='download',
-                 full_resolution=False, face=False, no_gui=False, limit=0, proxy_list=None):
+                 full_resolution=False, face=False, no_gui=False, limit=0, proxy_list=None, keywords_file='keywords.txt'):
         """
         :param skip_already_exist: Skips keyword already downloaded before. This is needed when re-downloading.
         :param n_threads: Number of threads to download.
@@ -78,6 +82,7 @@ class AutoCrawler:
         self.no_gui = no_gui
         self.limit = limit
         self.proxy_list = proxy_list if proxy_list and len(proxy_list) > 0 else None
+        self.keywords_file = keywords_file
 
         os.makedirs('./{}'.format(self.download_path), exist_ok=True)
 
@@ -130,13 +135,19 @@ class AutoCrawler:
             os.makedirs(path)
 
     @staticmethod
-    def get_keywords(keywords_file='keywords.txt'):
+    def get_keywords(keywords_file:str ='keywords.txt'):
         # read search keywords from file
-        with open(keywords_file, 'r', encoding='utf-8-sig') as f:
-            text = f.read()
-            lines = text.split('\n')
-            lines = filter(lambda x: x != '' and x is not None, lines)
-            keywords = sorted(set(lines))
+        if keywords_file.endswith('.txt'):
+            # * load txt file
+            with open(keywords_file, 'r', encoding='utf-8-sig') as f:
+                text = f.read()
+                lines = text.split('\n')
+                lines = filter(lambda x: x != '' and x is not None, lines)
+                keywords = sorted(set(lines))
+        elif keywords_file.endswith('.yaml'):
+            # * load yaml file
+            with open(keywords_file, 'r', encoding='utf-8-sig') as f:
+                text = yaml.load(f, Loader=yaml.FullLoader)
 
         print('{} keywords found: {}'.format(len(keywords), keywords))
 
@@ -267,7 +278,7 @@ class AutoCrawler:
         signal.signal(signal.SIGINT, signal.SIG_IGN)
         
     def do_crawling(self):
-        keywords = self.get_keywords()
+        keywords = self.get_keywords(self.keywords_file)
 
         tasks = []
 
@@ -369,6 +380,8 @@ if __name__ == '__main__':
     parser.add_argument('--proxy-list', type=str, default='',
                         help='The comma separated proxy list like: "socks://127.0.0.1:1080,http://127.0.0.1:1081". '
                              'Every thread will randomly choose one from the list.')
+    parser.add_argument('--keywords', type=str, default='/workspace/temp_feedback/Temp_Feedback/dataset_collection/crawler/keywords.yaml',)
+    parser.add_argument('--download_path', type=str, default='/workspace/temp_feedback/data/download')
     args = parser.parse_args()
 
     _skip = False if str(args.skip).lower() == 'false' else True
@@ -394,5 +407,6 @@ if __name__ == '__main__':
 
     crawler = AutoCrawler(skip_already_exist=_skip, n_threads=_threads,
                           do_google=_google, do_naver=_naver, full_resolution=_full,
-                          face=_face, no_gui=_no_gui, limit=_limit, proxy_list=_proxy_list)
+                          face=_face, no_gui=_no_gui, limit=_limit, proxy_list=_proxy_list,
+                          keywords_file=args.keywords, download_path='download')
     crawler.do_crawling()
