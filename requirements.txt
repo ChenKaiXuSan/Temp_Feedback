@@ -10,3 +10,5 @@ idna
 requests
 selenium
 webdriver-manager
+
+pyvirtualdisplay

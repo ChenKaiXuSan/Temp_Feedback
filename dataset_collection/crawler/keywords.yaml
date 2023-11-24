@@ -3,8 +3,8 @@ EN:
     spring
     beach
     sunshine
-    blue sky
-    white clouds
+    blue_sky
+    white_clouds
 
   hot:
     summer
@@ -24,7 +24,7 @@ EN:
     trees
     meadows
     grassland
-    maple leaves
+    maple_leaves
     moon
 
   cold:
@@ -35,9 +35,9 @@ EN:
     skiing 
     duvets
     ice
-    ice lanterns
+    ice_lanterns
     Antarctica
-    ice rinks
+    ice_rinks
 
   normal:
     indoor  

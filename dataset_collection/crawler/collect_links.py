@@ -106,9 +106,10 @@ class CollectLinks:
             # You may need to change this. Because google image changes rapidly.
             # btn_more = self.browser.find_element(By.XPATH, '//input[@value="결과 더보기"]')
             # self.wait_and_click('//input[@id="smb"]')
-            self.wait_and_click('//input[@type="button"]')
+            # ! comment this line
+            # self.wait_and_click('//input[@type="button"]')
 
-            for i in range(60):
+            for i in range(200):
                 elem.send_keys(Keys.PAGE_DOWN)
                 time.sleep(0.2)
 

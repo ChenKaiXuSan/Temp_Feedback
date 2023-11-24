@@ -1,24 +1,30 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
-###
-# File: /workspace/temp_feedback/Temp_Feedback/dataset_collection/crawler/main.py
-# Project: /workspace/temp_feedback/Temp_Feedback/dataset_collection/crawler
-# Created Date: Tuesday November 21st 2023
-# Author: Kaixu Chen
-# -----
-# Last Modified: Tuesday November 21st 2023 2:07:54 pm
-# Modified By: the developer formerly known as Kaixu Chen at <chenkaixusan@gmail.com>
-# -----
-# Copyright (c) 2023 The University of Tsukuba
-# -----
-# HISTORY:
-# Date      	By	Comments
-# ----------	---	---------------------------------------------------------
-# 
-# 22-11-2023	Kaixu Chen	we need change the keywords.yaml file type, and load the different key words in different group.
-###
+'''
+File: /workspace/temp_feedback/Temp_Feedback/dataset_collection/crawler/main.py
+Project: /workspace/temp_feedback/Temp_Feedback/dataset_collection/crawler
+Created Date: Tuesday November 21st 2023
+Author: Kaixu Chen
+-----
+Comment:
+
+Have a good code time :)
+-----
+Last Modified: Tuesday November 21st 2023 2:07:54 pm
+Modified By: the developer formerly known as Kaixu Chen at <chenkaixusan@gmail.com>
+-----
+Copyright (c) 2023 The University of Tsukuba
+-----
+HISTORY:
+Date      	By	Comments
+----------	---	---------------------------------------------------------
+
+24-11-2023	Kaixu Chen	the crawler can run successfully, but also have some bugs.
+'''
+
 
 import os, yaml
+from typing import Any
 import requests
 import shutil
 from multiprocessing import Pool
@@ -29,6 +35,7 @@ import imghdr
 import base64
 from pathlib import Path
 import random
+from pyvirtualdisplay import Display
 
 
 class Sites:
@@ -149,14 +156,19 @@ class AutoCrawler:
             with open(keywords_file, 'r', encoding='utf-8-sig') as f:
                 text = yaml.load(f, Loader=yaml.FullLoader)
 
-        print('{} keywords found: {}'.format(len(keywords), keywords))
+            group = text.keys()
+            lan_group = text['EN'].keys()
+
+        print('{} lans found: {}'.format(len(group), group))
+        print('{} group found: {}'.format(len(lan_group), lan_group))
 
         # re-save sorted keywords
-        with open(keywords_file, 'w+', encoding='utf-8') as f:
-            for keyword in keywords:
-                f.write('{}\n'.format(keyword))
+        # with open(keywords_file, 'w+', encoding='utf-8') as f:
+        #     for keyword in keywords:
+        #         f.write('{}\n'.format(keyword))
 
-        return keywords
+        return text
+        # return keywords
 
     @staticmethod
     def save_object_to_file(object, file_path, is_base64=False):
@@ -175,8 +187,12 @@ class AutoCrawler:
         data = base64.decodebytes(bytes(encoded, encoding='utf-8'))
         return data
 
-    def download_images(self, keyword, links, site_name, max_count=0):
-        self.make_dir('{}/{}'.format(self.download_path, keyword.replace('"', '')))
+    def download_images(self, keyword, links, site_name, max_count=0, down_info: list = ['EN', 'spring']):
+
+        down_lan = down_info[0]
+        down_class = down_info[1]
+
+        self.make_dir('{}/{}/{}'.format(self.download_path, down_class, keyword.replace('"', '')))
         total = len(links)
         success_count = 0
 
@@ -203,7 +219,7 @@ class AutoCrawler:
                     ext = self.get_extension_from_link(link)
                     is_base64 = False
 
-                no_ext_path = '{}/{}/{}_{}_{}'.format(self.download_path.replace('"', ''), keyword, site_name, keyword,
+                no_ext_path = '{}/{}/{}/{}_{}_{}_{}'.format(self.download_path.replace('"', ''), down_class, keyword, site_name, down_class, keyword.replace(' ', '-'), 
                                                    str(index).zfill(4))
                 path = no_ext_path + '.' + ext
                 self.save_object_to_file(response, path, is_base64=is_base64)
@@ -229,10 +245,19 @@ class AutoCrawler:
                 print('Download failed - ', e)
                 continue
 
-    def download_from_site(self, keyword, site_code):
+    def download_from_site(self, keyword, site_code, down_info: list):
+        """download images from site, by keyword.
+        This function is the main logic for the python crawler.
+
+        Args:
+            keyword (dict): the keyword dict, which contains the keyword in different class with detail keywords.
+            site_code (int): the site code.
+        """ 
+
         site_name = Sites.get_text(site_code)
         add_url = Sites.get_face_url(site_code) if self.face else ""
 
+        # ! in no gui mode, chromedriver is not initialized in main thread
         try:
             proxy = None
             if self.proxy_list:
@@ -262,7 +287,7 @@ class AutoCrawler:
                 links = []
 
             print('Downloading images from collected links... {} from {}'.format(keyword, site_name))
-            self.download_images(keyword, links, site_name, max_count=self.limit)
+            self.download_images(keyword, links, site_name, max_count=self.limit, down_info=down_info)
             Path('{}/{}/{}_done'.format(self.download_path, keyword.replace('"', ''), site_name)).touch()
 
             print('Done {} : {}'.format(site_name, keyword))
@@ -272,35 +297,42 @@ class AutoCrawler:
             return
 
     def download(self, args):
-        self.download_from_site(keyword=args[0], site_code=args[1])
+        
+        self.download_from_site(keyword=args[0], site_code=args[1], down_info=args[2])
 
     def init_worker(self):
         signal.signal(signal.SIGINT, signal.SIG_IGN)
-        
-    def do_crawling(self):
-        keywords = self.get_keywords(self.keywords_file)
+    
+    def do_crawling(self, keywords: dict, one_class: str, language: str = 'EN'):
+
+        # keywords = self.get_keywords(self.keywords_file)
+        keyword_list = keywords.split(' ')
 
         tasks = []
 
-        for keyword in keywords:
+        down_info = [language, one_class]
+
+        for keyword in keyword_list:
             dir_name = '{}/{}'.format(self.download_path, keyword)
             google_done = os.path.exists(os.path.join(os.getcwd(), dir_name, 'google_done'))
             naver_done = os.path.exists(os.path.join(os.getcwd(), dir_name, 'naver_done'))
             if google_done and naver_done and self.skip:
                 print('Skipping done task {}'.format(dir_name))
                 continue
+            
+            keyword = keyword.replace('_', ' ')
 
             if self.do_google and not google_done:
                 if self.full_resolution:
-                    tasks.append([keyword, Sites.GOOGLE_FULL])
+                    tasks.append([keyword, Sites.GOOGLE_FULL, down_info])
                 else:
-                    tasks.append([keyword, Sites.GOOGLE])
+                    tasks.append([keyword, Sites.GOOGLE, down_info])
 
             if self.do_naver and not naver_done:
                 if self.full_resolution:
-                    tasks.append([keyword, Sites.NAVER_FULL])
+                    tasks.append([keyword, Sites.NAVER_FULL, down_info])
                 else:
-                    tasks.append([keyword, Sites.NAVER])
+                    tasks.append([keyword, Sites.NAVER, down_info])
 
         try:
             pool = Pool(self.n_threads, initializer=self.init_worker)
@@ -313,9 +345,23 @@ class AutoCrawler:
             pool.join()
         print('Task ended. Pool join.')
 
+        # FIXME because change the save path, so the imbalance check is not work.
         self.imbalance_check()
 
         print('End Program')
+    
+    def __call__(self, *args: Any, **kwds: Any) -> Any:
+        all_keywords = self.get_keywords(self.keywords_file)
+
+        for lan, value in all_keywords.items():
+
+            for one_class in value:
+
+                self.do_crawling(value[one_class], one_class, lan)
+
+                print('Finish {} class in {} language'.format(one_class, lan))
+
+
 
     def imbalance_check(self):
         print('Data imbalance checking...')
@@ -365,9 +411,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--skip', type=str, default='true',
                         help='Skips keyword already downloaded before. This is needed when re-downloading.')
-    parser.add_argument('--threads', type=int, default=4, help='Number of threads to download.')
+    parser.add_argument('--threads', type=int, default=1, help='Number of threads to download.')
     parser.add_argument('--google', type=str, default='true', help='Download from google.com (boolean)')
-    parser.add_argument('--naver', type=str, default='true', help='Download from naver.com (boolean)')
+    parser.add_argument('--naver', type=str, default='false', help='Download from naver.com (boolean)')
     parser.add_argument('--full', type=str, default='false',
                         help='Download full resolution image instead of thumbnails (slow)')
     parser.add_argument('--face', type=str, default='false', help='Face search mode')
@@ -381,7 +427,7 @@ if __name__ == '__main__':
                         help='The comma separated proxy list like: "socks://127.0.0.1:1080,http://127.0.0.1:1081". '
                              'Every thread will randomly choose one from the list.')
     parser.add_argument('--keywords', type=str, default='/workspace/temp_feedback/Temp_Feedback/dataset_collection/crawler/keywords.yaml',)
-    parser.add_argument('--download_path', type=str, default='/workspace/temp_feedback/data/download')
+    parser.add_argument('--download_path', type=str, default='/workspace/data/download', help='Download folder path')
     args = parser.parse_args()
 
     _skip = False if str(args.skip).lower() == 'false' else True
@@ -405,8 +451,15 @@ if __name__ == '__main__':
         'Options - skip:{}, threads:{}, google:{}, naver:{}, full_resolution:{}, face:{}, no_gui:{}, limit:{}, _proxy_list:{}'
             .format(_skip, _threads, _google, _naver, _full, _face, _no_gui, _limit, _proxy_list))
 
+    display = Display(visible=0, size=(800, 600))
+    display.start()
+    print('Virtual display started.')
+
     crawler = AutoCrawler(skip_already_exist=_skip, n_threads=_threads,
                           do_google=_google, do_naver=_naver, full_resolution=_full,
                           face=_face, no_gui=_no_gui, limit=_limit, proxy_list=_proxy_list,
-                          keywords_file=args.keywords, download_path='download')
-    crawler.do_crawling()
+                          keywords_file=args.keywords, download_path=args.download_path)
+    crawler()
+
+    display.stop()
+    print('Virtual display stopped.')
