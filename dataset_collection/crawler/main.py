@@ -20,6 +20,7 @@ Date      	By	Comments
 ----------	---	---------------------------------------------------------
 
 24-11-2023	Kaixu Chen	the crawler can run successfully, but also have some bugs.
+                        
 '''
 
 
@@ -91,7 +92,7 @@ class AutoCrawler:
         self.proxy_list = proxy_list if proxy_list and len(proxy_list) > 0 else None
         self.keywords_file = keywords_file
 
-        os.makedirs('./{}'.format(self.download_path), exist_ok=True)
+        os.makedirs('{}'.format(self.download_path), exist_ok=True)
 
     @staticmethod
     def all_dirs(path):
@@ -191,6 +192,8 @@ class AutoCrawler:
 
         down_lan = down_info[0]
         down_class = down_info[1]
+
+        down_class = down_lan + '_' + down_class
 
         self.make_dir('{}/{}/{}'.format(self.download_path, down_class, keyword.replace('"', '')))
         total = len(links)
@@ -411,7 +414,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--skip', type=str, default='true',
                         help='Skips keyword already downloaded before. This is needed when re-downloading.')
-    parser.add_argument('--threads', type=int, default=1, help='Number of threads to download.')
+    parser.add_argument('--threads', type=int, default=4, help='Number of threads to download.')
     parser.add_argument('--google', type=str, default='true', help='Download from google.com (boolean)')
     parser.add_argument('--naver', type=str, default='false', help='Download from naver.com (boolean)')
     parser.add_argument('--full', type=str, default='false',

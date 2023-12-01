@@ -67,19 +67,21 @@ class CollectLinks:
 
     def wait_and_click(self, xpath):
         #  Sometimes click fails unreasonably. So tries to click at all cost.
-        try:
-            w = WebDriverWait(self.browser, 15)
-            elem = w.until(EC.element_to_be_clickable((By.XPATH, xpath)))
-            elem.click()
-            self.highlight(elem)
-        except Exception as e:
-            print('Click time out - {}'.format(xpath))
-            print('Refreshing browser...')
-            self.browser.refresh()
-            time.sleep(2)
-            return self.wait_and_click(xpath)
+        for _ in range(100):
+            try:
+                w = WebDriverWait(self.browser, 15)
+                elem = w.until(EC.element_to_be_clickable((By.XPATH, xpath)))
+                elem.click()
+                self.highlight(elem)
+                return True
+            except Exception as e:
+                print('Click time out - {}'.format(xpath))
+                print('Refreshing browser...')
+                self.browser.refresh()
+                time.sleep(2)
+                # return self.wait_and_click(xpath)
 
-        return elem
+        return False
 
     def highlight(self, element):
         self.browser.execute_script("arguments[0].setAttribute('style', arguments[1]);", element,
@@ -98,20 +100,22 @@ class CollectLinks:
 
         elem = self.browser.find_element(By.TAG_NAME, "body")
 
-        for i in range(60):
+        for i in range(100):
             elem.send_keys(Keys.PAGE_DOWN)
             time.sleep(0.2)
 
         try:
+            # ! this is bug for more button. It is not working now.
             # You may need to change this. Because google image changes rapidly.
-            # btn_more = self.browser.find_element(By.XPATH, '//input[@value="결과 더보기"]')
+            # btn_more = self.browser.find_element(By.XPATH, '//input[@value="显示更多搜索结果"]')
             # self.wait_and_click('//input[@id="smb"]')
-            # ! comment this line
-            # self.wait_and_click('//input[@type="button"]')
+            # this is for more button
+            more_flag = self.wait_and_click('//input[@type="button"]')
 
-            for i in range(200):
-                elem.send_keys(Keys.PAGE_DOWN)
-                time.sleep(0.2)
+            if more_flag:
+                for i in range(100):
+                    elem.send_keys(Keys.PAGE_DOWN)
+                    time.sleep(0.2)
 
         except ElementNotVisibleException:
             pass
@@ -177,7 +181,7 @@ class CollectLinks:
         self.browser.get("https://www.google.com/search?q={}&tbm=isch{}".format(keyword, add_url))
         time.sleep(1)
 
-        self.wait_and_click('//div[@class="isv-r PNCib ViTmJb BUooTd"]//img[@class="rg_i Q4LuWd"]')
+        self.wait_and_click('//div[@class="isv-r PNib ViTmJb BUooTd"]//img[@class="rg_i Q4LuWd"]')
         time.sleep(1)
 
         body = self.browser.find_element(By.TAG_NAME, "body")
