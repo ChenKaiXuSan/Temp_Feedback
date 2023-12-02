@@ -29,6 +29,8 @@ from torchvision.transforms import (
     Resize,
     ToTensor,
     RandomHorizontalFlip,
+    CenterCrop,
+    Normalize
 )
 
 from typing import Any, Callable, Dict, Optional, Type
@@ -53,18 +55,22 @@ class TempDataModule(LightningDataModule):
 
         self._BATCH_SIZE = opt.train.batch_size
         self._NUM_WORKERS = opt.data.num_workers
-        self._IMG_SIZE = opt.data.img_size
 
-        # FIXME: here have bugs
+        self._IMG_SIZE = opt.data.img_size
+        self._center_crop = opt.data.crop_size
+        self._resize = opt.data.resize
+
         self.train_transform = Compose([
-            Resize(size=[self._IMG_SIZE, self._IMG_SIZE]),
+            Resize(size=[self._resize, self._resize]),
+            CenterCrop(size=[self._center_crop, self._center_crop]),
             ToTensor(),
-            RandomCrop(size=[self._IMG_SIZE, self._IMG_SIZE]),
+            Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225]),
         ])
 
         self.val_transform = Compose([
-            Resize(size=[self._IMG_SIZE, self._IMG_SIZE]),
+            Resize(size=[self._resize, self._resize]),
             ToTensor(),
+            Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225]),
         ])
 
     def prepare_data(self) -> None:

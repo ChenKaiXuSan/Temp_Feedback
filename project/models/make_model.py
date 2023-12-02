@@ -24,17 +24,42 @@ Date      	By	Comments
 # %%
 # from pytorchvideo.models import x3d, resnet, csn, slowfast, r2plus1d
 
+from os import name
+from turtle import forward
+from typing import Any
+from sympy import elliptic_f
 import torch
 import torch.nn as nn
 from torchvision.models import resnet50, ResNet50_Weights
 
+from torchvision.models import (
+    resnet18, ResNet18_Weights,
+    resnet50, ResNet50_Weights,
+    resnet101, ResNet101_Weights,
+    resnet152, ResNet152_Weights,
+    
+    alexnet, AlexNet_Weights,
+
+    densenet121, DenseNet121_Weights,
+    densenet161, DenseNet161_Weights,
+    densenet169, DenseNet169_Weights,
+    densenet201, DenseNet201_Weights,
+
+    squeezenet1_0, SqueezeNet1_0_Weights,
+    squeezenet1_1, SqueezeNet1_1_Weights,
+
+    vgg11, VGG11_Weights,
+    vgg13, VGG13_Weights,
+    vgg16, VGG16_Weights,
+    vgg19, VGG19_Weights,
+
+    mobilenet_v3_small, MobileNet_V3_Small_Weights,
+    mobilenet_v3_large, MobileNet_V3_Large_Weights,
+
+)
 # %%
 
-class MakeVideoModule(nn.Module):
-    '''
-    the module zoo from the PytorchVideo lib, to make the different 3D model.
-
-    '''
+class MakeTempModule(nn.Module):
 
     def __init__(self, hparams) -> None:
 
@@ -42,57 +67,57 @@ class MakeVideoModule(nn.Module):
 
         self.model_class_num = hparams.model.model_class_num
         self.model_depth = hparams.model.model_depth
-
+        self.model_name = hparams.model.name
         self.transfor_learning = hparams.train.transfor_learning
 
-    def make_walk_resnet(self, input_channel:int = 3) -> nn.Module:
+    def make_resnet(self, depth:int = 50, input_channel:int = 3) -> nn.Module:
 
         if self.transfor_learning:
-            slow = torch.hub.load('facebookresearch/pytorchvideo', 'slow_r50', pretrained=True)
-            
-            # for the folw model and rgb model 
-            slow.blocks[0].conv = nn.Conv3d(input_channel, 64, kernel_size=(1, 7, 7), stride=(1, 2, 2), padding=(0, 3, 3), bias=False)
-            # change the knetics-400 output 400 to model class num
-            slow.blocks[-1].proj = nn.Linear(2048, self.model_class_num)
+
+            if depth == 18:
+                network = resnet18(weights = ResNet50_Weights)
+            elif depth == 50:
+                network = resnet50(weights = ResNet50_Weights)
+            elif depth == 101:
+                network = resnet101(weights = ResNet101_Weights)
+            else:
+                raise ValueError('The model name is not in the choice.')
+
+            # change the output to model class num
+            network.fc = nn.Linear(network.fc.in_features, self.model_class_num)
 
         else:
-            slow = resnet.create_resnet(
-                input_channel=input_channel,
-                model_depth=self.model_depth,
-                model_num_class=self.model_class_num,
-                norm=nn.BatchNorm3d,
-                activation=nn.ReLU,
-            )
+            network = resnet50()
 
-        return slow
+            network.fc = nn.Linear(network.fc.in_features, self.model_class_num)
 
-    def make_walk_x3d(self, input_channel:int = 3) -> nn.Module:
+        return network
 
-        if self.transfor_learning:
-            # x3d l model, param 6.15 with 16 frames. more smaller maybe more faster.
-            # top1 acc is 77.44
-            model = torch.hub.load("facebookresearch/pytorchvideo:main", model='x3d_m', pretrained=True)
-            model.blocks[0].conv.conv_t = nn.Conv3d(
-                in_channels=input_channel, 
-                out_channels=24,
-                kernel_size=(1,3,3),
-                stride=(1,2,2),
-                padding=(0,1,1),
-                bias=False
-                )
-            
-            model.blocks[-1].proj = nn.Linear(2048, self.model_class_num)
-            model.blocks[-1].activation = None
+    def forward(self, name, depth, input_channel):
 
+        if name == 'resnet':
+            return self.make_resnet(depth, input_channel)
         else:
-            model = x3d.create_x3d(
-                input_channel=3,
-                input_clip_length=16,
-                input_crop_size=224,
-                model_num_class=1,
-                norm=nn.BatchNorm3d,
-                activation=nn.ReLU,
-                head_activation=None,
-            )
+            raise ValueError('The model name is not in the choice.')
+        
+    
+def make_model(hparams):
+    """a helper function to make the model by the hparams.model.name.
 
-        return model
+    Args:
+        hparams (hydra): hpamras, include the model name, model class num, model depth, and so on.
+
+    Raises:
+        ValueError: when the model name is not in the choice, raise the error.
+
+    Returns:
+        nn.Module: the model
+    """
+
+    name = hparams.model.name
+    depth = hparams.model.model_depth
+    input_channel = hparams.model.model_class_num   
+
+    model = MakeTempModule(hparams)
+
+    return model(name, depth, input_channel)

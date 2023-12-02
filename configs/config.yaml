@@ -5,18 +5,25 @@ hydra:
 
 data:
   path: '/workspace/data/splited_dataset'
-  img_size: 224
+  img_size: 256
+  resize: 256
+  crop_size: 224
   num_workers: 4
 
 model:
-  model: "resnet"
+  name: "resnet"
   model_class_num: 5 # the class num of model
   model_depth: 50 # choices=[50, 101, 152], help='the depth of used model'
 
+optimizer:
+  name: "Adam"
+  lr: 0.001 # the learning rate of optimizer
+  weight_decay: 0.0001 # the weight decay of optimizer
+
 train:
   # Training config
-  max_epochs: 100 # numer of epochs of training
-  batch_size: 8 # batch size for the dataloader
+  max_epochs: 500 # numer of epochs of training
+  batch_size: 16 # batch size for the dataloader
 
   gpu_num: 0 # choices=[0, 1], help='the gpu number whicht to train'
 
@@ -24,8 +31,8 @@ train:
   transfor_learning: True # if use the transformer learning
   train_path: ""
 
-  version: "${model.model}" # the version of logger, such data
-  log_path: "/workspace/temp_feedback/Temp_Feedback/logs/${model.model}/${now:%Y-%m-%d}/${now:%H-%M-%S}"
+  version: "${model.name}" # the version of logger, such data
+  log_path: "/workspace/temp_feedback/Temp_Feedback/logs/${model.name}/${now:%Y-%m-%d}/${now:%H-%M-%S}"
 
   fast_dev_run: False # if use the fast_dev_run
   fold: 0 # the fold of the cross validation
