@@ -35,4 +35,3 @@ train:
   log_path: "/workspace/temp_feedback/Temp_Feedback/logs/${model.name}/${now:%Y-%m-%d}/${now:%H-%M-%S}"
 
   fast_dev_run: False # if use the fast_dev_run
-  fold: 0 # the fold of the cross validation

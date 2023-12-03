@@ -145,7 +145,7 @@ class TempFeedbackLightningModule(LightningModule):
         the configure_optimizers of the model
         '''
         optimizer = torch.optim.Adam(self.parameters(), lr=self.lr)
-        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=10, verbose=True)
+        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=3, verbose=True)
         return {
             'optimizer': optimizer,
             'lr_scheduler': scheduler,

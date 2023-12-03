@@ -7,6 +7,68 @@ Created Date: Thursday November 30th 2023
 Author: Kaixu Chen
 -----
 Comment:
+This script is used to split the prepared dataet. 
+The dataset is downloaded from the internet, and the structure is:
+raw_dataset_path
+├── class1
+│   ├── key_word1
+│   ├── key_word2
+│   ├── key_word3
+│   ├── key_word4
+│   └── key_word5
+├── class2
+│   ├── key_word1
+│   ├── key_word2
+│   ├── key_word3
+│   ├── key_word4
+│   └── key_word5
+├── class3
+│   ├── key_word1
+│   ├── key_word2
+│   ├── key_word3
+│   ├── key_word4
+│   └── key_word5
+├── class4
+│   ├── key_word1
+│   ├── key_word2
+│   ├── key_word3
+│   ├── key_word4
+│   └── key_word5
+└── class5
+    ├── key_word1
+    ├── key_word2
+    ├── key_word3
+    ├── key_word4
+    └── key_word5
+
+For our task, we collect 5 different classes. 
+they are: cold, cool, warm, hot, normal
+And each keyword is not equal to the others.
+We also use 3 different languages to collect the dataset, to find more images.
+
+The target dataset structure is:
+splitted_dataset_path
+├── train
+│   ├── class1
+│   ├── class2
+│   ├── class3
+│   ├── class4
+│   └── class5
+├── val
+│   ├── class1
+│   ├── class2
+│   ├── class3
+│   ├── class4
+│   └── class5
+└── test
+    ├── class1
+    ├── class2
+    ├── class3
+    ├── class4
+    └── class5
+
+the 5 classes are the same as the raw dataset.
+the train:val:test = 7:2:1
 
 Have a good code time :)
 -----

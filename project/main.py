@@ -10,7 +10,7 @@ Comment:
 
 Have a good code time :)
 -----
-Last Modified: Tuesday November 21st 2023 1:46:07 pm
+Last Modified: Thursday November 30th 2023 2:16:25 pm
 Modified By: the developer formerly known as Kaixu Chen at <chenkaixusan@gmail.com>
 -----
 Copyright (c) 2023 The University of Tsukuba
@@ -56,7 +56,7 @@ def train(hparams):
     lr_monitor = LearningRateMonitor(logging_interval='step')
     early_stop_callback = EarlyStopping(
         monitor='val_loss',
-        patience=10,
+        patience=20,
         verbose=True,
         mode='min'
     )

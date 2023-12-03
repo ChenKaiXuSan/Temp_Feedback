@@ -75,11 +75,13 @@ class MakeTempModule(nn.Module):
         if self.transfor_learning:
 
             if depth == 18:
-                network = resnet18(weights = ResNet50_Weights)
+                network = resnet18(weights = ResNet18_Weights)
             elif depth == 50:
                 network = resnet50(weights = ResNet50_Weights)
             elif depth == 101:
                 network = resnet101(weights = ResNet101_Weights)
+            elif depth == 152:
+                network = resnet152(weights = ResNet152_Weights)
             else:
                 raise ValueError('The model name is not in the choice.')
 

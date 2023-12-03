@@ -12,79 +12,25 @@ We try to use the deep learning method to detect the temperature of the image or
 
 ## Dataset
 
-To improve the research of the temperature feedback system, we collect a large number of images and videos of different session. 
-For the dataset, we decide to prepare a dataset inclue three different session, which are the normal session (N), the high session (H) and the cold session (C).
-To detail the different temperature of the session, we split hot/cold session into different level, which are high (H1), medium (H2), low (H3) and cold (C1), medium (C2), low (C3).
+To improve the research of the temperature feedback system, we collect a large number of images of different classes. 
+For the dataset, we decide to prepare a dataset inclue 5 different classes, which are the noraml, hot, cold, warm and cool.
 
-The class in the dataset is as follows:
-1. c1，c2，c3
-2. h1，h2，h3
-3. n
+For the dataset, we try to use 2 different methods to collect the dataset, which are the python crawler and the DF model.
 
-About the Hot flag, we think the image should include fire.
+You can find the detail information about the dataset in the [dataset](./dataset_collection/README.md).
 
-List 
+## Python crawler
 
-- 温暖：春天，沙滩，阳光，蓝天白云
-- 炎热：夏天，沙漠，火焰，热带雨林，沙漠，太阳，火山
-- 凉爽：秋天，瀑布，大海，河流，湖泊，森林，树木，草地，草原，枫叶，月亮（？）
-- 寒冷：冬天，雪地，雪花，雪球，滑雪，羽绒服，冰灯，南极，溜冰场
-- 一般：室内，草坪
+You can find the pytorch crawler in the [crawler](./dataset_collection/crawler) folder.
+We use the crawler to collect the dataset from the Internet, and we use the keyword to collect the dataset.
+Then we annotate the dataset by human, and prepare the dataset.
+You can fine the dataset prepare code in the [prepare_dataset.py](./dataset_collection/prepare_dataset.py) file.
 
-5个类别，一个类别收集2k张图片，1.5k用来训练，0.5k用来测试。
-使用5Fold CV。
+**The keyword used to collect the dataset:**
+You can find the keyword list in the [keyword.txt](./dataset_collection/crawler/keyword.yaml) file.
+Here, we use 3 different languages to collect the dataset, which are English, Chinese and Japanese.
 
-> trick：使用三种不同的语言来进行搜索，英文，中文，日文。
-可以增加图片的数量。
-
-
-## The keyword used to collect the dataset:
-sun	晴
-sunshine	阳光
-rain	雨
-snow	雪
-hail	冰雹
-drizzle	毛毛雨
-sleet	冰雨
-shower	阵雨
-mist	薄雾
-fog	雾
-cloud	云
-rainbow	彩虹
-wind	大风
-breeze	微风
-strong winds	强风
-thunder	打雷
-lightning	闪电
-storm	暴风
-thunderstorm	雷暴
-gale	大风
-tornado	旋风
-hurricane	飓风
-flood	洪水
-frost	霜
-ice	冰
-drought	干旱
-heat wave	暖流
-windy	有风
-cloudy	多云
-foggy	有雾
-misty	薄雾
-icy	结冰
-frosty	霜冻
-stormy	有雷雨
-dry	干燥
-wet	有雨水
-hot	热
-cold	冷
-chilly	寒
-sunny	晴朗
-rainy	下雨
-fine	晴天
-dull	阴天
-overcast	多云
-humid	湿润
-
+## Image Generation (Stable Diffusion)
 
 ## How to run   
 First, install dependencies   
