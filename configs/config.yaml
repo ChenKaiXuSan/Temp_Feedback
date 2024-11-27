@@ -32,6 +32,6 @@ train:
   train_path: ""
 
   version: "${model.name}" # the version of logger, such data
-  log_path: "/workspace/temp_feedback/Temp_Feedback/logs/${model.name}/${now:%Y-%m-%d}/${now:%H-%M-%S}"
+  log_path: "logs/${model.name}/${now:%Y-%m-%d}/${now:%H-%M-%S}"
 
   fast_dev_run: False # if use the fast_dev_run
