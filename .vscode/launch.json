@@ -5,14 +5,6 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Python: 当前文件",
-      "type": "python",
-      "request": "launch",
-      "program": "${file}",
-      "console": "integratedTerminal",
-      "justMyCode": true
-    },
-    {
       "name": "crawler",
       "type": "python",
       "request": "launch",
@@ -29,11 +21,11 @@
       "justMyCode": true,
     },
     {
-      "name": "merge_img",
+      "name": "fuse_img",
       "type": "debugpy",
       "request": "launch",
-      "program": "/workspace/temp_feedback/Temp_Feedback/fuse_image/fuse_image.py",
-      "cwd": "/workspace/temp_feedback/Temp_Feedback",
+      "cwd": "${workspaceFolder}",
+      "module": "fuse_image.fuse_image",
       "console": "integratedTerminal"
     }
   ]
