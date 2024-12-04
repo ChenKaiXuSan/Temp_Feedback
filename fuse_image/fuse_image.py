@@ -30,7 +30,7 @@ from PIL import Image
 
 
 def random_scale_and_combine_two_images(back: Image, front: Image):
-    scale_factor = random.uniform(0.5, 1.0)  # 缩放比例从0.3到1.0之间
+    scale_factor = random.uniform(0.1, 0.5)
 
     if back.width > front.width and back.height > front.height:
         new_width = int(front.width * scale_factor)
@@ -38,6 +38,7 @@ def random_scale_and_combine_two_images(back: Image, front: Image):
     else:
         new_width = int(back.width * scale_factor)
         new_height = int(back.height * scale_factor)
+
     front_resized = front.resize((new_width, new_height), Image.ANTIALIAS)
 
     max_x = back.width - new_width
