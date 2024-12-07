@@ -60,18 +60,24 @@ def find_label(img: Path):
 
 
 def merge_images(first_imgs: list[Path], second_imgs: list[Path], output_path: Path):
-    # 创建组合
-    combinations = itertools.product(first_imgs + second_imgs, repeat=2)
 
-    for i, (image1_path, image2_path) in enumerate(combinations):
+    if len(first_imgs) > len(second_imgs):
+        first_imgs = random.sample(first_imgs, len(second_imgs))
+    else:
+        second_imgs = random.sample(second_imgs, len(first_imgs))
+
+    for i, (image1_path, image2_path) in enumerate(zip(first_imgs, second_imgs)):
+
         if image1_path == image2_path:
             continue
+        if i == 1000: # stop after 500 images
+            break
 
         image1 = Image.open(image1_path)
         image2 = Image.open(image2_path)
 
         merged_img: Image = random_scale_and_combine_two_images(image1, image2)
-        # 保存合并后的图片
+
         label = Path(f"back_{find_label(image1_path)}_front_{find_label(image2_path)}")
         save_path = output_path / label / f"{label}_{i}.jpg"
 
@@ -148,6 +154,6 @@ if __name__ == "__main__":
 
     cold_imgs, hot_imgs, normal_imgs = load_images(image_path)
 
-    # merge_images(cold_imgs, hot_imgs, normal_imgs, output_path)
+    # merge_images(cold_imgs, hot_imgs, output_path)
 
     multi_process_merge_images(cold_imgs, hot_imgs, normal_imgs, output_path)
