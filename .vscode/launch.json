@@ -1,0 +1,32 @@
+{
+  // 使用 IntelliSense 了解相关属性。
+  // 悬停以查看现有属性的描述。
+  // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "crawler",
+      "type": "python",
+      "request": "launch",
+      "program": "/workspace/temp_feedback/Temp_Feedback/dataset_collection/crawler/main.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+    },
+    {
+      "name": "temp_feedback",
+      "type": "python",
+      "request": "launch",
+      "program": "/workspace/temp_feedback/Temp_Feedback/project/main.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+    },
+    {
+      "name": "fuse_img",
+      "type": "debugpy",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "module": "fuse_image.fuse_image",
+      "console": "integratedTerminal"
+    }
+  ]
+}
