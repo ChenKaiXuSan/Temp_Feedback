@@ -13,3 +13,6 @@ selenium
 webdriver-manager
 
 pyvirtualdisplay
+
+# hugging face transformers
+transformers
