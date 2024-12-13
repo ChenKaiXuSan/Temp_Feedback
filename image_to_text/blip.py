@@ -36,6 +36,14 @@ from utils.timer import timer
 
 
 def load_images(image_path: Path):
+    """load images from the image_path.
+
+    Args:
+        image_path (Path): path to the image.
+
+    Returns:
+        list: list of image paths.
+    """    
     cold_imgs = []
     hot_imgs = []
     normal_imgs = []
@@ -103,6 +111,15 @@ class ImageToText:
 
     @timer
     def image2text_con(self, image_path: Path, text: str = "a photography of"):
+        """convert image to text using conditional image captioning.
+
+        Args:
+            image_path (Path): path to the image.
+            text (str, optional): the text used for conditional. Defaults to "a photography of".
+
+        Returns:
+            str: text generated from the image.
+        """        
 
         image = Image.open(image_path).convert("RGB")
         print(image.size)
@@ -115,6 +132,14 @@ class ImageToText:
 
     @timer
     def image2text_uncon(self, image_path: Path):
+        """convert image to text using unconditional image captioning.
+
+        Args:
+            image_path (Path): path to the image.
+
+        Returns:
+            str: text generated from the image.
+        """        
 
         image = Image.open(image_path).convert("RGB")
         print(image.size)
@@ -166,19 +191,18 @@ class ImageToText:
         image.save(output_path)
 
     def save_image_info_to_json(self, image_info: dict, json_file_path: Path):
-        """
-        Saves the image path and associated text to a JSON file.
+        """save image info into json file.
 
-        :param image_path: Path to the image file.
-        :param text: Text associated with the image.
-        :param json_file_path: Path to the JSON file where data will be saved.
-        """
+        Args:
+            image_info (dict): image info in dict format.
+            json_file_path (Path): path to save the json file.
+        """        
 
-        # Ensure the directory for the JSON file exists
+        # Ensure the directory for the JSON file exists.
         if json_file_path.exists() is False:
             json_file_path.parent.mkdir(parents=True, exist_ok=True)
 
-        # 将更新后的列表写回 JSON 文件
+        # save image info into json file.
         with open(json_file_path, "w", encoding="utf-8") as file:
             json.dump(image_info, file, ensure_ascii=False, indent=4)
 

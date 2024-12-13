@@ -7,6 +7,7 @@ Created Date: Monday October 7th 2024
 Author: Kaixu Chen
 -----
 Comment:
+This script is used to fuse two images together. The first image is the background image, and the second image is the foreground image.
 
 Have a good code time :)
 -----
