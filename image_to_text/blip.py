@@ -105,7 +105,7 @@ class ImageToText:
     def image2text_con(self, image_path: Path, text: str = "a photography of"):
 
         image = Image.open(image_path).convert("RGB")
-
+        print(image.size)
         # conditional image captioning
         inputs = self.processor(image, text, return_tensors="pt").to(self.device)
 
@@ -117,6 +117,7 @@ class ImageToText:
     def image2text_uncon(self, image_path: Path):
 
         image = Image.open(image_path).convert("RGB")
+        print(image.size)
 
         # unconditional image captioning
         inputs = self.processor(image, return_tensors="pt").to(self.device)
