@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
-'''
+"""
 File: /workspace/temp_feedback/Temp_Feedback/image_to_text/blip.py
 Project: /workspace/temp_feedback/Temp_Feedback/image_to_text
 Created Date: Wednesday December 11th 2024
@@ -12,7 +12,7 @@ https://huggingface.co/Salesforce/blip-image-captioning-large
 
 Have a good code time :)
 -----
-Last Modified: Wednesday December 11th 2024 10:44:01 am
+Last Modified: Friday December 13th 2024 9:07:04 am
 Modified By: the developer formerly known as Kaixu Chen at <chenkaixusan@gmail.com>
 -----
 Copyright (c) 2024 The University of Tsukuba
@@ -20,7 +20,7 @@ Copyright (c) 2024 The University of Tsukuba
 HISTORY:
 Date      	By	Comments
 ----------	---	---------------------------------------------------------
-'''
+"""
 
 from PIL import Image, ImageDraw
 from transformers import BlipProcessor, BlipForConditionalGeneration
@@ -32,7 +32,10 @@ import logging
 import multiprocessing
 import itertools
 import random
-import time 
+import time
+
+from utils.get_device import get_device
+
 
 def load_images(image_path: Path):
     cold_imgs = []
@@ -52,46 +55,62 @@ def load_images(image_path: Path):
 
     return cold_imgs, hot_imgs, normal_imgs
 
+
 class ImageToText:
 
-    def __init__(self, output_path: Path):
+    def __init__(self, output_path: Path, device: str):
         super().__init__()
-        self.load_model()
+
+        self.device = device
+        self.load_model(device)
 
         self.output_path = output_path
         self.image_info = []
 
-    def load_model(self):
+    def load_model(self, device: str):
 
-        self.processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-large")
-        self.model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-large").to("cuda")
+        self.processor = BlipProcessor.from_pretrained(
+            "Salesforce/blip-image-captioning-large"
+        )
+        self.model = BlipForConditionalGeneration.from_pretrained(
+            "Salesforce/blip-image-captioning-large"
+        ).to(device)
 
-    def image_to_text(self, image_path: Path):
+    def image_to_text(self, image_path: Path, text: str = "a photography of"):
 
-        image = Image.open(image_path).convert('RGB')
+        image = Image.open(image_path).convert("RGB")
 
         # conditional image captioning
         start_time = time.time()
-        text = "a photography of"
-        inputs = self.processor(image, text, return_tensors="pt").to("cuda")
+        inputs = self.processor(image, text, return_tensors="pt").to(self.device)
 
         con_out = self.model.generate(**inputs)
-        print(self.processor.decode(con_out[0], skip_special_tokens=True))
+        logging.info(self.processor.decode(con_out[0], skip_special_tokens=True))
         forward_time = time.time() - start_time
-        print(f"con forward time: {forward_time}")
+        logging.info(f"con forward time: {forward_time}")
 
         # unconditional image captioning
         start_time = time.time()
-        inputs = self.processor(image, return_tensors="pt").to("cuda")
+        inputs = self.processor(image, return_tensors="pt").to(self.device)
 
         uncon_out = self.model.generate(**inputs)
-        print(self.processor.decode(uncon_out[0], skip_special_tokens=True))
+        logging.info(self.processor.decode(uncon_out[0], skip_special_tokens=True))
         forward_time = time.time() - start_time
-        print(f"uncon forward time: {forward_time}")
+        logging.info(f"uncon forward time: {forward_time}")
 
-        return self.processor.decode(con_out[0], skip_special_tokens=True), self.processor.decode(uncon_out[0], skip_special_tokens=True)
+        return self.processor.decode(
+            con_out[0], skip_special_tokens=True
+        ), self.processor.decode(uncon_out[0], skip_special_tokens=True)
 
-    def add_text_to_image(self, image_path, text, output_path: Path, position=(0, 0), color=(255, 255, 255)):
+    @deprecated
+    def add_text_to_image(
+        self,
+        image_path,
+        text,
+        output_path: Path,
+        position=(0, 0),
+        color=(255, 255, 255),
+    ):
         """
         Adds text to an image and saves the result.
 
@@ -117,8 +136,8 @@ class ImageToText:
         if output_path.exists() is False:
             output_path.parent.mkdir(parents=True, exist_ok=True)
 
-        if image.mode != 'RGB':
-            image = image.convert('RGB')
+        if image.mode != "RGB":
+            image = image.convert("RGB")
 
         image.save(output_path)
 
@@ -136,49 +155,58 @@ class ImageToText:
             json_file_path.parent.mkdir(parents=True, exist_ok=True)
 
         # 将更新后的列表写回 JSON 文件
-        with open(json_file_path, 'w', encoding='utf-8') as file:
+        with open(json_file_path, "w", encoding="utf-8") as file:
             json.dump(image_info, file, ensure_ascii=False, indent=4)
 
     def __call__(self, image_path: Path):
 
         con_out, uncon_out = self.image_to_text(image_path)
 
-
         # self.add_text_to_image(
         #     image_path=image_path,
         #     text=con_out,
         #     output_path=self.output_path / f"{image_path.stem}.jpg",
         #     position=(50, 50),
-        #     color=(255, 255, 255) 
+        #     color=(255, 255, 255)
         # )
 
+        # package the image info
         image_info = {
             "image_name": image_path.stem,
             "image_path": str(image_path),
             "con_text": con_out,
-            "uncon_text": uncon_out
+            "uncon_text": uncon_out,
         }
 
         self.image_info.append(image_info)
 
         self.save_image_info_to_json(
             image_info=self.image_info,
-            json_file_path=self.output_path / f"image_info.json"
+            json_file_path=self.output_path / "image_info.json",
         )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
-    image_path = Path("/workspace/data/temp_dataset")
+    device = get_device()
+
     output_path = Path("logs/blip_result")
 
-    cold_imgs, hot_imgs, normal_imgs = load_images(image_path)
+    if device.type == "cuda":
+        logging.info("Using GPU")
 
-    image_to_text = ImageToText(output_path)
+        image_path = Path("/workspace/data/temp_dataset")
 
-    test_image = [Path("/workspace/temp_feedback/Temp_Feedback/tests/data/sample.jpg")]
+        test_images = load_images(image_path)
 
-    for img_path in test_image:
+    elif device.type == "cpu" or device.type == "mps":
+        logging.info("Using CPU")
+
+        test_images = [Path(["tests/data/sample.jpg", "tests/data/fire.jpg"])]
+
+    # Initialize the ImageToText class
+    image_to_text = ImageToText(output_path, device)
+
+    for img_path in test_images:
 
         image_to_text(img_path)
-

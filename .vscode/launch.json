@@ -13,7 +13,7 @@
     },
     {
       "name": "crawler",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
       "program": "/workspace/temp_feedback/Temp_Feedback/dataset_collection/crawler/main.py",
       "console": "integratedTerminal",
@@ -21,7 +21,7 @@
     },
     {
       "name": "temp_feedback",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
       "program": "/workspace/temp_feedback/Temp_Feedback/project/main.py",
       "console": "integratedTerminal",
@@ -33,6 +33,14 @@
       "request": "launch",
       "cwd": "${workspaceFolder}",
       "module": "fuse_image.fuse_image",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "blip",
+      "type": "debugpy",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "module": "image_to_text.blip",
       "console": "integratedTerminal"
     }
   ]
