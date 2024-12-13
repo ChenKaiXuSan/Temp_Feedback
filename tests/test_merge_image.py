@@ -10,7 +10,7 @@ Comment:
 
 Have a good code time :)
 -----
-Last Modified: Tuesday December 3rd 2024 10:41:22 am
+Last Modified: Wednesday December 11th 2024 11:53:31 am
 Modified By: the developer formerly known as Kaixu Chen at <chenkaixusan@gmail.com>
 -----
 Copyright (c) 2024 The University of Tsukuba
@@ -21,7 +21,3 @@ Date      	By	Comments
 '''
 
 import pytest 
-
-
-def test_merge_image():
-    

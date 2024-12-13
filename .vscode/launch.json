@@ -5,8 +5,15 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Python 调试程序: 当前文件",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal"
+    },
+    {
       "name": "crawler",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
       "program": "/workspace/temp_feedback/Temp_Feedback/dataset_collection/crawler/main.py",
       "console": "integratedTerminal",
@@ -14,7 +21,7 @@
     },
     {
       "name": "temp_feedback",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
       "program": "/workspace/temp_feedback/Temp_Feedback/project/main.py",
       "console": "integratedTerminal",
@@ -26,6 +33,14 @@
       "request": "launch",
       "cwd": "${workspaceFolder}",
       "module": "fuse_image.fuse_image",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "image2text_blip",
+      "type": "debugpy",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "module": "image_to_text.blip",
       "console": "integratedTerminal"
     }
   ]
