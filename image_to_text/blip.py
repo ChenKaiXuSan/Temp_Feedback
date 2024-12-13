@@ -26,15 +26,13 @@ from PIL import Image, ImageDraw
 from transformers import BlipProcessor, BlipForConditionalGeneration
 
 from pathlib import Path
-import os
 import json
 import logging
-import multiprocessing
-import itertools
-import random
 import time
+from typing_extensions import deprecated
 
 from utils.get_device import get_device
+from utils.timer import timer
 
 
 def load_images(image_path: Path):
@@ -76,6 +74,7 @@ class ImageToText:
             "Salesforce/blip-image-captioning-large"
         ).to(device)
 
+    @deprecated("instead of using this method, use image2text_con and image2text_uncon")
     def image_to_text(self, image_path: Path, text: str = "a photography of"):
 
         image = Image.open(image_path).convert("RGB")
@@ -102,7 +101,31 @@ class ImageToText:
             con_out[0], skip_special_tokens=True
         ), self.processor.decode(uncon_out[0], skip_special_tokens=True)
 
-    @deprecated
+    @timer
+    def image2text_con(self, image_path: Path, text: str = "a photography of"):
+
+        image = Image.open(image_path).convert("RGB")
+
+        # conditional image captioning
+        inputs = self.processor(image, text, return_tensors="pt").to(self.device)
+
+        con_out = self.model.generate(**inputs)
+
+        return self.processor.decode(con_out[0], skip_special_tokens=True)
+
+    @timer
+    def image2text_uncon(self, image_path: Path):
+
+        image = Image.open(image_path).convert("RGB")
+
+        # unconditional image captioning
+        inputs = self.processor(image, return_tensors="pt").to(self.device)
+
+        uncon_out = self.model.generate(**inputs)
+
+        return self.processor.decode(uncon_out[0], skip_special_tokens=True)
+
+    @deprecated("not used")
     def add_text_to_image(
         self,
         image_path,
@@ -160,15 +183,9 @@ class ImageToText:
 
     def __call__(self, image_path: Path):
 
-        con_out, uncon_out = self.image_to_text(image_path)
-
-        # self.add_text_to_image(
-        #     image_path=image_path,
-        #     text=con_out,
-        #     output_path=self.output_path / f"{image_path.stem}.jpg",
-        #     position=(50, 50),
-        #     color=(255, 255, 255)
-        # )
+        # con_out, uncon_out = self.image_to_text(image_path)
+        con_out = self.image2text_con(image_path)
+        uncon_out = self.image2text_uncon(image_path)
 
         # package the image info
         image_info = {
@@ -202,7 +219,7 @@ if __name__ == "__main__":
     elif device.type == "cpu" or device.type == "mps":
         logging.info("Using CPU")
 
-        test_images = [Path(["tests/data/sample.jpg", "tests/data/fire.jpg"])]
+        test_images = [Path("tests/data/sample.jpg"), Path("tests/data/fire.jpg")]
 
     # Initialize the ImageToText class
     image_to_text = ImageToText(output_path, device)

@@ -7,6 +7,7 @@ Created Date: Friday December 13th 2024
 Author: Kaixu Chen
 -----
 Comment:
+A function to get the device for training.
 
 Have a good code time :)
 -----

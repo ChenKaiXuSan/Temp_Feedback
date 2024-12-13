@@ -36,7 +36,7 @@
       "console": "integratedTerminal"
     },
     {
-      "name": "blip",
+      "name": "image2text_blip",
       "type": "debugpy",
       "request": "launch",
       "cwd": "${workspaceFolder}",
