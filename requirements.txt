@@ -16,3 +16,6 @@ pyvirtualdisplay
 
 # hugging face transformers
 transformers
+
+# youtube-dl
+pytubefix
