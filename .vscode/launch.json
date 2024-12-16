@@ -42,6 +42,14 @@
       "cwd": "${workspaceFolder}",
       "module": "image_to_text.blip",
       "console": "integratedTerminal"
+    },
+    {
+      "name": "qwen2-vl",
+      "type": "debugpy",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "module": "image_to_text.qwen2_vl",
+      "console": "integratedTerminal"
     }
   ]
 }
