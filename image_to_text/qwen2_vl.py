@@ -138,6 +138,7 @@ class Qwen2VL:
             whole_output_text[idx] = self.generate(inputs)        
         
         # package the image info
+        # TODO: 这里的组装方式还可以修改一下
         image_info = {
             "image_name": image_path.stem,
             "image_path": str(image_path),
