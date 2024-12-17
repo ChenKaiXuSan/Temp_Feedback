@@ -1,0 +1,16 @@
+# hydra config
+hydra:
+  run:
+    dir: .
+  output_subdir: null
+
+output_path: logs/qwen2-vl_result/${now:%Y-%m-%d}/${now:%H-%M-%S}
+image_path: /workspace/data/splited_dataset
+
+# reference from https://github.com/f/awesome-chatgpt-prompts
+prompt:
+  1: Describe this image.
+  2: Write a story about this image.
+  3: Find the temperature of this image.
+  4: What is the temperature of this image?
+  5: What is the temperature of this image in Celsius?
