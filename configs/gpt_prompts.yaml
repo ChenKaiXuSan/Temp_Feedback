@@ -15,24 +15,22 @@ prompt:
   4: What is the temperature of this image?
   5: What is the temperature of this image in Celsius?
 
-prompt-cn:
-  "
+prompt_cn: |
   请按照以下格式分析图片中的内容，以确保结果准确且清晰：
-	1.	是否存在热源或冷源：判断图片中是否有明显的热源或冷源。
-	2.	热源或冷源类型：描述热源或冷源的具体类型（例如：火焰、电热器、冰块等）。
-	3.	热源或冷源位置：明确热源或冷源在图片中的具体位置（例如：左上角、中央、右下角等）。
-	4.	热源或冷源占比：估算热源或冷源在整个图片中所占的比例（以百分比表示）。
-
+  1. 是否存在热源或冷源：判断图片中是否有明显的热源或冷源。
+  2. 热源或冷源类型：描述热源或冷源的具体类型（例如：火焰、电热器、冰块等）。
+  3. 热源或冷源位置：明确热源或冷源在图片中的具体位置（例如：左上角、中央、右下角等）。
+  4. 热源或冷源占比：估算热源或冷源在整个图片中所占的比例（以百分比表示）。
   请按照以上格式逐条提供分析结果。
-  "
 
-prompt-en:
-  "
+prompt_en: |
   Please analyze the content of the image according to the following format to ensure clarity and accuracy:
-	1.	Presence of a heat source or cold source: Determine whether there is an identifiable heat source or cold source in the image.
-	2.	Type of heat source or cold source: Describe the specific type of the heat source or cold source (e.g., flame, electric heater, ice block, etc.).
-	3.	Location of the heat source or cold source: Specify the exact location of the heat source or cold source in the image (e.g., top-left, center, bottom-right, etc.).
-  4.  Proportion of the heat source or cold source: Estimate the proportion of the image occupied by the heat source or cold source (expressed as a percentage).
-  
+  1. Presence of a heat source or cold source: Determine whether there is an identifiable heat source or cold source in the image.
+  2. Type of heat source or cold source: Describe the specific type of the heat source or cold source (e.g., flame, electric heater, ice block, etc.).
+  3. Location of the heat source or cold source: Specify the exact location of the heat source or cold source in the image (e.g., top-left, center, bottom-right, etc.).
+  4. Proportion of the heat source or cold source: Estimate the proportion of the image occupied by the heat source or cold source (expressed as a percentage).
   Please provide the analysis following this format.
-  "
+
+model: 
+  min_pixels: 256 * 28 * 28 
+  max_pixels: 1280 * 28 * 28

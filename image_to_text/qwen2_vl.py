@@ -34,6 +34,7 @@ from pathlib import Path
 
 from utils.timer import timer
 from utils.get_device import get_device
+from utils.video_loader import split_video_and_extract_frames_decord
 
 # 配置日志输出到文件
 # TODO: log 输出的位置需要修改一下
@@ -107,20 +108,26 @@ class Qwen2VL:
         
         full_path = json_file_path
 
-        if full_path.exists() is False:
+        if full_path.parent.exists() is False:
             full_path.parent.mkdir(parents=True, exist_ok=True)
 
         with open(full_path, "w") as f:
             json.dump(image_info, f, indent=4)
 
     def __call__(self, image_path: Path, text: str = "Describe this image."):
-
-        image = Image.open(image_path).convert("RGB")
-        logging.info(image.size)
+        
+        if isinstance(image_path, str):
+            image = Image.open(image_path).convert("RGB")
+            logging.info(image.size)
+        elif isinstance(image_path, dict):
+            video_path = image_path["video_path"]
+            frame_idx = image_path["frame_idx"]
+            second = image_path["second"]
+            image = image_path["image"]
 
         whole_output_text = {}
 
-        for idx, text in self.prompt.items():
+        if isinstance(self.prompt, str):
             conversation = [
                 {
                     "role": "user",
@@ -128,24 +135,36 @@ class Qwen2VL:
                         {
                             "type": "image",
                         },
-                        {"type": "text", "text": text},
+                        {"type": "text", "text": self.prompt},
                     ],
                 }
             ]
+        else:
+            # TODO: 这里的逻辑还可以修改一下
+            conversation = self.get_conversation("user", self.prompt)
 
-            inputs = self.preprocess(conversation, image, self.device_name)
+        inputs = self.preprocess(conversation, image, self.device_name)
 
-            whole_output_text[idx] = self.generate(inputs)        
+        whole_output_text[0] = self.generate(inputs)        
         
         # package the image info
         # TODO: 这里的组装方式还可以修改一下
-        image_info = {
-            "image_name": image_path.stem,
-            "image_path": str(image_path),
-            "conversation": conversation,
-            "output_text": whole_output_text,
-        }
-
+        if isinstance(image_path, str):
+            image_info = {
+                "image_name": image_path.split("/")[-1],
+                "image_path": image_path,
+                "conversation": conversation,
+                "output_text": whole_output_text,
+            }
+        elif isinstance(image_path, dict):
+            image_info = {
+                "video_path": video_path,
+                "frame_idx": frame_idx,
+                "second": second,
+                "conversation": conversation,
+                "output_text": whole_output_text,
+            }
+        
         self.image_info.append(image_info)
 
         self.save_image_info_to_json(self.image_info, self.output_path / "image_info.json")
@@ -155,14 +174,22 @@ def load_config(cfg: omegaconf.DictConfig):
     
     output_path = cfg.output_path
 
+    image_to_text = Qwen2VL(output_path=output_path, prompt=cfg.prompt_en)
+
     # test image path
-    images_path = [Path("tests/data/sample.jpg"), Path("tests/data/fire.jpg")]
-
-    image_to_text = Qwen2VL(output_path=output_path, prompt=cfg.prompt)
-
-    for image_path in images_path:
-        image_to_text(image_path)
+    # images_path = [Path("tests/data/sample.jpg"), Path("tests/data/fire.jpg")]
+    # for image_path in images_path:
+    #     image_to_text(image_path)
     
+
+    video_path = "tests/data/downloaded_video.mp4"
+    
+    total_frame_list = split_video_and_extract_frames_decord(video_path, output_path + "/frames", fps=2)
+
+    for frame_info in total_frame_list:
+        
+        image_to_text(image_path=frame_info)
+
     
 if __name__ == "__main__":
 
