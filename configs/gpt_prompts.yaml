@@ -1,8 +1,9 @@
 # hydra config
 hydra:
   run:
-    dir: .
-  output_subdir: null
+    dir: ${output_path}
+  job:
+    chdir: false
 
 output_path: logs/qwen2-vl_result/${now:%Y-%m-%d}/${now:%H-%M-%S}
 image_path: /workspace/data/splited_dataset

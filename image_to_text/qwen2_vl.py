@@ -29,6 +29,7 @@ import hydra
 import omegaconf
 import torch
 from typing import Dict
+from tqdm import tqdm
 from transformers import Qwen2VLForConditionalGeneration, AutoTokenizer, AutoProcessor
 from pathlib import Path
 
@@ -92,7 +93,7 @@ class Qwen2VL:
 
         with torch.inference_mode():
             # Inference: Generation of the output
-            output_ids = self.model.generate(**inputs, max_new_tokens=512)
+            output_ids = self.model.generate(**inputs, max_new_tokens=2048)
             generated_ids = [
                 output_ids[len(input_ids) :]
                 for input_ids, output_ids in zip(inputs.input_ids, output_ids)
@@ -174,22 +175,21 @@ def load_config(cfg: omegaconf.DictConfig):
     
     output_path = cfg.output_path
 
-    image_to_text = Qwen2VL(output_path=output_path, prompt=cfg.prompt_en)
 
     # test image path
     # images_path = [Path("tests/data/sample.jpg"), Path("tests/data/fire.jpg")]
     # for image_path in images_path:
     #     image_to_text(image_path)
     
-
     video_path = "tests/data/downloaded_video.mp4"
     
     total_frame_list = split_video_and_extract_frames_decord(video_path, output_path + "/frames", fps=2)
 
-    for frame_info in total_frame_list:
-        
-        image_to_text(image_path=frame_info)
+    image_to_text = Qwen2VL(output_path=output_path, prompt=cfg.prompt_en)
 
+    for frame_info in tqdm(total_frame_list, desc="Processing frames"):
+
+        image_to_text(image_path=frame_info)
     
 if __name__ == "__main__":
 
