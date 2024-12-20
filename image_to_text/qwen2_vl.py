@@ -37,15 +37,6 @@ from utils.timer import timer
 from utils.get_device import get_device
 from utils.video_loader import split_video_and_extract_frames_decord
 
-# 配置日志输出到文件
-# TODO: log 输出的位置需要修改一下
-logging.basicConfig(
-    filename='app.log',           # 输出的日志文件名
-    level=logging.INFO,           # 日志级别（DEBUG, INFO, WARNING, ERROR, CRITICAL）
-    format='%(asctime)s - %(levelname)s - %(message)s',  # 日志格式
-    datefmt='%Y-%m-%d %H:%M:%S'   # 日期时间格式
-)
-
 class Qwen2VL:
     def __init__(self, output_path: str, prompt: dict):
 
@@ -191,6 +182,8 @@ def load_config(cfg: omegaconf.DictConfig):
 
         image_to_text(image_path=frame_info)
     
+    logging.info("All done!")
+
 if __name__ == "__main__":
 
     load_config()
