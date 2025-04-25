@@ -1,20 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 '''
-File: /Users/chenkaixu/Temp_Feedback/image_to_text/qwen2-vl.py
-Project: /Users/chenkaixu/Temp_Feedback/image_to_text
-Created Date: Saturday December 14th 2024
+File: /workspace/code/image_to_text/deepseek.py
+Project: /workspace/code/image_to_text
+Created Date: Friday April 25th 2025
 Author: Kaixu Chen
 -----
 Comment:
-https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct
 
 Have a good code time :)
 -----
-Last Modified: Sunday December 15th 2024 7:14:46 am
+Last Modified: Friday April 25th 2025 5:32:29 pm
 Modified By: the developer formerly known as Kaixu Chen at <chenkaixusan@gmail.com>
 -----
-Copyright (c) 2024 The University of Tsukuba
+Copyright (c) 2025 The University of Tsukuba
 -----
 HISTORY:
 Date      	By	Comments
