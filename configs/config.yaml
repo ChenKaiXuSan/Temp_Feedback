@@ -1,7 +1,9 @@
 # hydra config
 hydra:
   run:
-    dir: /workspace/temp_feedback/Temp_Feedback/logs/${train.version}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    dir: /workspace/code/logs/${train.version}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  job:
+    chdir: False
 
 data:
   path: '/workspace/data/splited_dataset'
