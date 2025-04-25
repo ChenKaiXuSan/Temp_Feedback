@@ -52,6 +52,7 @@ class Qwen2VL:
         self.model = Qwen2VLForConditionalGeneration.from_pretrained(
             "Qwen/Qwen2-VL-7B-Instruct", torch_dtype="auto"
         ).to(self.device_name)
+        # processor = AutoProcessor.from_pretrained("Qwen/Qwen2.5-VL-72B-Instruct")
 
         self.min_pixels = 256 * 28 * 28
         self.max_pexels = 1280 * 28 * 28
