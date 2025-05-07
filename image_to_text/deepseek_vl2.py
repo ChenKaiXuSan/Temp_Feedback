@@ -1,22 +1,25 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 """
-File: /Users/chenkaixu/Temp_Feedback/image_to_text/qwen2-vl.py
-Project: /Users/chenkaixu/Temp_Feedback/image_to_text
-Created Date: Saturday December 14th 2024
+File: /workspace/code/image_to_text/deepseek.py
+Project: /workspace/code/image_to_text
+Created Date: Friday April 25th 2025
 Author: Kaixu Chen
 -----
 Comment:
-https://huggingface.co/Qwen/
 
-The Qwen series can use the huggingface processor. 
+The deepseek api should be complied with the github repo:
+https://github.com/deepseek-ai/DeepSeek-VL2
+
+with the following command:
+pip install -e .
 
 Have a good code time :)
 -----
-Last Modified: Friday April 25th 2025 6:22:26 pm
+Last Modified: Friday April 25th 2025 5:32:29 pm
 Modified By: the developer formerly known as Kaixu Chen at <chenkaixusan@gmail.com>
 -----
-Copyright (c) 2024 The University of Tsukuba
+Copyright (c) 2025 The University of Tsukuba
 -----
 HISTORY:
 Date      	By	Comments
@@ -24,65 +27,54 @@ Date      	By	Comments
 """
 
 import logging
-import os
 import json
 from PIL import Image
 import hydra
 import omegaconf
 import torch
-from pathlib import Path
 from typing import Dict
 from tqdm import tqdm
+from pathlib import Path
 
-from transformers import Qwen2VLForConditionalGeneration, AutoTokenizer, AutoProcessor
-from transformers import Qwen2_5_VLForConditionalGeneration
+
+from transformers import AutoModelForCausalLM
+
+from deepseek_vl2.models import DeepseekVLV2Processor, DeepseekVLV2ForCausalLM
 
 from utils.timer import timer
 from utils.get_device import get_device
 from utils.video_loader import split_video_and_extract_frames_decord
 
 
-class Qwen2VL:
+class DeepSeek:
     def __init__(
         self,
         output_path: str,
         prompt: dict,
-        version: str = "Qwen/Qwen2.5-VL-7B-Instruct",
+        version: str = "deepseek-ai/deepseek-v12-small",
     ):
 
         self.device_name = get_device()
         self.output_path = Path(output_path)
         self.prompt = prompt
 
-        self.model, self.processor = self.load_model(version, self.device_name)
+        self.model, self.processor = self.load_model(version)
+
         self.image_info = []
 
     @staticmethod
-    def load_model(version: str, device_name: str):
+    def load_model(version: str):
 
-        if "Qwen2.5" in version:
-            model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
-                version, torch_dtype="auto"
-            ).to(device_name)
-        elif "Qwen2" in version:
-            model = Qwen2VLForConditionalGeneration.from_pretrained(
-                version, torch_dtype="auto"
-            ).to(device_name)
-        else:
-            raise ValueError(
-                f"Unsupported model version: {version}. Please use Qwen2 or Qwen2.5."
-            )
-
-        min_pixels = 256 * 28 * 28
-        max_pexels = 1280 * 28 * 28
-
-        processor = AutoProcessor.from_pretrained(
-            version,
-            min_pixels=min_pixels,
-            max_pixels=max_pexels,
+        vl_chat_processor: DeepseekVLV2Processor = (
+            DeepseekVLV2Processor.from_pretrained(version)
         )
 
-        return model, processor
+        vl_gpt: DeepseekVLV2ForCausalLM = AutoModelForCausalLM.from_pretrained(
+            version, trust_remote_code=True
+        )
+        vl_gpt = vl_gpt.to(torch.bfloat16).cuda().eval()
+
+        return vl_gpt, vl_chat_processor
 
     def get_conversation(self, role: str, content: Dict):
         conversation = [{"role": role, "content": content}]
@@ -142,36 +134,47 @@ class Qwen2VL:
             second = image_path["second"]
             image = image_path["image"]
 
-        whole_output_text = {}
+        conversation = [
+            {
+                "role": "<|User|>",
+                "content": f"<image>\n<|ref|>{self.prompt}<|/ref|>.",
+                # "images": ["./images/visual_grounding_1.jpeg"],
+            },
+            {"role": "<|Assistant|>", "content": ""},
+        ]
 
-        if isinstance(self.prompt, str):
-            conversation = [
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "image",
-                        },
-                        {"type": "text", "text": self.prompt},
-                    ],
-                }
-            ]
-        else:
-            # TODO: 这里的逻辑还可以修改一下
-            conversation = self.get_conversation("user", self.prompt)
+        prepare_inputs = self.processor(
+            conversations=conversation,
+            images=[image],
+            force_batchify=True,
+            system_prompt="",
+        ).to(self.model.device)
 
-        inputs = self.preprocess(conversation, image, self.device_name)
+        inputs_embeds = self.model.prepare_inputs_embeds(**prepare_inputs)
 
-        whole_output_text[0] = self.generate(inputs)
+        tokenizer = self.processor.tokenizer
+
+        # run the model to get the response
+        outputs = self.model.language.generate(
+            inputs_embeds=inputs_embeds,
+            attention_mask=prepare_inputs.attention_mask,
+            pad_token_id=tokenizer.eos_token_id,
+            bos_token_id=tokenizer.bos_token_id,
+            eos_token_id=tokenizer.eos_token_id,
+            max_new_tokens=512,
+            do_sample=False,
+            use_cache=True,
+        )
+
+        answer = tokenizer.decode(outputs[0].cpu().tolist(), skip_special_tokens=False)
 
         # package the image info
-        # TODO: 这里的组装方式还可以修改一下
         if isinstance(image_path, str):
             image_info = {
                 "image_name": image_path.split("/")[-1],
                 "image_path": image_path,
                 "conversation": conversation,
-                "output_text": whole_output_text,
+                "output_text": answer,
             }
         elif isinstance(image_path, dict):
             image_info = {
@@ -179,7 +182,7 @@ class Qwen2VL:
                 "frame_idx": frame_idx,
                 "second": second,
                 "conversation": conversation,
-                "output_text": whole_output_text,
+                "output_text": answer,
             }
 
         self.image_info.append(image_info)
@@ -189,7 +192,7 @@ class Qwen2VL:
         )
 
 
-@hydra.main(config_path="../configs", config_name="qwen2")
+@hydra.main(config_path="../configs", config_name="deepseek")
 def load_config(cfg: omegaconf.DictConfig):
 
     output_path = cfg.output_path
@@ -205,7 +208,7 @@ def load_config(cfg: omegaconf.DictConfig):
         video_path, output_path + "/frames", fps=2
     )
 
-    image_to_text = Qwen2VL(
+    image_to_text = DeepSeek(
         output_path=output_path, prompt=cfg.prompt_en, version=cfg.version.model
     )
 
