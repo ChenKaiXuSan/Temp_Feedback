@@ -5,7 +5,7 @@ hydra:
   job:
     chdir: false
 
-output_path: logs/deepseek-vl_result/${version.model}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+output_path: logs/${version.model}/${now:%Y-%m-%d}/${now:%H-%M-%S}
 image_path: /workspace/data/splited_dataset
 
 # reference from https://github.com/f/awesome-chatgpt-prompts

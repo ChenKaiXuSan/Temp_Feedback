@@ -40,6 +40,7 @@ from pathlib import Path
 from transformers import AutoModelForCausalLM
 
 from deepseek_vl2.models import DeepseekVLV2Processor, DeepseekVLV2ForCausalLM
+from vllm import LLM
 
 from utils.timer import timer
 from utils.get_device import get_device
