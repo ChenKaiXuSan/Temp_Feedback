@@ -42,6 +42,30 @@
       "cwd": "${workspaceFolder}",
       "module": "image_to_text.blip",
       "console": "integratedTerminal"
+    },
+    {
+      "name": "qwen2-vl",
+      "type": "debugpy",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "module": "image_to_text.qwen2_vl",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "deepseek-vl2",
+      "type": "debugpy",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "module": "image_to_text.deepseek_vl2",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "vllm_qwen2-vl",
+      "type": "debugpy",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "module": "vllm.qwen2_vl",
+      "console": "integratedTerminal"
     }
   ]
 }

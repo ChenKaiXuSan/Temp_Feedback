@@ -1,10 +1,11 @@
 {
 	"folders": [
-		{
-			"path": "/workspace/temp_feedback/Temp_Feedback"
+		{	
+			"name": "temp_feedback",
+			"path": "/workspace/code"
 		},
 		{
-			"name": "dataset",
+			"name": "data",
 			"path": "/workspace/data"
 		}
 	]
