@@ -12,7 +12,7 @@ import os
 import random
 import pandas as pd
 import time
-
+from pathlib import Path
 
 def get_video_path():
     """
@@ -22,8 +22,7 @@ def get_video_path():
         list: return the video path in list.
     """
 
-    # PATH = 'test_video'
-    PATH = os.path.join(os.getcwd(), "video")
+    PATH = os.path.join(Path(__file__).parent, "videos")
 
     path_list = []
     path = os.listdir(PATH)
@@ -95,7 +94,7 @@ class VideoPlayer(Ui_video_player, QMainWindow):
         QMainWindow (_type_): father class
     """
 
-    def __init__(self, name: str):
+    def __init__(self):
 
         super(Ui_video_player, self).__init__()
 
@@ -122,7 +121,7 @@ class VideoPlayer(Ui_video_player, QMainWindow):
         # display video number in textBrower
         self.textBrowser_display()
 
-        self.name = name
+        self.name = 'teset'
         print(self.name)
 
     def signal_init(self):
@@ -285,15 +284,15 @@ class VideoPlayer(Ui_video_player, QMainWindow):
         like: current number, remain, total number.
         """
 
-        self.textBrowser.setText(
+        self.inforamtion.setText(
             '<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt; color:#ff0000;">current number: %s</span></p>\n'
             % str(self.playlist.currentIndex() + 1)
         )
-        self.textBrowser.append(
+        self.inforamtion.append(
             '<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt; color:#ff0000;">remain: %s</span></p>\n'
             % str((self.playlist.mediaCount() - self.playlist.currentIndex() - 1))
         )
-        self.textBrowser.append(
+        self.inforamtion.append(
             '<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt; color:#ff0000;">total number: %s</span></p>\n'
             % str(self.playlist.mediaCount())
         )
