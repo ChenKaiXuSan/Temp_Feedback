@@ -4,6 +4,36 @@ from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent, QMediaPlaylist
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 
+from PyQt5.QtGui import QPalette, QKeySequence, QIcon
+from PyQt5.QtCore import (
+    QDir,
+    Qt,
+    QUrl,
+    QSize,
+    QPoint,
+    QTime,
+    QMimeData,
+    QProcess,
+    QEvent,
+)
+from PyQt5.QtMultimedia import QMediaContent, QMediaPlayer, QMediaMetaData
+from PyQt5.QtMultimediaWidgets import QVideoWidget
+from PyQt5.QtWidgets import (
+    QApplication,
+    QFileDialog,
+    QHBoxLayout,
+    QLineEdit,
+    QPushButton,
+    QSizePolicy,
+    QSlider,
+    QMessageBox,
+    QStyle,
+    QVBoxLayout,
+    QWidget,
+    QShortcut,
+    QMenu,
+)
+
 # load the ui config
 from UI.video_player import Ui_video_player, myVideoWidget
 
@@ -14,6 +44,7 @@ import pandas as pd
 import time
 from pathlib import Path
 
+
 def get_video_path():
     """
     get the video path, with random shuffle, for QMediaPlayer.
@@ -22,13 +53,9 @@ def get_video_path():
         list: return the video path in list.
     """
 
-    PATH = os.path.join(Path(__file__).parent, "videos")
+    _path = Path(__file__).parent / "videos"
 
-    path_list = []
-    path = os.listdir(PATH)
-
-    for i in path:
-        path_list.append(os.path.join(PATH, i))
+    path_list = [str(path) for path in _path.glob("*.mp4")]
 
     # random shuffle the data list
     random.shuffle(path_list)
@@ -121,7 +148,7 @@ class VideoPlayer(Ui_video_player, QMainWindow):
         # display video number in textBrower
         self.textBrowser_display()
 
-        self.name = 'teset'
+        self.name = "teset"
         print(self.name)
 
     def signal_init(self):
@@ -321,8 +348,28 @@ class VideoPlayer(Ui_video_player, QMainWindow):
         self.player.play()
 
         # 当媒体加载完成后更新 slider 范围
-        self.player.durationChanged.connect(self.progressBar.setMaximum)
-        self.player.positionChanged.connect(self.progressBar.setValue)
+        self.player.durationChanged.connect(self.update_duration)
+        self.player.positionChanged.connect(self.update_position)
+
+    def update_duration(self, duration: int):
+        """
+        update the video duration, called by player.durationChanged signal.
+
+        Args:
+            duration (int): video duration in ms.
+        """
+
+        self.progressBar.setMaximum(duration)
+    
+    def update_position(self, position: int):
+        """
+        update the video position, called by player.positionChanged signal.
+
+        Args:
+            position (int): video position in ms.
+        """
+
+        self.progressBar.setValue(position)
 
     def save_info(self, attn_list: list, disease_list: list):
         """

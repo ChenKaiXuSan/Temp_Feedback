@@ -74,7 +74,7 @@ class Ui_video_player(object):
         )
         self.verticalLayout.addItem(spacerItem2)
         self.progressBar = QtWidgets.QProgressBar(self.centralwidget)
-        self.progressBar.setProperty("value", 24)
+        self.progressBar.setProperty("value", 0)
         self.progressBar.setObjectName("progressBar")
         self.verticalLayout.addWidget(self.progressBar)
         self.line_2 = QtWidgets.QFrame(self.centralwidget)
