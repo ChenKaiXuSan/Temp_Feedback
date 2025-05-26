@@ -30,3 +30,5 @@ pyqt5-tools
 pandas 
 
 pyserial
+
+opencv-python-headless
