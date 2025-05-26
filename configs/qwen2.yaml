@@ -7,6 +7,8 @@ hydra:
 
 output_path: logs/qwen2-vl_result/${version.model}/${now:%Y-%m-%d}/${now:%H-%M-%S}
 image_path: /workspace/data/splited_dataset
+video_path: tests/video/
+cache_path: ckpt/
 
 # reference from https://github.com/f/awesome-chatgpt-prompts
 prompt:
@@ -31,13 +33,20 @@ prompt_en: |
   3. Location of the heat source or cold source: Specify the exact location of the heat source or cold source in the image (e.g., top-left, center, bottom-right, etc.).
   4. Proportion of the heat source or cold source: Estimate the proportion of the image occupied by the heat source or cold source (expressed as a percentage).
   Please provide the analysis following this format.
+  and save the heat source or cold source and location into this format:
+  {
+    "heat_source": "fire",
+    "location": "top-left",
+    "proportion": 0.2
+  }
 
-model: 
-  min_pixels: 256 * 28 * 28 
+model:
+  min_pixels: 256 * 28 * 28
   max_pixels: 1280 * 28 * 28
-
 
 version:
   # Qwen/Qwen2-VL-7B-Instruct
   # Qwen/Qwen2.5-VL-32B-Instruct
   model: Qwen/Qwen2.5-VL-7B-Instruct
+
+gpu: 0
