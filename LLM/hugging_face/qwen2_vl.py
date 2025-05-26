@@ -9,7 +9,7 @@ Author: Kaixu Chen
 Comment:
 https://huggingface.co/Qwen/
 
-The Qwen series can use the huggingface processor. 
+The Qwen series can use the huggingface processor.
 
 Have a good code time :)
 -----
@@ -24,14 +24,11 @@ Date      	By	Comments
 """
 
 import logging
-import os
 import json
-from PIL import Image
 import hydra
 import omegaconf
 import torch
 from pathlib import Path
-from typing import Dict
 from tqdm import tqdm
 
 from transformers import Qwen2VLForConditionalGeneration, AutoTokenizer, AutoProcessor
@@ -41,6 +38,28 @@ from utils.timer import timer
 from utils.get_device import get_device
 from utils.video_loader import split_video_and_extract_frames_decord
 
+logger = logging.getLogger(__name__)
+
+
+def save_image_info_to_json(image_info: dict, json_file_path: Path):
+
+    full_path = json_file_path
+
+    save_image_info = {
+        "video_path": str(image_info["video_path"]),
+        "frame_idx": int(image_info["frame_idx"]),
+        "second": int(image_info["second"]),
+        "ms": int(image_info["ms"]),
+        "conversation": image_info["conversation"],
+        "output_text": image_info["output_text"],
+    }
+
+    if full_path.parent.exists() is False:
+        full_path.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(full_path, "w") as f:
+        json.dump(save_image_info, f, indent=4)
+
 
 class Qwen2VL:
     def __init__(
@@ -48,25 +67,31 @@ class Qwen2VL:
         output_path: str,
         prompt: dict,
         version: str = "Qwen/Qwen2.5-VL-7B-Instruct",
+        cache_dir: str = "",
     ):
 
         self.device_name = get_device()
         self.output_path = Path(output_path)
         self.prompt = prompt
 
-        self.model, self.processor = self.load_model(version, self.device_name)
-        self.image_info = []
+        self.model, self.processor = self.load_model(
+            version, self.device_name, cache_dir
+        )
 
     @staticmethod
-    def load_model(version: str, device_name: str):
+    def load_model(version: str, device_name: str, cache_dir: str = ""):
+
+        if not Path(cache_dir).exists():
+            logger.info(f"Creating cache directory at {cache_dir}")
+            Path(cache_dir).mkdir(parents=True, exist_ok=True)
 
         if "Qwen2.5" in version:
             model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
-                version, torch_dtype="auto"
+                version, torch_dtype="auto", cache_dir=cache_dir
             ).to(device_name)
         elif "Qwen2" in version:
             model = Qwen2VLForConditionalGeneration.from_pretrained(
-                version, torch_dtype="auto"
+                version, torch_dtype="auto", cache_dir=cache_dir
             ).to(device_name)
         else:
             raise ValueError(
@@ -84,7 +109,7 @@ class Qwen2VL:
 
         return model, processor
 
-    def get_conversation(self, role: str, content: Dict):
+    def get_conversation(self, role: str, content: dict):
         conversation = [{"role": role, "content": content}]
         return conversation
 
@@ -117,32 +142,21 @@ class Qwen2VL:
                 skip_special_tokens=True,
                 clean_up_tokenization_spaces=True,
             )
-            logging.info(output_text)
+            # logger.info(output_text)
 
         return output_text
 
-    def save_image_info_to_json(self, image_info: dict, json_file_path: Path):
+    def __call__(self, frame_info: dict):
 
-        full_path = json_file_path
+        video_path = frame_info["video_path"]
+        frame_idx = frame_info["frame_idx"]
+        current_ms = frame_info["current_ms"]
+        second = frame_info["second"]
+        image = frame_info["image"]
 
-        if full_path.parent.exists() is False:
-            full_path.parent.mkdir(parents=True, exist_ok=True)
-
-        with open(full_path, "w") as f:
-            json.dump(image_info, f, indent=4)
-
-    def __call__(self, image_path: Path, text: str = "Describe this image."):
-
-        if isinstance(image_path, str):
-            image = Image.open(image_path).convert("RGB")
-            logging.info(image.size)
-        elif isinstance(image_path, dict):
-            video_path = image_path["video_path"]
-            frame_idx = image_path["frame_idx"]
-            second = image_path["second"]
-            image = image_path["image"]
-
-        whole_output_text = {}
+        logger.info(
+            f"Processing frame {frame_idx} at {video_path} - second: {second}, ms: {current_ms}"
+        )
 
         if isinstance(self.prompt, str):
             conversation = [
@@ -162,58 +176,50 @@ class Qwen2VL:
 
         inputs = self.preprocess(conversation, image, self.device_name)
 
-        whole_output_text[0] = self.generate(inputs)
-
         # package the image info
-        # TODO: 这里的组装方式还可以修改一下
-        if isinstance(image_path, str):
-            image_info = {
-                "image_name": image_path.split("/")[-1],
-                "image_path": image_path,
-                "conversation": conversation,
-                "output_text": whole_output_text,
-            }
-        elif isinstance(image_path, dict):
-            image_info = {
-                "video_path": video_path,
-                "frame_idx": frame_idx,
-                "second": second,
-                "conversation": conversation,
-                "output_text": whole_output_text,
-            }
+        image_info = {
+            "video_path": video_path,
+            "frame_idx": frame_idx,
+            "second": second,
+            "ms": current_ms,
+            "conversation": conversation,
+            "output_text": self.generate(inputs),
+        }
 
-        self.image_info.append(image_info)
-
-        self.save_image_info_to_json(
-            self.image_info, self.output_path / "image_info.json"
+        # logger.info(f"Saving image info to JSON at {_output_path / 'image_info.json'}")
+        save_image_info_to_json(
+            image_info,
+            self.output_path
+            / f"frame_{frame_idx}_second_{second}_ms_{current_ms}.json",
         )
 
 
-@hydra.main(config_path="../configs", config_name="qwen2")
+@hydra.main(config_path="../../configs", config_name="qwen2")
 def load_config(cfg: omegaconf.DictConfig):
 
-    output_path = cfg.output_path
+    output_path = Path(cfg.output_path)
+    video_path = Path(cfg.video_path)
 
-    # test image path
-    # images_path = [Path("tests/data/sample.jpg"), Path("tests/data/fire.jpg")]
-    # for image_path in images_path:
-    #     image_to_text(image_path)
+    for pth in tqdm(video_path.iterdir(), desc="video file"):
 
-    video_path = "tests/data/downloaded_video.mp4"
+        _output_path = output_path / pth.stem
 
-    total_frame_list = split_video_and_extract_frames_decord(
-        video_path, output_path + "/frames", fps=2
-    )
+        total_frame_list = split_video_and_extract_frames_decord(
+            pth, _output_path / "frames"
+        )
 
-    image_to_text = Qwen2VL(
-        output_path=output_path, prompt=cfg.prompt_en, version=cfg.version.model
-    )
+        image_to_text = Qwen2VL(
+            output_path=output_path / pth.stem / "image_info",
+            prompt=cfg.prompt_en,
+            version=cfg.version.model,
+            cache_dir=cfg.cache_path,
+        )
 
-    for frame_info in tqdm(total_frame_list, desc="Processing frames"):
+        for frame_info in tqdm(total_frame_list, desc="Processing frames"):
 
-        image_to_text(image_path=frame_info)
+            image_to_text(frame_info=frame_info)
 
-    logging.info("All done!")
+    logger.info("All done!")
 
 
 if __name__ == "__main__":

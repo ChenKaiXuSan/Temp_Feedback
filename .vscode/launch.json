@@ -48,7 +48,7 @@
       "type": "debugpy",
       "request": "launch",
       "cwd": "${workspaceFolder}",
-      "module": "image_to_text.qwen2_vl",
+      "module": "LLM.hugging_face.qwen2_vl",
       "console": "integratedTerminal"
     },
     {
