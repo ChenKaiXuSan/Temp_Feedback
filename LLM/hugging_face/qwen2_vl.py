@@ -43,22 +43,20 @@ logger = logging.getLogger(__name__)
 
 def save_image_info_to_json(image_info: dict, json_file_path: Path):
 
-    full_path = json_file_path
+    # save_image_info = {
+    #     "video_path": str(image_info["video_path"]),
+    #     "frame_idx": int(image_info["frame_idx"]),
+    #     "second": int(image_info["second"]),
+    #     "ms": int(image_info["ms"]),
+    #     "conversation": image_info["conversation"],
+    #     "output_text": image_info["output_text"],
+    # }
 
-    save_image_info = {
-        "video_path": str(image_info["video_path"]),
-        "frame_idx": int(image_info["frame_idx"]),
-        "second": int(image_info["second"]),
-        "ms": int(image_info["ms"]),
-        "conversation": image_info["conversation"],
-        "output_text": image_info["output_text"],
-    }
+    if json_file_path.parent.exists() is False:
+        json_file_path.parent.mkdir(parents=True, exist_ok=True)
 
-    if full_path.parent.exists() is False:
-        full_path.parent.mkdir(parents=True, exist_ok=True)
-
-    with open(full_path, "w") as f:
-        json.dump(save_image_info, f, indent=4)
+    with open(json_file_path, "w") as f:
+        json.dump(image_info, f, indent=4)
 
 
 class Qwen2VL:
@@ -178,10 +176,10 @@ class Qwen2VL:
 
         # package the image info
         image_info = {
-            "video_path": video_path,
-            "frame_idx": frame_idx,
-            "second": second,
-            "ms": current_ms,
+            "video_path": str(video_path),
+            "frame_idx": int(frame_idx),
+            "second": int(second),
+            "ms": int(current_ms),
             "conversation": conversation,
             "output_text": self.generate(inputs),
         }
@@ -193,6 +191,8 @@ class Qwen2VL:
             / f"frame_{frame_idx}_second_{second}_ms_{current_ms}.json",
         )
 
+        return image_info
+
 
 @hydra.main(config_path="../../configs", config_name="qwen2")
 def load_config(cfg: omegaconf.DictConfig):
@@ -202,6 +202,8 @@ def load_config(cfg: omegaconf.DictConfig):
 
     for pth in tqdm(video_path.iterdir(), desc="video file"):
 
+        res_imgae_info = []
+
         _output_path = output_path / pth.stem
 
         total_frame_list = split_video_and_extract_frames_decord(
@@ -209,7 +211,7 @@ def load_config(cfg: omegaconf.DictConfig):
         )
 
         image_to_text = Qwen2VL(
-            output_path=output_path / pth.stem / "image_info",
+            output_path=_output_path / "image_info",
             prompt=cfg.prompt_en,
             version=cfg.version.model,
             cache_dir=cfg.cache_path,
@@ -217,7 +219,17 @@ def load_config(cfg: omegaconf.DictConfig):
 
         for frame_info in tqdm(total_frame_list, desc="Processing frames"):
 
-            image_to_text(frame_info=frame_info)
+            _img_info = image_to_text(frame_info=frame_info)
+            res_imgae_info.append(_img_info)
+
+        # Save the results to a JSON file
+        logger.info(f"Results saved to {_output_path / 'image_info'}")
+        save_image_info_to_json(
+            res_imgae_info,
+            _output_path / "all_frames_info.json",
+        )
+        logger.info(f"Processed video: {pth.stem}")
+        res_imgae_info.clear()
 
     logger.info("All done!")
 
