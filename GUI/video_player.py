@@ -1,5 +1,5 @@
 import sys
-from turtle import position
+from turtle import pos, position
 from PyQt5.QtWidgets import (
     QApplication,
     QWidget,
@@ -119,10 +119,7 @@ class VideoPlayer(QWidget):
 
     def find_res_with_position(self, frame_idx: int, data: dict):
 
-        self.frame_label.setText(
-            f"Current Frame: {frame_idx}, second: {frame_idx / self.fps:.2f}"
-        )
-
+        
         for one_info in data:
 
             info_frame_idx = one_info["frame_idx"]
@@ -218,18 +215,26 @@ class VideoPlayer(QWidget):
 
         print(f"当前帧号: {current_frame}")
 
-        llm_res_dict= self.find_res_with_position(current_frame, self.annotations)
+        self.frame_label.setText(
+            f"Current Frame: {current_frame}, second: {current_frame / self.fps:.2f}, ms: {position:.2f}"
+        )
 
-        print("sending to arduino")
+        # FIXME: 感觉不能用默认的播放器，而要用帧来拼凑返回的信号？
+        if position % 1000 == 0: # 每秒更新一次
+        # if current_frame % 30 == 0:
+            
+            llm_res_dict= self.find_res_with_position(current_frame, self.annotations)
 
-        # convert dict to str
-        # FIXME: the source key word should change
-        heat_source = llm_res_dict["heat_source"]
-        portion = llm_res_dict["proportion"]
-        location = llm_res_dict["location"]
+            print("sending to arduino")
 
-        final_text = str(heat_source) + "_" + str(portion)
-        self.arduino(final_text)
+            # convert dict to str
+            # FIXME: the source key word should change
+            heat_source = llm_res_dict["heat_source"]
+            portion = llm_res_dict["proportion"]
+            location = llm_res_dict["location"]
+
+            final_text = str(heat_source) + "_" + str(portion)
+            self.arduino(final_text)
 
 
     def update_time_label(self, current_ms, total_ms):
