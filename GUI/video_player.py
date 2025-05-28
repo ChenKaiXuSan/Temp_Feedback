@@ -20,11 +20,14 @@ from pathlib import Path
 import json
 import re
 import cv2
-
+from arduino_serial import ArduinoSerial
 
 class VideoPlayer(QWidget):
     def __init__(self):
         super().__init__()
+
+        self.arduino = ArduinoSerial()
+
         self.setWindowTitle("Video Player")
         self.setGeometry(100, 100, 1000, 600)
 
@@ -144,7 +147,7 @@ class VideoPlayer(QWidget):
         else:
             result = {
                 "heat_source": "none",
-                "fire": "none",
+                "proportion": "none",
                 "location": "none",
             }
             print("maybe not heat source")
@@ -217,6 +220,16 @@ class VideoPlayer(QWidget):
 
         llm_res_dict= self.find_res_with_position(current_frame, self.annotations)
 
+        print("sending to arduino")
+
+        # convert dict to str
+        # FIXME: the source key word should change
+        heat_source = llm_res_dict["heat_source"]
+        portion = llm_res_dict["proportion"]
+        location = llm_res_dict["location"]
+
+        final_text = str(heat_source) + "_" + str(portion)
+        self.arduino(final_text)
 
 
     def update_time_label(self, current_ms, total_ms):
