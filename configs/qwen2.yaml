@@ -33,9 +33,8 @@ prompt_en: |
   3. Location of the heat source or cold source: Specify the exact location of the heat source or cold source in the image (e.g., top-left, center, bottom-right, etc.).
   4. Proportion of the heat source or cold source: Estimate the proportion of the image occupied by the heat source or cold source (expressed as a percentage).
   Please provide the analysis following this format.
-  and save the heat source or cold source and location into this format:
   {
-    "heat_source": "fire",
+    "source": "heat or cold",
     "location": "top-left",
     "proportion": 0.2
   }
