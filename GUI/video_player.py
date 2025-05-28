@@ -1,4 +1,3 @@
-import pathlib
 import sys
 from turtle import position
 from PyQt5.QtWidgets import (
@@ -19,6 +18,7 @@ from PyQt5.QtCore import QUrl, Qt, QTime
 
 from pathlib import Path
 import json
+import re
 import cv2
 
 
@@ -96,8 +96,8 @@ class VideoPlayer(QWidget):
 
     def load_llm_res(self, path: str):
 
-        video_path = path
-        json_file = video_path.split("/")[-1].split(".")[0] + ".json"
+        video_path = Path(path)
+        json_file = video_path.stem + ".json"
 
         _path = Path(__file__).parent / "assets" / "llm_res" / json_file
 
@@ -124,12 +124,32 @@ class VideoPlayer(QWidget):
 
             info_frame_idx = one_info["frame_idx"]
             info_second = one_info["second"]
+            info_ms = one_info["ms"]
             info_conversation = one_info["conversation"]
             info_output_text = one_info["output_text"]
 
             if info_frame_idx == frame_idx:
-                print(f"find res: {info_output_text}")
-                break
+                preprocess_llm_res = self.convert_str_dict(info_output_text)
+                return preprocess_llm_res
+
+    def convert_str_dict(self, llm_res: str):
+
+        # 用正则提取 ```json``` 块中间的部分
+        match = re.search(r"\s*(\{.*?\})\s*", llm_res[0], re.DOTALL)
+
+        if match:
+            json_str = match.group(1)
+            result = json.loads(json_str)
+            print(result)
+        else:
+            result = {
+                "heat_source": "none",
+                "fire": "none",
+                "location": "none",
+            }
+            print("maybe not heat source")
+
+        return result
 
     def get_default_videos(self):
 
@@ -172,7 +192,6 @@ class VideoPlayer(QWidget):
             self.label.setText(f"Currently Playing:{path.split('/')[-1]}")
             self.mediaPlayer.play()
 
-
     def handle_media_status(self, status):
         if status == QMediaPlayer.EndOfMedia:
             self.play_next()
@@ -196,7 +215,9 @@ class VideoPlayer(QWidget):
 
         print(f"当前帧号: {current_frame}")
 
-        self.find_res_with_position(current_frame, self.annotations)
+        llm_res_dict= self.find_res_with_position(current_frame, self.annotations)
+
+
 
     def update_time_label(self, current_ms, total_ms):
         current_time = QTime(0, 0, 0).addMSecs(current_ms)

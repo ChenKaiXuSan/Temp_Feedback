@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
-'''
+"""
 File: /home/chenkaixu/Temp_Feedback/GUI/serial.py
 Project: /home/chenkaixu/Temp_Feedback/GUI
 Created Date: Sunday May 25th 2025
@@ -18,7 +18,7 @@ Copyright (c) 2025 The University of Tsukuba
 HISTORY:
 Date      	By	Comments
 ----------	---	---------------------------------------------------------
-'''
+"""
 import serial
 import time
 from serial.tools import list_ports
@@ -36,11 +36,7 @@ def list_available_ports():
 def open_serial(port_name, baudrate=9600, timeout=1):
     """打开串口连接"""
     try:
-        ser = serial.Serial(
-            port=port_name,
-            baudrate=baudrate,
-            timeout=timeout
-        )
+        ser = serial.Serial(port=port_name, baudrate=baudrate, timeout=timeout)
         print(f"✅ 已连接：{port_name}")
         return ser
     except Exception as e:
@@ -51,7 +47,7 @@ def open_serial(port_name, baudrate=9600, timeout=1):
 def send_command(ser, message):
     """发送数据到串口"""
     if ser and ser.is_open:
-        ser.write((message + '\n').encode('utf-8'))
+        ser.write((message + "\n").encode("utf-8"))
         print(f"📤 已发送：{message.strip()}")
     else:
         print("❌ 串口未打开")
@@ -60,13 +56,14 @@ def send_command(ser, message):
 def read_response(ser):
     """读取串口返回数据"""
     if ser and ser.in_waiting:
-        line = ser.readline().decode('utf-8').strip()
+        line = ser.readline().decode("utf-8").strip()
         print(f"📥 收到：{line}")
         return line
     return None
 
 
-def main():
+def arduino(text: str = "test"):
+
     print("=== 串口通信示例 ===")
     available_ports = list_available_ports()
     if not available_ports:
@@ -84,7 +81,7 @@ def main():
     try:
         while True:
             cmd = input("请输入要发送的内容（输入 quit 退出）： ").strip()
-            if cmd.lower() == 'quit':
+            if cmd.lower() == "quit":
                 break
             send_command(ser, cmd)
             time.sleep(0.2)
@@ -92,7 +89,3 @@ def main():
     finally:
         ser.close()
         print("🔌 串口已关闭")
-
-
-if __name__ == '__main__':
-    main()
