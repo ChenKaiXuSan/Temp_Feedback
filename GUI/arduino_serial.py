@@ -81,14 +81,6 @@ class ArduinoSerial:
             self.read_response(self.ser)
         except KeyboardInterrupt:
             print("no more input")
-
-        response = self.ser.readline().decode("utf-8").strip()
-        if response:
-            print(f"📥 收到：{response}")
-            return response
-        else:
-            print("❌ 没有收到数据")
-            return None
             
         # finally:
         #     self.ser.close()
