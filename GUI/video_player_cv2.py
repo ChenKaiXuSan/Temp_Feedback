@@ -162,7 +162,7 @@ class VideoPlayer(QWidget):
         if self.current_frame % int(self.fps) == 0:
             result = self.find_res_with_position(self.current_frame)
             if result:
-                msg = f"{result['heat_source']}_{result['proportion']}"
+                msg = f"{result['source']}_{result['proportion']}\n"
                 self.arduino(msg)
 
     def find_res_with_position(self, frame_idx):
