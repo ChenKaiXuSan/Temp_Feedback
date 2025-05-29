@@ -1,0 +1,14 @@
+# youtube-dl
+pytubefix
+
+# video loader 
+decord
+
+pyqt5 
+pyqt5-tools
+
+pandas 
+
+pyserial
+
+opencv-python-headless
