@@ -1,96 +1,73 @@
 <div align="center">
 
-# Interface for Adult Spinal Deformity
+# GUI for Image-Text Model Prediction Result
 
 </div>
 
-## Description  
+## Description
 
-📓 This project made with the PyQt5, PyInstaller, Python3.
-
-This project make the interface for Adult Spinal Deformity (ASD), used for doctor to select the adult spinal predicted disease type and attention body part.
-
-The attention body part include:
-
-- head
-- shoulder (cervical)
-- wrist
-- lumbar, pelvis
-- foot
-- don't konw
-
-The disease type include:
-
-- ASD
-- non-ASD
-- don't konw
+This project make the GUI for displaying the image-text model's prediction result.
 
 Detailed comments are written for most of the functions and classes.
 Have a happy code. 😄
 
 ## Folder structure
 
-``` bash  
-├─build
-│   PyInstaller generate the sys file.
-├─logs
-|   Save the log file, include the doctor's selections.
-├─imgs
-|   imgs used by README.md.
-├─misc
-|   The additional video file decoder.
-├─test_video
-|   test video, for debug.
-├─UI
-│   UI file location, include the login.py and GUI.py
-├─video
-|   Video to experiment.
-└─__pycache__
+```bash
+.
+|-- README.md # This file
+|-- arduino_r4
+|   `-- test.ino
+|-- arduino_serial.py
+|-- assets
+|   |-- llm_res
+|       |-- test1\ copy.json
+|       `-- test1.json
+|-- build.py
+|-- main.py
+|-- requirements.txt
+|-- video_player_cv2.py
+`-- video_player_qmedia_player.py
 ```
 
 ## How to run
 
-1. This is login form, here you should input your name.
+1. first should put the video file and the annotations file in the ./assets/videos and ./assets/llm_res/ directory.
 
-    ![login](img/login_form.png)
+   The video file should be in the format of `.mp4` or `.avi`, and the annotations file should be in the format of `.json`.
 
-2. This is the main window, here you should select the predicted disease type and attnetion body part.
+   We provide a sample video file, where can be download from YouTube, and the annotations file is in the `assets/llm_res` directory.
 
-    The video is shown on the left and the options are on the right.
-    Above on the right are the options for the attention part and below on the right are the options for disease prediction.
+   ```bash
+   # make sure you are in the root directory of the project
+   python utils\youtube_dl.py
+   ```
+   This will download a sample video file and save it in the `assets/videos` directory.
 
-    ![main_window](img/main_window.png)
+2. Install the required libraries.
 
-3. The final result will generated in [logs/](logs/), such as format: /logs/your_name_data.csv
+   We use OpenCV and PyQt5 to build the GUI.
 
-## Installation  
+   Make sure you install the PyQt5 and OpenCV libraries before running the code.
+   You can install them with the following commands:
 
-In this application, we use the PyQt5.QtMultimedia.QMediaPlayer.
-Because of this function can only decoder the .avi video file, but we have .mp4 video file.
-So we need to install additional decoders, where locate in [LAVFilters](misc/LAVFilters-0.73.1.exe)
+   ```bash
+   pip install PyQt5
+   pip install opencv-python
+   ```
 
-⚠️ Need first to install the additional decoder, otherwise an error will reported!
+   or you can install all the requirements in [requirements.txt](requirements.txt):
 
-Make sure you install the PyQt5 and PyInstaller, or install them with pip.
+3. Run the `video_player_cv2.py` file to start the GUI application.
 
-``` bash
-pip install PyQt5
-pip install pyinstaller
-```
-
-## Invert .ui to .py
-
-For PyQt5 import, you can invert the .ui file to the .py file.
-Use pyuic to invert GUI.ui to GUI.py.
-This will init include in PyQt5 lib.
-
-``` bash
-python -m PyQt5.uic.pyuic [GUI.ui] > [GUI.py]
-```
+   ```bash
+   # make sure you are in the root directory of the project
+   python GUI/video_player_cv2.py
+   ```
 
 ## PyInstaller
 
 In [build.py](build.py), can use PyInstaller to compile the .py file to .exe app.
-For the final user.  
+For the final user.
 
 > ⚠️ Users should first check the **manual.docx** document to see how to use this application.
