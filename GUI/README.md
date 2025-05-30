@@ -1,6 +1,6 @@
 <div align="center">
 
-# Interface for Adult Spinal Deformity
+# GUI for Image-Text Model Prediction Result
 
 </div>
 
@@ -16,13 +16,6 @@ Have a happy code. 😄
 ```bash
 .
 |-- README.md # This file
-|-- UI
-|   |-- GUI.py
-|   |-- GUI.ui
-|   |-- login.py
-|   |-- login.ui
-|   |-- video_player.py
-|   `-- video_player.ui
 |-- arduino_r4
 |   `-- test.ino
 |-- arduino_serial.py
@@ -31,12 +24,7 @@ Have a happy code. 😄
 |       |-- test1\ copy.json
 |       `-- test1.json
 |-- build.py
-|-- img
-|   |-- login_form.png
-|   `-- main_window.png
 |-- main.py
-|-- misc
-|   `-- LAVFilters-0.73.1.exe
 |-- requirements.txt
 |-- video_player_cv2.py
 `-- video_player_qmedia_player.py
@@ -44,38 +32,38 @@ Have a happy code. 😄
 
 ## How to run
 
-1. This is login form, here you should input your name.
+1. first should put the video file and the annotations file in the ./assets/videos and ./assets/llm_res/ directory.
 
-   ![login](img/login_form.png)
+   The video file should be in the format of `.mp4` or `.avi`, and the annotations file should be in the format of `.json`.
 
-2. This is the main window, here you should select the predicted disease type and attnetion body part.
+   We provide a sample video file, where can be download from YouTube, and the annotations file is in the `assets/llm_res` directory.
 
-   The video is shown on the left and the options are on the right.
-   Above on the right are the options for the attention part and below on the right are the options for disease prediction.
+   ```bash
+   # make sure you are in the root directory of the project
+   python utils\youtube_dl.py
+   ```
+   This will download a sample video file and save it in the `assets/videos` directory.
 
-   ![main_window](img/main_window.png)
+2. Install the required libraries.
 
-3. The final result will generated in [logs/](logs/), such as format: /logs/your_name_data.csv
+   We use OpenCV and PyQt5 to build the GUI.
 
-## Installation
+   Make sure you install the PyQt5 and OpenCV libraries before running the code.
+   You can install them with the following commands:
 
-We use OpenCV and PyQt5 to build the GUI.
+   ```bash
+   pip install PyQt5
+   pip install opencv-python
+   ```
 
-<!-- Because of this function can only decoder the .avi video file, but we have .mp4 video file.
-So we need to install additional decoders, where locate in [LAVFilters](misc/LAVFilters-0.73.1.exe)
+   or you can install all the requirements in [requirements.txt](requirements.txt):
 
-⚠️ Need first to install the additional decoder, otherwise an error will reported!
--->
+3. Run the `video_player_cv2.py` file to start the GUI application.
 
-Make sure you install the PyQt5 and OpenCV libraries before running the code.
-You can install them with the following commands:
-
-```bash
-pip install PyQt5
-pip install opencv-python
-```
-
-or you can install all the requirements in [requirements.txt](requirements.txt):
+   ```bash
+   # make sure you are in the root directory of the project
+   python GUI/video_player_cv2.py
+   ```
 
 ## PyInstaller
 

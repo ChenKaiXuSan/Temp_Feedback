@@ -198,6 +198,7 @@ class VideoPlayer(QWidget):
             f"Current Frame: {self.current_frame}, ms: {1000 * self.current_frame / self.fps:.2f}"
         )
 
+        # every fps seconds, check for annotations
         if self.current_frame % int(self.fps) == 0:
             result = self.find_res_with_position(self.current_frame)
             if result:
