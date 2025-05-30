@@ -1,20 +1,54 @@
+#!/usr/bin/env python3
+# -*- coding:utf-8 -*-
+"""
+File: /workspace/code/GUI/video_player_cv2.py
+Project: /workspace/code/GUI
+Created Date: Friday May 30th 2025
+Author: Kaixu Chen
+-----
+Comment:
+
+This is a simple video player using OpenCV and PyQt5.
+It allows you to open multiple video files, play, pause, and stop them.
+It also integrates with an Arduino serial interface to send messages based on video frame annotations.
+
+Have a good code time :)
+-----
+Last Modified: Friday May 30th 2025 9:36:50 am
+Modified By: the developer formerly known as Kaixu Chen at <chenkaixusan@gmail.com>
+-----
+Copyright (c) 2025 The University of Tsukuba
+-----
+HISTORY:
+Date      	By	Comments
+----------	---	---------------------------------------------------------
+"""
+
 import sys
 import cv2
 import json
 import re
 from pathlib import Path
 from PyQt5.QtWidgets import (
-    QApplication, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QFileDialog,
-    QListWidget, QLabel, QSlider
+    QApplication,
+    QWidget,
+    QVBoxLayout,
+    QHBoxLayout,
+    QPushButton,
+    QFileDialog,
+    QListWidget,
+    QLabel,
+    QSlider,
 )
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtGui import QImage, QPixmap
 from arduino_serial import ArduinoSerial
 
+
 class VideoPlayer(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("OpenCV Video Player")
+        self.setWindowTitle("Video Player")
         self.setGeometry(100, 100, 1000, 600)
 
         self.arduino = ArduinoSerial()
@@ -33,6 +67,7 @@ class VideoPlayer(QWidget):
         self.label = QLabel("Currently Playing:")
         self.frame_label = QLabel("Current Frame:")
 
+        # Create buttons for video control
         openBtn = QPushButton("Open Folder")
         openBtn.clicked.connect(self.open_files)
         playBtn = QPushButton("Play")
@@ -75,7 +110,7 @@ class VideoPlayer(QWidget):
         self.get_default_videos()
 
     def open_files(self):
-        files, _ = QFileDialog.getOpenFileNames(self, "选择多个视频")
+        files, _ = QFileDialog.getOpenFileNames(self, "select one or more video files")
         if files:
             self.video_paths = files
             self.listWidget.clear()
@@ -85,6 +120,8 @@ class VideoPlayer(QWidget):
             self.load_and_play(self.current_index)
 
     def get_default_videos(self):
+        """Load default video files from the assets/videos directory."""
+        
         _path = Path(__file__).parent / "assets" / "videos"
         path_list = sorted(str(p) for p in _path.glob("*.mp4"))
         self.video_paths = path_list
@@ -157,7 +194,9 @@ class VideoPlayer(QWidget):
         self.slider.setValue(self.current_frame)
         total_frames = int(self.cap.get(cv2.CAP_PROP_FRAME_COUNT))
         self.timeLabel.setText(f"{self.current_frame} / {total_frames}")
-        self.frame_label.setText(f"Current Frame: {self.current_frame}, ms: {1000 * self.current_frame / self.fps:.2f}")
+        self.frame_label.setText(
+            f"Current Frame: {self.current_frame}, ms: {1000 * self.current_frame / self.fps:.2f}"
+        )
 
         if self.current_frame % int(self.fps) == 0:
             result = self.find_res_with_position(self.current_frame)
@@ -176,6 +215,7 @@ class VideoPlayer(QWidget):
         if match:
             return json.loads(match.group(0))
         return {"heat_source": "none", "proportion": "none", "location": "none"}
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
