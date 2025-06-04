@@ -27,61 +27,78 @@ from serial.tools import list_ports
 class ArduinoSerial:
 
     def __init__(self):
-        """初始化串口通信"""
-        print("ArduinoSerial 初始化")
+        """Initialize serial communication"""
+        print("ArduinoSerial initializing...")
 
         available_ports = self.list_available_ports()
         if not available_ports:
-            print("⚠️ 没有检测到串口设备。")
+            print("⚠️ No serial devices detected.")
+            self.ser = None
+            return
 
-        self.ser = self.open_serial(available_ports[0])
+        # Let user select the port
+        print("Please select a serial port number:")
+        for idx, port in enumerate(available_ports):
+            print(f"[{idx}] {port}")
+        while True:
+            try:
+                choice = int(input("Enter index (default 0): ") or "0")
+                if 0 <= choice < len(available_ports):
+                    break
+                else:
+                    print("❌ Invalid index, please try again.")
+            except ValueError:
+                print("❌ Please enter an integer index.")
+
+        selected_port = available_ports[choice]
+        self.ser = self.open_serial(selected_port)
 
     @staticmethod
     def list_available_ports():
-        """列出所有可用串口设备"""
-        print("可用串口：")
+        """List all available serial ports"""
+        print("Available serial ports:")
         ports = list_ports.comports()
         for port in ports:
             print(f"  - {port.device} ({port.description})")
         return [port.device for port in ports]
 
     def open_serial(self, port_name, baudrate=9600, timeout=1):
-        """打开串口连接"""
+        """Open the serial connection"""
         try:
             ser = serial.Serial(port=port_name, baudrate=baudrate, timeout=timeout)
-            print(f"✅ 已连接：{port_name}")
+            print(f"✅ Connected to: {port_name}")
             return ser
         except Exception as e:
-            print(f"❌ 无法打开串口 {port_name}：{e}")
+            print(f"❌ Failed to open port {port_name}: {e}")
             return None
 
     def send_command(self, ser, message):
-        """发送数据到串口"""
+        """Send a message to the serial port"""
         if ser and ser.is_open:
             ser.write((message + "\n").encode("utf-8"))
-            print(f"📤 已发送：{message.strip()}")
+            print(f"📤 Sent: {message.strip()}")
         else:
-            print("❌ 串口未打开")
+            print("❌ Serial port is not open")
 
     def read_response(self, ser):
-        """读取串口返回数据"""
+        """Read response from the serial port"""
         if ser and ser.in_waiting:
             line = ser.readline().decode("utf-8").strip()
-            print(f"📥 收到：{line}")
+            print(f"📥 Received: {line}")
             return line
         return None
 
     def __call__(self, text: str):
 
-        # time.sleep(2)  # 等设备准备好
+        # time.sleep(2)  # Wait for the device to be ready
 
         try:
             self.send_command(self.ser, text)
             time.sleep(0.2)
             self.read_response(self.ser)
         except KeyboardInterrupt:
-            print("no more input")
-            
+            print("No more input")
+
         # finally:
         #     self.ser.close()
-        #     print("🔌 串口已关闭")
+        #     print("🔌 Serial port closed")

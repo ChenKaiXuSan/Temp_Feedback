@@ -202,7 +202,8 @@ class VideoPlayer(QWidget):
         if self.current_frame % int(self.fps) == 0:
             result = self.find_res_with_position(self.current_frame)
             if result:
-                msg = f"{result['source']}_{result['proportion']}\n"
+                msg = f"{result['source'][0]}{result['proportion'] * 255}"
+                # print(msg)
                 self.arduino(msg)
 
     def find_res_with_position(self, frame_idx):
@@ -215,7 +216,7 @@ class VideoPlayer(QWidget):
         match = re.search(r"\{.*?\}", llm_res[0], re.DOTALL)
         if match:
             return json.loads(match.group(0))
-        return {"heat_source": "none", "proportion": "none", "location": "none"}
+        return {"source": "none", "proportion": "none", "location": "none"}
 
 
 if __name__ == "__main__":

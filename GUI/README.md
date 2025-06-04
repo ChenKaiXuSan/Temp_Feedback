@@ -64,6 +64,30 @@ Have a happy code. 😄
    # make sure you are in the root directory of the project
    python GUI/video_player_cv2.py
    ```
+## Serial Communication
+
+The LLM result can be sent to the Arduino R4 board via serial communication.
+the format of the data is a JSON string, which contains source, location and prediction.
+like this:
+
+```json
+{
+    "source": "heat" or "cold" or "none",
+    "location": "left" or "right" or "center",
+    "proportion": "0.15"
+}
+```
+
+When send to serial, the string will be:
+```
+source_proportion*255
+```
+like:
+```
+h75 or c38 or n0
+```
+
+⚠️ We send one single with 30 fps.
 
 ## PyInstaller
 
