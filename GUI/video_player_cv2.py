@@ -54,7 +54,10 @@ class VideoPlayer(QWidget):
         self.arduino = ArduinoSerial()
 
         self.video_label = QLabel("Video Display")
-        self.video_label.setFixedSize(640, 480)
+        self.video_label.setAlignment(Qt.AlignCenter)
+        self.video_label.setMinimumSize(1920, 1080)
+        self.video_label.setScaledContents(True)
+
         self.slider = QSlider(Qt.Horizontal)
         self.slider.setRange(0, 0)
         self.slider.sliderMoved.connect(self.set_position)
@@ -121,7 +124,7 @@ class VideoPlayer(QWidget):
 
     def get_default_videos(self):
         """Load default video files from the assets/videos directory."""
-        
+
         _path = Path(__file__).parent / "assets" / "videos"
         path_list = sorted(str(p) for p in _path.glob("*.mp4"))
         self.video_paths = path_list
@@ -189,7 +192,11 @@ class VideoPlayer(QWidget):
         h, w, ch = rgb_image.shape
         bytes_per_line = ch * w
         qt_image = QImage(rgb_image.data, w, h, bytes_per_line, QImage.Format_RGB888)
-        self.video_label.setPixmap(QPixmap.fromImage(qt_image))
+        scaled_image = qt_image.scaled(
+            self.video_label.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation
+        )
+        self.video_label.setPixmap(QPixmap.fromImage(scaled_image))
+        # self.video_label.setPixmap(QPixmap.fromImage(qt_image))
 
         self.slider.setValue(self.current_frame)
         total_frames = int(self.cap.get(cv2.CAP_PROP_FRAME_COUNT))
@@ -199,11 +206,29 @@ class VideoPlayer(QWidget):
         )
 
         # every fps seconds, check for annotations
+        # if self.current_frame % int(self.fps) == 0:
+        #     result = self.find_res_with_position(self.current_frame)
+        #     if result:
+        #         msg = f"{result['source'][0]}{result['proportion'] * 255}"
+        #         # print(msg)
+        #         self.arduino(msg)
+
+        # every fps seconds, check for annotations
         if self.current_frame % int(self.fps) == 0:
             result = self.find_res_with_position(self.current_frame)
             if result:
-                msg = f"{result['source'][0]}{result['proportion'] * 255}"
-                # print(msg)
+                source = result['source'][0]
+                proportion = result['proportion']
+
+                if source == "h":
+                    val = int(proportion * 255)
+                elif source == "c":
+                    val = int(proportion * 70 + 185)  # 将 proportion 映射到 [185, 255]
+                else:
+                    val = 0  # 或者可以跳过
+
+                val = max(0, min(255, val))  # 保证在 0~255 范围内
+                msg = f"{source}{round(val)}"
                 self.arduino(msg)
 
     def find_res_with_position(self, frame_idx):

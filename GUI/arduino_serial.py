@@ -36,22 +36,37 @@ class ArduinoSerial:
             self.ser = None
             return
 
-        # Let user select the port
-        print("Please select a serial port number:")
+        # Step 1: Select serial port
+        print("\nPlease select a serial port:")
         for idx, port in enumerate(available_ports):
             print(f"[{idx}] {port}")
         while True:
             try:
-                choice = int(input("Enter index (default 0): ") or "0")
-                if 0 <= choice < len(available_ports):
+                port_choice = input("Enter port index (default 0): ") or "0"
+                port_choice = int(port_choice)
+                if 0 <= port_choice < len(available_ports):
                     break
                 else:
                     print("❌ Invalid index, please try again.")
             except ValueError:
-                print("❌ Please enter an integer index.")
+                print("❌ Please enter a valid integer.")
 
-        selected_port = available_ports[choice]
-        self.ser = self.open_serial(selected_port)
+        selected_port = available_ports[port_choice]
+
+        # Step 2: Let user input baudrate manually
+
+        while True:
+            try:
+                baud_input = input("Enter baudrate (default 9600): ") or "9600"
+                baudrate = int(baud_input)
+                if baudrate > 0:
+                    break
+                else:
+                    print("❌ Baudrate must be a positive number.")
+            except ValueError:
+                print("❌ Please enter a valid integer baudrate.")
+                
+        self.ser = self.open_serial(selected_port, baudrate=baudrate, timeout=1)
 
     @staticmethod
     def list_available_ports():
@@ -95,7 +110,7 @@ class ArduinoSerial:
         try:
             self.send_command(self.ser, text)
             time.sleep(0.2)
-            self.read_response(self.ser)
+            # self.read_response(self.ser)
         except KeyboardInterrupt:
             print("No more input")
 
