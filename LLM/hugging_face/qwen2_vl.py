@@ -229,7 +229,11 @@ def load_config(cfg: omegaconf.DictConfig):
             _output_path / "all_frames_info.json",
         )
         logger.info(f"Processed video: {pth.stem}")
-        res_imgae_info.clear()
+
+        # Clean up        
+        del image_to_text
+        del res_imgae_info
+        torch.cuda.empty_cache()
 
     logger.info("All done!")
 
