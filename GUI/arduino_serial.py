@@ -110,7 +110,7 @@ class ArduinoSerial:
         try:
             self.send_command(self.ser, text)
             time.sleep(0.2)
-            # self.read_response(self.ser)
+            self.read_response(self.ser)
         except KeyboardInterrupt:
             print("No more input")
 
