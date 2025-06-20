@@ -28,6 +28,7 @@ import json
 import hydra
 import omegaconf
 import torch
+import shutil
 from pathlib import Path
 from tqdm import tqdm
 
@@ -199,6 +200,7 @@ def load_config(cfg: omegaconf.DictConfig):
 
     output_path = Path(cfg.output_path)
     video_path = Path(cfg.video_path)
+    assets_path = Path(cfg.assets_path)
 
     for pth in tqdm(video_path.iterdir(), desc="video file"):
 
@@ -223,11 +225,19 @@ def load_config(cfg: omegaconf.DictConfig):
             res_imgae_info.append(_img_info)
 
         # Save the results to a JSON file
-        logger.info(f"Results saved to {_output_path / 'image_info'}")
+        logger.info(f"Results saved to {_output_path / f'{_output_path.stem}.json'}")
+
         save_image_info_to_json(
             res_imgae_info,
-            _output_path / "all_frames_info.json",
+            _output_path / f"{_output_path.stem}.json",
         )
+
+        # copy the video file to the assets path 
+        if not (_output_path).exists():
+            _output_path.mkdir(parents=True, exist_ok=True)
+        
+        shutil.copy(_output_path / f"{_output_path.stem}.json", f"{assets_path / _output_path.stem}.json")
+
         logger.info(f"Processed video: {pth.stem}")
 
         # Clean up        

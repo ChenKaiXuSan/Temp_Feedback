@@ -7,8 +7,9 @@ hydra:
 
 output_path: logs/qwen2-vl_result/${version.model}/${now:%Y-%m-%d}/${now:%H-%M-%S}
 image_path: /workspace/data/splited_dataset
-video_path: tests/video/
+video_path: GUI/assets/videos
 cache_path: ckpt/
+assets_path: GUI/assets/llm_res
 
 # reference from https://github.com/f/awesome-chatgpt-prompts
 prompt:
