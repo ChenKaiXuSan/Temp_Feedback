@@ -26,6 +26,8 @@ Date          	By	Comments
 """
 
 import sys
+from tkinter.ttk import Combobox
+from turtle import window_height
 import cv2
 import json
 import re
@@ -62,48 +64,147 @@ class VideoPlayer(QWidget):
         # Top control bar
         self.refresh_box = QComboBox()
         self.refresh_box.addItems(["Refresh", "Option 1", "Option 2"])
-        self.refresh_box.setStyleSheet("font-size: 2em;")
+        # self.refresh_box.setStyleSheet("font-size: 10em;")
+        # self.refresh_box.setFixedWidth(300)
         # self.refresh_box.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
-        self.button_btn = QPushButton("Button")
-        self.button_btn.setStyleSheet("font-size: 2em;")
+        self.port_box = QComboBox()
+        _items = self.arduino.list_available_ports()
+        self.port_box.addItems(_items if _items else ["No serial devices detected"])
+        # self.port_box.setStyleSheet("font-size: 10em;")
+        # self.port_box.setFixedWidth(300)
+
+        self.button_btn = QPushButton("Connect")
+        # self.button_btn.setStyleSheet("font-size: 10em;")
+        # self.button_btn.setFixedWidth(300)
+        # self.button_btn.clicked.connect(self.arduino.open_serial(port_name=self.port_box.currentText))
         # self.button_btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
-        self.status_label = QLabel("Status")
-        self.status_label.setStyleSheet("font-size: 2em;")
+        # self.status_label = QLabel("Status")
+        # self.status_label.setStyleSheet("font-size: 2em;")
 
         self.exit_btn = QPushButton("Exit")
         self.exit_btn.clicked.connect(self.close)
-        self.exit_btn.setStyleSheet("font-size: 2em;")
+        # self.exit_btn.setStyleSheet("font-size: 4em;")
+        # self.exit_btn.setFixedWidth(300)
         # self.exit_btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
+
+        for widget in [self.refresh_box, self.port_box, self.button_btn, self.exit_btn]:
+            widget.setFixedHeight(100)
+            widget.setMinimumWidth(300)
+            widget.setFixedWidth(300)
+
+            widget.setStyleSheet(
+                """
+                QComboBox {
+                    font-size: 40px;
+                    background-color: white;
+                    color: black;
+                    padding: 8px;
+                    border: 2px solid gray;
+                    border-radius: 6px;
+                }
+                QComboBox::drop-down {
+                    subcontrol-origin: padding;
+                    subcontrol-position: top right;
+                    width: 30px;
+                    border-left-width: 1px;
+                    border-left-color: darkgray;
+                    border-left-style: solid;
+                    border-top-right-radius: 3px;
+                    border-bottom-right-radius: 3px;
+                }
+                QComboBox::down-arrow {
+                    image: none;
+                }
+                QPushButton {
+                    font-size: 40px;
+                    background-color: white;
+                    color: black;
+                    border: 2px solid gray;
+                    border-radius: 10px;
+                    padding: 10px;
+                }
+                QPushButton:hover {
+                    background-color: #dddddd;
+                }
+            """
+            )
+            
+        # Top bar layout
         top_bar = QHBoxLayout()
+
         top_bar.addWidget(self.refresh_box)
+        top_bar.addWidget(self.port_box)
         top_bar.addWidget(self.button_btn)
-        top_bar.addWidget(self.status_label)
         top_bar.addStretch()
         top_bar.addWidget(self.exit_btn)
 
         # Left control panel
+
+        # 设置白底黑字样式
+        common_button_style = """
+            QPushButton {
+                font-size: 40px;
+                background-color: white;
+                color: black;
+                border: 2px solid gray;
+                border-radius: 8px;
+                padding: 8px;
+            }
+            QPushButton:hover {
+                background-color: #dddddd;
+            }
+        """
+
+        combo_box_style = """
+            QComboBox {
+                font-size: 40px;
+                background-color: white;
+                color: black;
+                border: 2px solid gray;
+                border-radius: 8px;
+                padding: 4px;
+            }
+            QComboBox QAbstractItemView {
+                font-size: 1.5px;
+                background-color: white;
+                color: black;
+                selection-background-color: #bbbbbb;
+            }
+        """
+
+        label_style = """
+            QLabel {
+                font-size: 40px;
+                color: white;
+                padding: 8px;
+                font-weight: bold;
+            }
+        """
+        
         self.select_label = QLabel("select video")
-        self.select_label.setStyleSheet("font-size: 1.5em;")
+        self.select_label.setStyleSheet(label_style)
         self.select_combo = QComboBox()
         self.select_combo.currentIndexChanged.connect(self.load_selected_video)
-        self.select_combo.setStyleSheet("font-size: 1.5em;")
+        self.select_combo.setStyleSheet(combo_box_style)
         self.select_combo.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
         self.stimulus_label = QLabel("stimulus")
-        self.stimulus_label.setStyleSheet("font-size: 1.5em;")
+        self.stimulus_label.setStyleSheet(label_style)
         self.stimulus_btn = QPushButton("OFF")
-        self.stimulus_btn.setStyleSheet("font-size: 1.5em;")
+        self.stimulus_btn.setStyleSheet(common_button_style)
         self.stimulus_btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
         self.video_label_title = QLabel("video")
-        self.video_label_title.setStyleSheet("font-size: 1.5em;")
+        self.video_label_title.setStyleSheet(label_style)
         self.video_control_btn = QPushButton("STOP")
         self.video_control_btn.clicked.connect(self.toggle_video)
-        self.video_control_btn.setStyleSheet("font-size: 1.5em;")
-        self.video_control_btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.video_control_btn.setStyleSheet(common_button_style)
+        self.video_control_btn.setSizePolicy(
+            QSizePolicy.Expanding, QSizePolicy.Expanding
+        )
 
         left_panel = QVBoxLayout()
         for widget in [
@@ -115,17 +216,18 @@ class VideoPlayer(QWidget):
             self.video_control_btn,
         ]:
             left_panel.addWidget(widget)
-            widget.setFixedWidth(130)
+            widget.setFixedWidth(350)
+            widget.setFixedHeight(100)
 
         left_frame = QFrame()
         left_frame.setLayout(left_panel)
         left_frame.setStyleSheet("background-color: #333333; padding: 10px;")
-        left_frame.setFixedWidth(180)
+        left_frame.setFixedWidth(400)
 
         # Video display
         self.video_label = QLabel("Video Display")
         self.video_label.setAlignment(Qt.AlignCenter)
-        self.video_label.setMinimumSize(640, 360)
+        self.video_label.setMinimumSize(800, 600)
         self.video_label.setStyleSheet("border: 1px solid white;")
         self.video_label.setScaledContents(True)
 
