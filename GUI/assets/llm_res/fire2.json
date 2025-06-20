@@ -1675,7 +1675,7 @@
             }
         ],
         "output_text": [
-            "{\n  \"source\": \"heat\",\n  \"location\": \"center\",\n  \"proportion\": 0.8\n}"
+            "{\n  \"source\": \"heat\",\n  \"location\": \"center-right\",\n  \"proportion\": 0.7\n}"
         ]
     },
     {
@@ -1951,7 +1951,7 @@
             }
         ],
         "output_text": [
-            "The image provided is predominantly dark with minimal visible details. There appears to be a faint glow or light source in the center of the image, which could be interpreted as a heat source.\n\n1. **Presence of a heat source or cold source**: Yes, there seems to be a heat source present.\n2. **Type of heat source or cold source**: The heat source appears to be a small, localized glow, possibly resembling a flame or a small light.\n3. **Location of the heat source or cold source**: The heat source is located in the center of the image.\n4. **Proportion of the heat source or cold source**: The heat source occupies a very small portion of the image, approximately 0.1% of the total area.\n\nGiven these observations, the analysis can be summarized as follows:\n\n{\n  \"source\": \"heat\",\n  \"location\": \"center\",\n  \"proportion\": 0.1\n}"
+            "The image appears to be predominantly dark with some faint, indistinct shapes that could be interpreted as heat sources. However, due to the low visibility and lack of clear details, it's challenging to accurately determine the presence of a heat source or\u51b7source.\n\nGiven the limited information, here is the analysis:\n\n{\n  \"source\": \"uncertain\",\n  \"location\": \"center\",\n  \"proportion\": 0.1\n}"
         ]
     },
     {
@@ -1974,7 +1974,7 @@
             }
         ],
         "output_text": [
-            "The image appears to be predominantly dark with minimal visible details. There is a faint, elongated shape that could be interpreted as a heat source, possibly a flame, located near the center of the image. However, due to the darkness and lack of clear detail, it's difficult to determine the exact nature of the source.\n\nGiven the limited information:\n\n1. **Presence of a heat source or cold source**: There seems to be a faint indication of a heat source.\n2. **Type of heat source or cold source**: The source appears to be a flame-like shape.\n3. **Location of the heat source or cold source**: The source is located near the center of the image.\n4. **Proportion of the heat source or cold source**: It occupies a small portion of the image, approximately 0.1% of the total area.\n\nTherefore, the analysis would be:\n\n{\n  \"source\": \"heat\",\n  \"location\": \"center\",\n  \"proportion\": 0.1\n}"
+            "The image appears to be very dark with minimal visible details. There is a faint, elongated shape that could be interpreted as a heat source, possibly a flame, located near the center of the image. However, due to the darkness and lack of clear details, it is difficult to determine the exact nature of the object.\n\nGiven the limited information, here is the analysis:\n\n{\n  \"source\": \"heat\",\n  \"location\": \"center\",\n  \"proportion\": 0.05\n}"
         ]
     }
 ]

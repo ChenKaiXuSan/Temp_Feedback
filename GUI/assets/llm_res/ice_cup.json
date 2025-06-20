@@ -2802,7 +2802,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with ice cubes and a liquid being poured into it. There is no visible heat source or cold source in the image.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with ice cubes and a liquid being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -3078,7 +3078,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with what appears to be a cold beverage, likely iced coffee, given the presence of ice cubes and the dark color of the liquid. There is no visible heat source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
+            "The image shows a glass with what appears to be a cold beverage, possibly iced coffee or iced tea, with ice cubes and some liquid visible. There is no identifiable heat source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
         ]
     },
     {
@@ -3285,7 +3285,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a beverage that appears to be iced coffee. There is no visible heat source or cold source in the image.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass containing a beverage with ice cubes. The liquid appears to be a coffee-based drink, possibly iced coffee, given the presence of ice and the color of the liquid.\n\n1. **Presence of a heat source or cold source**: There is no identifiable heat source in the image. However, there is a cold source present.\n2. **Type of cold source**: The cold source is ice cubes.\n3. **Location of the cold source**: The ice cubes are located at the bottom of the glass.\n4. **Proportion of the cold source**: The ice cubes occupy approximately 50% of the image's lower portion.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"bottom\",\n  \"proportion\": 0.5\n}"
         ]
     },
     {
@@ -3331,7 +3331,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with ice cubes and a dark liquid being poured into it. The ice cubes appear to be melting, indicating the presence of a cold source.\n\n1. **Presence of a heat source or cold source**: There is a cold source present.\n2. **Type of cold source**: The cold source is ice blocks.\n3. **Location of the cold source**: The ice blocks are located at the bottom of the glass.\n4. **Proportion of the cold source**: The ice blocks occupy approximately 50% of the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"bottom\",\n  \"proportion\": 0.5\n}"
+            "The image shows a glass with ice cubes and a liquid being poured into it. There is no visible heat source or cold source in the image.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -5539,7 +5539,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid being poured over ice cubes. There is no visible heat source or cold source in the image.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with a dark liquid being poured over ice cubes. The liquid appears to be coffee or a similar beverage. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -5562,7 +5562,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with ice cubes and a dark liquid being poured into it. The liquid appears to be coffee or a similar beverage.\n\n1. **Presence of a heat source or cold source**: There is no identifiable heat source or cold source in the image. The focus is on the pouring action and the contents of the glass.\n\n2. **Type of heat source or cold source**: There is no heat source or cold source present in the image.\n\n3. **Location of the heat source or cold source**: Since there is no heat source or cold source, this step is not applicable.\n\n4. **Proportion of the heat source or cold source**: Since there is no heat source or cold source, this step is not applicable.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"N/A\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with ice cubes and a dark liquid being poured into it. The liquid appears to be coffee or a similar beverage.\n\n1. **Presence of a heat source or cold source**: There is no identifiable heat source in the image. However, there is a cold source present.\n2. **Type of cold source**: The cold source is ice cubes.\n3. **Location of the cold source**: The ice cubes are located at the bottom of the glass.\n4. **Proportion of the cold source**: The ice cubes occupy approximately 50% of the image's lower portion.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"bottom\",\n  \"proportion\": 0.5\n}"
         ]
     },
     {
@@ -5700,7 +5700,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid being poured over ice cubes. There is no visible heat source or cold source in the image.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with a dark liquid being poured over ice cubes. The liquid appears to be a cold beverage, likely iced coffee or tea, given its color and the presence of ice.\n\n1. **Presence of a heat source or cold source**: There is no identifiable heat source in the image. The cold source is clearly visible.\n2. **Type of cold source**: The cold source is ice cubes.\n3. **Location of the cold source**: The ice cubes are located at the bottom of the glass.\n4. **Proportion of the cold source**: The ice cubes occupy approximately 50% of the image's lower portion.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"bottom\",\n  \"proportion\": 0.5\n}"
         ]
     },
     {
@@ -5815,7 +5815,7 @@
             }
         ],
         "output_text": [
-            "The image shows a close-up of a glass containing a beverage with ice cubes. The liquid appears to be a coffee-based drink, possibly an iced coffee or latte, with a dark brown color. There is a stream of liquid being poured into the glass, which could be milk or cream, creating a swirling effect around the ice cubes.\n\n1. **Presence of a heat source or cold source**: There is no identifiable heat source in the image. However, the presence of ice cubes suggests a cold source.\n2. **Type of cold source**: The cold source is ice cubes.\n3. **Location of the cold source**: The ice cubes are located at the bottom of the glass, partially submerged in the liquid.\n4. **Proportion of the cold source**: The ice cubes occupy approximately 50% of the bottom area of the glass.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"bottom\",\n  \"proportion\": 0.5\n}"
+            "The image shows a close-up of a glass containing a beverage with ice cubes. The liquid appears to be a coffee-based drink, possibly an iced coffee or latte, with a dark brown color. There is a stream of liquid being poured into the glass, which could be milk or cream, creating a swirling effect around the ice cubes.\n\n1. **Presence of a heat source or cold source**: There is no identifiable heat source or cold source in the image. The focus is on the pouring action and the contents of the glass.\n\n2. **Type of heat source or cold source**: There is no heat source or cold source present in the image.\n\n3. **Location of the heat source or cold source**: Since there is no heat or cold source, this information does not apply.\n\n4. **Proportion of the heat source or cold source**: Since there is no heat or cold source, this information does not apply.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"N/A\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -5999,7 +5999,7 @@
             }
         ],
         "output_text": [
-            "The image shows a close-up of a glass containing a beverage with ice cubes. The liquid appears to be a coffee-based drink, possibly iced coffee, given the presence of ice and the coloration.\n\n1. **Presence of a heat source or cold source**: There is no identifiable heat source in the image. However, there is a cold source present.\n2. **Type of cold source**: The cold source is ice cubes.\n3. **Location of the cold source**: The ice cubes are located at the bottom of the glass, partially submerged in the liquid.\n4. **Proportion of the cold source**: The ice cubes occupy approximately 50% of the lower portion of the glass.\n\nGiven these observations:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"bottom\",\n  \"proportion\": 0.5\n}"
+            "The image shows a close-up of a glass containing a beverage with ice cubes. The liquid appears to be a coffee-based drink, possibly iced coffee, given the presence of ice and the coloration.\n\n1. **Presence of a heat source or cold source**: There is no identifiable heat source in the image. However, there is a cold source present.\n2. **Type of cold source**: The cold source is ice cubes.\n3. **Location of the cold source**: The ice cubes are located at the bottom of the glass, partially submerged in the liquid.\n4. **Proportion of the cold source**: The ice cubes occupy approximately 50% of the lower portion of the glass.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"bottom\",\n  \"proportion\": 0.5\n}"
         ]
     },
     {
@@ -6137,7 +6137,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with ice cubes and a liquid being poured into it. There is no visible heat source or cold source in the image.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with ice cubes and a liquid that appears to be coffee or a similar beverage. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -6252,7 +6252,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with ice cubes and a liquid that appears to be coffee or a similar beverage. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with ice cubes and a dark liquid, likely coffee or tea, being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -6275,7 +6275,7 @@
             }
         ],
         "output_text": [
-            "The image shows a close-up of a glass containing a beverage with ice cubes. There is no visible heat source or cold source in the image.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a close-up of a glass containing a beverage with ice cubes. The liquid appears to be a dark brown color, possibly coffee or tea, with some bubbles visible on the surface.\n\n1. **Presence of a heat source or cold source**: There is no identifiable heat source in the image. However, the presence of ice cubes suggests the use of a cold source.\n2. **Type of cold source**: The cold source is ice cubes.\n3. **Location of the cold source**: The ice cubes are located within the glass, which is the central focus of the image.\n4. **Proportion of the cold source**: The ice cubes occupy a significant portion of the glass, approximately 50% of the image's area.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
         ]
     },
     {
@@ -6344,7 +6344,7 @@
             }
         ],
         "output_text": [
-            "The image shows a close-up of a glass containing a beverage with ice cubes and a dark liquid, likely coffee or tea. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a close-up of a glass containing a beverage with ice cubes. There is no visible heat source or cold source in the image.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -6528,7 +6528,7 @@
             }
         ],
         "output_text": [
-            "The image shows a close-up of a glass containing a beverage with ice cubes. The liquid appears to be a dark brown color, possibly coffee or tea, with some bubbles visible on the surface.\n\n1. **Presence of a heat source or cold source**: There is no identifiable heat source or cold source in the image. The presence of ice cubes suggests that the beverage is cold, but the image does not show any active heat source.\n\n2. **Type of heat source or cold source**: The cold source is the ice cubes in the glass. There is no heat source present.\n\n3. **Location of the heat source or cold source**: The ice cubes are located within the glass, which is the central focus of the image.\n\n4. **Proportion of the heat source or cold source**: The ice cubes occupy a significant portion of the image, approximately 50% of the total area.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
+            "The image shows a close-up of a glass containing a beverage with ice cubes. The liquid appears to be a dark brown color, possibly coffee or tea, with visible bubbles and foam.\n\n1. **Presence of a heat source or cold source**: There is no identifiable heat source or cold source in the image. The presence of ice cubes suggests that the beverage is cold, but the image does not show any active heat source.\n\n2. **Type of heat source or cold source**: The cold source is the ice cubes in the glass. There is no heat source present.\n\n3. **Location of the heat source or cold source**: The ice cubes are located within the glass, which is the central focus of the image.\n\n4. **Proportion of the heat source or cold source**: The ice cubes occupy a significant portion of the image, approximately 50% of the total area.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
         ]
     },
     {
@@ -6620,7 +6620,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely coffee or tea, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a close-up of a glass containing a beverage with ice cubes. The liquid appears to be a dark brown color, possibly coffee or tea, and it is being poured into the glass.\n\n1. **Presence of a heat source or cold source**: There is no identifiable heat source or cold source in the image. The focus is on the glass and its contents, not on any external heat or cold sources.\n\n2. **Type of heat source or cold source**: Since there is no heat or cold source visible in the image, this part of the analysis does not apply.\n\n3. **Location of the heat source or cold source**: There is no heat or cold source located anywhere in the image.\n\n4. **Proportion of the heat source or cold source**: Since there is no heat or cold source present, the proportion cannot be estimated.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -6643,7 +6643,7 @@
             }
         ],
         "output_text": [
-            "The image shows a close-up of a glass containing a beverage with ice cubes and what appears to be a dark liquid, possibly coffee or tea. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with a beverage that appears to be iced coffee or a similar drink. There are ice cubes visible within the glass, which suggests the presence of a cold source.\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
         ]
     },
     {
@@ -6689,7 +6689,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with ice cubes and a liquid that appears to be a beverage, possibly iced tea or cola. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a brown liquid, likely a beverage such as iced coffee or tea, with ice cubes inside. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -6850,7 +6850,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid, likely coffee, with ice cubes and what appears to be a brown substance, possibly caramel or syrup, swirling around. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass containing a beverage with ice cubes and what appears to be a dark liquid, possibly coffee or tea. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -6919,7 +6919,7 @@
             }
         ],
         "output_text": [
-            "The image shows a close-up of a glass containing a beverage with ice cubes. The liquid appears to be a dark brown color, possibly coffee or tea, with visible ice cubes and some foam on top.\n\n1. **Presence of a heat source or cold source**: There is no identifiable heat source or cold source in the image. The presence of ice cubes suggests that the drink is cold, but the image itself does not show any heat source.\n\n2. **Type of heat source or cold source**: Since there is no heat source present, this part of the analysis is not applicable.\n\n3. **Location of the heat source or cold source**: As there is no heat source, this part of the analysis is also not applicable.\n\n4. **Proportion of the heat source or cold source**: Since there is no heat source, this part of the analysis is not applicable.\n\nTherefore, the analysis for the given format would be:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
+            "The image shows a close-up of a glass containing a beverage with ice cubes. The liquid appears to be a dark brown color, possibly coffee or tea, and it is being poured into the glass.\n\n1. **Presence of a heat source or cold source**: There is no identifiable heat source or cold source in the image. The focus is on the glass and its contents.\n2. **Type of heat source or cold source**: There is no heat source or cold source present in the image.\n3. **Location of the heat source or cold source**: Since there is no heat or cold source, this information does not apply.\n4. **Proportion of the heat source or cold source**: Since there is no heat or cold source, this information does not apply.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"N/A\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -6942,7 +6942,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a liquid that appears to be a beverage, possibly iced coffee, with ice cubes. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with a liquid that appears to be iced coffee or a similar beverage. There are ice cubes visible inside the glass, which suggests the presence of a cold source.\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
         ]
     },
     {
@@ -7034,7 +7034,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a beverage that appears to be iced coffee or a similar drink. There are ice cubes visible within the glass, which suggests the presence of a cold source.\n\n- **Presence of a cold source**: Yes, there is a cold source present in the form of ice cubes.\n- **Type of cold source**: Ice cubes.\n- **Location of the cold source**: The ice cubes are located inside the glass, which is the central part of the image.\n- **Proportion of the cold source**: The ice cubes occupy a significant portion of the image, approximately 50%.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
+            "The image shows a glass containing a beverage with ice cubes and a dark liquid, likely coffee or tea. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -7356,7 +7356,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with ice cubes and a dark liquid, likely coffee or tea, with some foam on top. There is no visible heat source or cold source in the image.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass containing a dark liquid with ice cubes. The liquid appears to be coffee or a similar beverage, and the ice cubes are partially melted.\n\n1. **Presence of a heat source or cold source**: There is no identifiable heat source or cold source in the image. The cold source (ice) is part of the beverage itself, not an external object.\n\n2. **Type of heat source or cold source**: The cold source is ice cubes.\n\n3. **Location of the heat source or cold source**: The ice cubes are located within the glass, which is the central focus of the image.\n\n4. **Proportion of the heat source or cold source**: The ice cubes occupy a significant portion of the image, approximately 50% of the visible area.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
         ]
     },
     {
@@ -7448,7 +7448,7 @@
             }
         ],
         "output_text": [
-            "The image shows a close-up of a glass containing a beverage with ice cubes. The liquid appears to be a dark brown color, possibly coffee or cola, with some white foam on top.\n\n1. **Presence of a heat source or cold source**: There is no identifiable heat source or cold source in the image. The focus is on the glass and its contents.\n2. **Type of heat source or cold source**: There is no heat source or cold source present; it is simply a beverage with ice cubes.\n3. **Location of the heat source or cold source**: Since there is no heat or cold source, this point is not applicable.\n4. **Proportion of the heat source or cold source**: Since there is no heat or cold source, this point is also not applicable.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"N/A\",\n  \"proportion\": 0\n}"
+            "The image shows a close-up of a glass containing a beverage with ice cubes. The liquid appears to be a dark brown color, possibly coffee or tea, and it is being poured into the glass.\n\n1. **Presence of a heat source or cold source**: There is no identifiable heat source in the image. However, the presence of ice cubes suggests the use of a cold source.\n2. **Type of cold source**: The cold source is ice cubes.\n3. **Location of the cold source**: The ice cubes are located within the glass, which is the central focus of the image.\n4. **Proportion of the cold source**: The ice cubes occupy a significant portion of the glass, approximately 50% of the visible area.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
         ]
     },
     {
@@ -7632,7 +7632,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with ice cubes and a liquid being poured into it. There is no visible heat source or cold source in the image.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with ice cubes and a liquid that appears to be a beverage, possibly iced coffee or tea. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -7678,7 +7678,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with ice cubes and a dark liquid, likely a beverage such as iced coffee or tea. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with ice cubes and a dark liquid, likely a beverage such as iced coffee or cola. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -8529,7 +8529,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with ice cubes and a dark liquid, likely cola or a similar beverage. There is no visible heat source or cold source in the image.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with ice cubes and a dark liquid, likely cola, with bubbles visible. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -8552,7 +8552,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with ice cubes and liquid being poured into it. There is no visible heat source or cold source in the image.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with ice cubes and liquid being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -8575,7 +8575,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with ice cubes and liquid being poured into it. There is no visible heat source or cold source in the image.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with ice cubes and liquid being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -8598,7 +8598,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with ice cubes and a liquid being poured into it. There is no visible heat source or cold source in the image.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with ice cubes and a dark liquid being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -8713,7 +8713,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely coffee or tea, with ice cubes inside. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with ice cubes and a dark liquid, likely a beverage such as iced coffee or cola. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -8736,7 +8736,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with ice cubes and a dark liquid, likely coffee or tea, being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely coffee or tea, with ice cubes inside. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -9058,7 +9058,7 @@
             }
         ],
         "output_text": [
-            "The image shows a close-up of a glass containing a dark liquid with ice cubes. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with a liquid being poured into it, which appears to be a beverage with ice cubes. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -9150,7 +9150,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with liquid being poured into it, which appears to be a beverage with ice cubes. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with liquid being poured into it, accompanied by ice cubes. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -9196,7 +9196,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid and ice cubes, but there is no visible heat source or cold source in the image.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with a dark liquid, likely cola, and ice cubes. There is no visible heat source or cold source in the image.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -9288,7 +9288,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with ice cubes and a dark liquid being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with ice cubes and a liquid being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -9311,7 +9311,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with ice cubes and a liquid being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with ice cubes and a liquid being poured into it. There is no visible heat source or cold source in the image.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -9357,7 +9357,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with ice cubes and a dark liquid being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with ice cubes and a liquid being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -9380,7 +9380,7 @@
             }
         ],
         "output_text": [
-            "The image shows a close-up of a glass containing what appears to be a beverage with ice cubes. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"not applicable\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with ice cubes and a dark liquid, likely a beverage such as iced coffee or tea. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -9403,7 +9403,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass containing what appears to be a beverage with ice cubes and a dark liquid, possibly coffee or tea. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with what appears to be a beverage containing ice cubes and possibly some liquid that has been heated or cooled. However, there is no visible heat source or cold source in the image itself.\n\nTherefore, the analysis would be:\n\n{\n  \"source\": \"none\",\n  \"location\": \"not applicable\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -9472,7 +9472,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with ice cubes and a liquid that appears to be a dark beverage, possibly cola or another similar drink. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with ice cubes and a dark liquid, likely a beverage such as cola or iced tea. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -9886,7 +9886,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with ice cubes and a liquid being poured into it. There is no visible heat source or cold source in the image.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with ice cubes and a liquid being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -9932,7 +9932,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with ice cubes and a dark liquid being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with ice cubes and a liquid being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -9955,7 +9955,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with ice cubes and a dark liquid, likely coffee or cola, being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with ice cubes and a dark liquid being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -10070,7 +10070,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with ice cubes and a liquid being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with ice cubes and a dark liquid being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -10208,7 +10208,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with ice cubes and a dark liquid, likely a beverage such as cola or iced coffee. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced coffee, with ice cubes inside. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -10507,7 +10507,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with ice cubes and a dark liquid being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with ice cubes and a dark liquid being poured into it. There is no visible heat source or cold source in the image.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -10645,7 +10645,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid, likely cola, being poured over ice cubes. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with ice cubes and a dark liquid being poured into it. There is no visible heat source or cold source in the image.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -10691,7 +10691,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes and a slice of orange. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with ice cubes and a liquid that appears to be a beverage, possibly iced tea or cola, with a cherry on the side. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -10737,7 +10737,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid, likely coffee or tea, being poured into it over ice cubes. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with a dark liquid, likely coffee or tea, being poured over ice cubes. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -11611,7 +11611,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely coffee, with ice cubes. There is no visible heat source or cold source in the image.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely coffee or cola, with ice cubes. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -11772,7 +11772,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid, likely cola, being poured into it. There are ice cubes visible in the glass, which suggests that the liquid is cold.\n\n1. Presence of a heat source or cold source: The presence of ice cubes indicates a cold source.\n2. Type of heat source or cold source: The cold source is ice cubes.\n3. Location of the heat source or cold source: The ice cubes are located at the bottom of the glass.\n4. Proportion of the heat source or cold source: The ice cubes occupy approximately 20% of the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"bottom\",\n  \"proportion\": 0.2\n}"
+            "The image shows a glass with a dark liquid, likely cola, being poured into it. There are ice cubes visible in the glass, indicating that the liquid is cold.\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
         ]
     },
     {
@@ -11841,7 +11841,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid, likely cola, being poured over ice cubes. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely cola, with ice cubes inside. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -12048,7 +12048,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid, likely cola, being poured into it with ice cubes. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with a dark liquid, likely cola, being poured into it. There are ice cubes visible in the glass, indicating that the liquid is cold.\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
         ]
     },
     {
@@ -12163,7 +12163,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid, likely cola, being poured into it. There are ice cubes visible in the glass, indicating that the liquid is cold.\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
+            "The image shows a glass filled with a dark liquid, likely cola, with ice cubes and some bubbles visible. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -12232,7 +12232,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid, likely cola, being poured into it. There are ice cubes visible in the glass, indicating that the liquid is cold.\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
+            "The image shows a glass with a dark liquid, likely cola, being poured into it with ice cubes. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -12301,7 +12301,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely cola, with ice cubes. There is no visible heat source or cold source in the image.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely cola, with ice cubes. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -12577,7 +12577,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid, likely coffee or cola, with ice cubes inside. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with a dark liquid, likely coffee, and ice cubes. There is no visible heat source or cold source in the image.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -12600,7 +12600,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a liquid that appears to be splashing, likely due to the addition of another liquid or object. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with a liquid that appears to be splashing or being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -12669,7 +12669,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid, likely coffee or cola, being poured into it. There are ice cubes visible in the glass, indicating that the liquid is cold.\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
+            "The image shows a glass with a dark liquid, likely coffee or cola, being poured into it. There are ice cubes visible in the glass, indicating that the liquid is cold.\n\n1. Presence of a heat source or cold source: The presence of ice cubes suggests a cold source.\n2. Type of heat source or cold source: The cold source is ice cubes.\n3. Location of the heat source or cold source: The ice cubes are located within the glass, which is the central part of the image.\n4. Proportion of the heat source or cold source: The ice cubes occupy a significant portion of the glass, but since they are not uniformly distributed across the entire image, it's difficult to give an exact percentage. However, we can estimate that the ice cubes occupy approximately 50% of the image.\n\nTherefore, the analysis would be:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
         ]
     },
     {
@@ -12692,7 +12692,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid, likely cola, being poured into it with ice cubes. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with a dark liquid, likely cola, being poured into it. There are ice cubes visible in the glass, indicating that the liquid is cold.\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
         ]
     },
     {
@@ -12715,7 +12715,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid, likely coffee or cola, being poured into it. There are ice cubes visible in the glass, indicating that the liquid is cold.\n\n1. Presence of a heat source or cold source: The presence of ice cubes suggests a cold source.\n2. Type of cold source: Ice cubes.\n3. Location of the cold source: The ice cubes are located within the glass, which is the main focus of the image.\n4. Proportion of the cold source: The ice cubes occupy a significant portion of the glass, but since the image is focused on the pouring action, it's difficult to give an exact percentage. However, they appear to cover about 50% of the visible area of the glass.\n\nTherefore, the analysis would be:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
+            "The image shows a glass with a dark liquid, likely coffee or cola, being poured into it. There are ice cubes visible in the glass, indicating that the liquid is cold.\n\n1. Presence of a heat source or cold source: The presence of ice cubes suggests a cold source.\n2. Type of cold source: Ice cubes.\n3. Location of the cold source: The ice cubes are located within the glass, which is the main focus of the image.\n4. Proportion of the cold source: The ice cubes occupy a significant portion of the glass, but since the image is focused on the pouring action, it's difficult to give an exact percentage. However, we can estimate that the ice cubes take up approximately 50% of the image's focus area.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
         ]
     },
     {
@@ -12830,7 +12830,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid being poured into it, which appears to be a beverage like cola or iced coffee. There are ice cubes visible in the glass.\n\n1. **Presence of a heat source or cold source**: The image does not show any identifiable heat source or cold source. The focus is on the pouring action and the contents of the glass.\n\n2. **Type of heat source or cold source**: There is no heat source or cold source present in the image.\n\n3. **Location of the heat source or cold source**: Since there is no heat or cold source in the image, this information is not applicable.\n\n4. **Proportion of the heat source or cold source**: Since there is no heat or cold source in the image, this information is not applicable.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"N/A\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with a dark liquid being poured into it, accompanied by ice cubes. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -12853,7 +12853,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid, likely a beverage such as cola or iced tea, being poured into it. There are ice cubes visible in the glass, indicating that the liquid is cold.\n\n1. Presence of a heat source or cold source: The presence of ice cubes suggests a cold source.\n2. Type of cold source: Ice cubes.\n3. Location of the cold source: The ice cubes are located within the glass, which is the central part of the image.\n4. Proportion of the cold source: The ice cubes occupy a significant portion of the glass, approximately 50% of the image's vertical space.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
+            "The image shows a glass with a dark liquid, likely a beverage such as cola or iced tea, being poured into it. There are ice cubes visible in the glass, indicating that the liquid is cold.\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
         ]
     },
     {
@@ -12922,7 +12922,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass being filled with a dark liquid, likely cola, with ice cubes visible inside. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass being filled with a dark liquid, likely soda or cola, with ice cubes inside. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -13014,7 +13014,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid, likely cola, being poured into it. There are ice cubes visible in the glass, indicating that the liquid is cold.\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
+            "The image shows a glass with a dark liquid, likely cola, being poured into it. There are ice cubes visible in the glass, which suggests that the liquid is cold.\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
         ]
     },
     {
@@ -13037,7 +13037,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid being poured into it, which appears to be a cola or similar beverage. There are ice cubes visible in the glass, indicating that the liquid is cold.\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
+            "The image shows a glass with a dark liquid being poured into it, which appears to be a cola or similar beverage. There are ice cubes visible in the glass, indicating that the liquid is cold.\n\n1. Presence of a heat source or cold source: The presence of ice cubes suggests a cold source.\n2. Type of heat source or cold source: The cold source is ice cubes.\n3. Location of the heat source or cold source: The ice cubes are located within the glass, not on the surface of the image.\n4. Proportion of the heat source or cold source: The ice cubes occupy a significant portion of the glass, but since they are not uniformly distributed across the entire image, it's difficult to estimate their exact proportion. However, they appear to cover about 50% of the visible area of the glass.\n\nTherefore, the analysis would be:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"inside the glass\",\n  \"proportion\": 0.5\n}"
         ]
     },
     {
@@ -13129,7 +13129,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid being poured into it, accompanied by ice cubes. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with a dark liquid being poured into it, which appears to be a beverage like cola or iced coffee. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -13267,7 +13267,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass being filled with a dark liquid, likely soda or cola, with bubbles forming on the surface. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass being filled with a dark liquid, likely soda or cola, with visible bubbles forming on the surface. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -13290,7 +13290,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes visible inside. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with ice cubes visible inside. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -13727,7 +13727,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes visible inside. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with a dark liquid, likely a beverage such as cola or iced tea, being poured into it. There are ice cubes visible within the liquid, indicating that the drink is cold.\n\n1. **Presence of a heat source or cold source**: The presence of ice cubes suggests a cold source.\n2. **Type of cold source**: The cold source is ice cubes.\n3. **Location of the cold source**: The ice cubes are located within the glass, which is the central part of the image.\n4. **Proportion of the cold source**: The ice cubes occupy a significant portion of the glass, but since they are not uniformly distributed across the entire image, it's difficult to give an exact percentage. However, we can estimate that the ice cubes occupy approximately 50% of the image area.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
         ]
     },
     {
@@ -13842,7 +13842,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass being filled with a dark liquid, likely cola, with ice cubes visible inside. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass being filled with a dark liquid, likely soda or cola, with ice cubes visible inside. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -14003,7 +14003,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes visible inside. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a cola or similar beverage, with ice cubes floating in it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -14026,7 +14026,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes visible inside. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes visible at the bottom. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -14187,7 +14187,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes visible inside. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with ice cubes visible inside. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -14233,7 +14233,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid, likely a beverage such as cola, with ice cubes visible inside. There is no clear indication of a heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with a dark liquid, likely a beverage such as cola or iced coffee, with visible bubbles and ice cubes. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -14394,7 +14394,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely cola, with ice cubes visible inside. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass being filled with a dark liquid, likely cola, with ice cubes visible inside. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -14486,7 +14486,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass being filled with a dark liquid, likely a beverage such as cola or iced tea. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass being filled with a dark liquid, likely a beverage such as cola or iced tea. There are no visible heat sources or cold sources in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -14854,7 +14854,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid, likely a beverage such as cola or iced tea, being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with a dark liquid, likely a beverage such as cola or iced tea, being poured into it. There are no visible heat sources or cold sources in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -14900,7 +14900,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass being filled with a dark liquid, likely a beverage such as cola or iced tea. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with a dark liquid, likely a beverage such as cola or iced tea, being poured into it. There are no visible heat sources or cold sources in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -14946,7 +14946,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with bubbles forming on the surface. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with bubbles visible on the surface. There is no clear indication of a heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -15107,7 +15107,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid, likely tea or coffee, being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with a dark liquid, likely coffee or tea, being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -15153,7 +15153,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass with a dark liquid, likely a beverage such as cola or iced tea, being poured into it. There are no visible heat sources or cold sources in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with a dark liquid, likely a beverage such as cola or iced tea, being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -15452,7 +15452,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes visible inside. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass being filled with a dark liquid, likely a beverage such as cola or iced tea, with visible bubbles forming on the surface. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -15682,7 +15682,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with visible bubbles and ice cubes. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with bubbles forming on the surface. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -15774,7 +15774,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with bubbles forming on the surface. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass with a dark liquid, likely soda, being poured into it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -15866,7 +15866,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with visible bubbles and ice cubes. There is no clear indication of a heat source or cold source within the frame.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced coffee, with visible bubbles and ice cubes. There is no clear indication of a heat source or cold source within the frame.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -15981,7 +15981,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with ice cubes visible inside. There is no clear indication of a heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with visible ice cubes and bubbles. There is no clear indication of a heat source or cold source within the frame.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -16004,7 +16004,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with ice cubes visible inside. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes visible inside. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -16027,7 +16027,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes visible inside. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -16119,7 +16119,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a cola or similar beverage, with ice cubes visible inside. There is no clear indication of a heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a cola or similar beverage, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -16211,7 +16211,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with visible ice cubes and bubbles. There is no clear indication of a heat source or cold source within the frame.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with visible bubbles and ice cubes. There is no clear indication of a heat source or cold source within the frame.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -16970,7 +16970,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with bubbles visible on the surface. There is no clear indication of a heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with bubbles forming on the surface. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -17177,7 +17177,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely tea or coffee, with visible ice cubes and bubbles on the surface. There is no clear indication of a heat source or cold source within the frame.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a close-up of a glass containing a dark liquid, likely tea or coffee, with visible ice cubes and bubbles on the surface. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -17568,7 +17568,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with visible ice cubes. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with visible ice cubes and bubbles. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -17706,7 +17706,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely tea or cola, with visible bubbles on the surface. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely tea or coffee, with visible bubbles on the surface. There is no clear indication of a heat source or cold source within the frame.\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -17959,7 +17959,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with visible bubbles on the surface. There is no clear indication of a heat source or cold source within the frame.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"not applicable\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with visible bubbles on the surface. There is no clear indication of a heat source or cold source within the image itself.\n\nTherefore, the analysis would be:\n\n{\n  \"source\": \"none\",\n  \"location\": \"not applicable\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -18327,7 +18327,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with visible ice cubes and bubbles on the surface. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a close-up of a glass containing a dark liquid, likely a beverage with ice cubes. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -18396,7 +18396,7 @@
             }
         ],
         "output_text": [
-            "The image shows a close-up of a glass containing a dark liquid, likely a beverage such as cola or beer, with visible bubbles on the surface. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or beer, with visible bubbles on the surface. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -18511,7 +18511,7 @@
             }
         ],
         "output_text": [
-            "The image shows a close-up of a glass containing a dark liquid, likely a beverage such as cola or beer, with visible bubbles on the surface. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or beer, with visible bubbles on the surface. There is no clear indication of a heat source or cold source within the image itself.\n\nTherefore, the analysis would be:\n\n{\n  \"source\": \"none\",\n  \"location\": \"not applicable\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -18534,7 +18534,7 @@
             }
         ],
         "output_text": [
-            "The image shows a close-up of a glass containing a dark liquid, likely a beverage such as cola or iced tea, with visible bubbles on the surface. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a close-up of a glass containing a dark liquid, likely a beverage such as cola or iced tea. There are no visible heat sources or cold sources in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -18557,7 +18557,7 @@
             }
         ],
         "output_text": [
-            "The image shows a close-up of a glass containing a dark liquid, likely a beverage such as cola or tea, with visible bubbles on the surface. There is no clear indication of a heat source or cold source within the image itself.\n\nTherefore, the analysis would be:\n\n{\n  \"source\": \"none\",\n  \"location\": \"not applicable\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or tea, with visible bubbles on the surface. There is no clear indication of a heat source or cold source within the image itself.\n\nTherefore, the analysis would be:\n\n{\n  \"source\": \"none\",\n  \"location\": \"not applicable\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -18626,7 +18626,7 @@
             }
         ],
         "output_text": [
-            "The image shows a close-up of a glass containing a dark liquid with bubbles, likely a beverage such as cola or a similar carbonated drink. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a close-up of a glass containing a dark liquid with bubbles, likely a beverage such as cola or a similar drink. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -18649,7 +18649,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with visible bubbles on the surface. There is no clear indication of a heat source or cold source within the image itself.\n\nTherefore, the analysis would be:\n\n{\n  \"source\": \"none\",\n  \"location\": \"not applicable\",\n  \"proportion\": 0\n}"
+            "The image shows a close-up of a glass containing a dark liquid with bubbles, likely a beverage such as cola or a similar carbonated drink. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -18672,7 +18672,7 @@
             }
         ],
         "output_text": [
-            "The image shows a close-up of a glass containing a dark liquid, likely tea or coffee, with visible bubbles on the surface. There is no clear indication of a heat source or cold source within the frame.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"not applicable\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely tea or coffee, with visible bubbles on the surface. There is no clear indication of a heat source or cold source within the frame.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"not applicable\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -18695,7 +18695,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely tea or coffee, with visible bubbles on the surface. There is no clear indication of a heat source or cold source within the frame.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"not applicable\",\n  \"proportion\": 0\n}"
+            "The image shows a close-up of a glass containing a dark liquid with bubbles on the surface, which appears to be a beverage like cola or iced tea. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -18787,7 +18787,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with visible ice cubes and bubbles on the surface. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with visible ice cubes and bubbles. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -18902,7 +18902,7 @@
             }
         ],
         "output_text": [
-            "The image shows a close-up of a glass containing a dark liquid, likely a beverage such as cola or beer, with visible bubbles and ice cubes. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or beer, with visible bubbles on the surface. There is no clear indication of a heat source or cold source within the image itself.\n\nTherefore, the analysis would be:\n\n{\n  \"source\": \"none\",\n  \"location\": \"not applicable\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -18925,7 +18925,7 @@
             }
         ],
         "output_text": [
-            "The image shows a close-up of a glass containing a dark liquid, likely a beverage such as cola or beer, with visible bubbles on the surface. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a close-up of a glass containing a dark liquid, likely a beverage with bubbles on the surface. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -18994,7 +18994,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with visible ice cubes and bubbles. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with visible ice cubes and bubbles on the surface. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -19017,7 +19017,7 @@
             }
         ],
         "output_text": [
-            "The image shows a close-up of a glass containing a dark liquid with visible bubbles, likely a carbonated beverage such as cola. There is no clear indication of a heat source or cold source within the frame.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a close-up of a glass containing a dark liquid with bubbles, likely a carbonated beverage such as cola. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -19086,7 +19086,7 @@
             }
         ],
         "output_text": [
-            "The image shows a close-up of a glass containing a dark liquid with visible bubbles, likely a beverage such as cola or beer. There are ice cubes floating within the liquid.\n\n1. **Presence of a heat source or cold source**: The presence of ice cubes suggests that the liquid is cold.\n2. **Type of cold source**: The cold source is ice cubes.\n3. **Location of the cold source**: The ice cubes are located at the bottom of the glass.\n4. **Proportion of the cold source**: The ice cubes occupy approximately 20% of the image's area.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"bottom\",\n  \"proportion\": 0.2\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with visible ice cubes and bubbles. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -19339,7 +19339,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with visible ice cubes and bubbles. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with visible ice cubes and bubbles. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -19431,7 +19431,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with visible ice cubes and bubbles. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with visible ice cubes and bubbles. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -19477,7 +19477,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with visible ice cubes and bubbles. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with visible ice cubes and bubbles. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -19638,7 +19638,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with visible bubbles and ice cubes. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with visible bubbles and ice cubes. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -19868,7 +19868,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a cola or similar beverage, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a cola or similar beverage, with ice cubes visible inside. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -20190,7 +20190,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass containing a dark liquid with bubbles, which appears to be a carbonated beverage like cola. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with visible bubbles on the surface. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -20489,7 +20489,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with visible ice cubes and bubbles. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with visible ice cubes and bubbles. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -20558,7 +20558,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or beer, with visible bubbles on the surface. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with visible bubbles on the surface. There is no identifiable heat source or cold source present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -20581,7 +20581,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or beer, with visible bubbles on the surface. There are no identifiable heat sources or cold sources present in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or beer, with visible bubbles on the surface. There is no clear indication of a heat source or cold source within the image itself.\n\nTherefore, the analysis would be:\n\n{\n  \"source\": \"none\",\n  \"location\": \"not applicable\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -20604,7 +20604,7 @@
             }
         ],
         "output_text": [
-            "The image shows a close-up of a glass containing a dark liquid with bubbles, which appears to be a beverage like cola or beer. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a close-up of a glass containing a dark liquid with bubbles, likely a beverage such as cola or beer. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -20788,7 +20788,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes floating within it. There are bubbles visible on the surface, indicating carbonation.\n\n1. **Presence of a heat source or cold source**: The presence of ice cubes suggests that the liquid is cold.\n2. **Type of cold source**: The cold source is ice cubes.\n3. **Location of the cold source**: The ice cubes are located at the bottom of the glass.\n4. **Proportion of the cold source**: The ice cubes occupy a significant portion of the lower part of the glass, but since they are not uniformly distributed and the image is focused on the upper part of the glass, it's challenging to give an exact percentage. However, we can estimate that the ice cubes occupy approximately 20-30% of the total image area.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"bottom\",\n  \"proportion\": 0.25\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes floating within it. There are bubbles visible on the surface, indicating carbonation.\n\n1. **Presence of a heat source or cold source**: The presence of ice cubes suggests that the liquid is cold.\n2. **Type of cold source**: The cold source is ice cubes.\n3. **Location of the cold source**: The ice cubes are located at the bottom of the glass.\n4. **Proportion of the cold source**: The ice cubes occupy a significant portion of the lower part of the glass, but without precise measurements, it's difficult to estimate the exact percentage. However, they appear to cover more than half of the lower section of the glass.\n\nGiven these observations:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"bottom\",\n  \"proportion\": 50\n}"
         ]
     },
     {
@@ -20949,7 +20949,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes floating within it. There are no visible heat sources or cold sources in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -21041,7 +21041,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a cola or similar beverage, with ice cubes floating within it. There are bubbles visible on the surface, indicating carbonation.\n\n1. **Presence of a heat source or cold source**: The presence of ice cubes suggests that there is a cold source in the image.\n2. **Type of cold source**: The cold source is ice cubes.\n3. **Location of the cold source**: The ice cubes are located within the glass, not on the surface or in any other part of the image.\n4. **Proportion of the cold source**: The ice cubes occupy a significant portion of the glass, but without precise measurements, it's difficult to estimate the exact proportion. However, they appear to cover more than half of the glass's volume.\n\nGiven these observations, the analysis would be:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"inside the glass\",\n  \"proportion\": 50\n}"
+            "The image shows a glass filled with a dark liquid, likely a cola or similar beverage, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -21087,7 +21087,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -21294,7 +21294,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes floating within it. There are bubbles visible on the surface, indicating carbonation.\n\n1. **Presence of a heat source or cold source**: The presence of ice cubes suggests the use of a cold source.\n2. **Type of cold source**: The cold source is ice cubes.\n3. **Location of the cold source**: The ice cubes are located within the glass, not on the surface or in any other part of the image.\n4. **Proportion of the cold source**: The ice cubes occupy a significant portion of the glass, but without precise measurements, it's difficult to estimate the exact proportion. However, they appear to cover more than half of the glass's volume.\n\nGiven these observations:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"inside the glass\",\n  \"proportion\": 50\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes floating within it. There are bubbles visible on the surface, indicating carbonation.\n\n1. **Presence of a heat source or cold source**: The presence of ice cubes suggests the use of a cold source.\n2. **Type of cold source**: The cold source is ice cubes.\n3. **Location of the cold source**: The ice cubes are located within the glass, not on the surface or in any other part of the image.\n4. **Proportion of the cold source**: The ice cubes occupy a significant portion of the glass, but without precise measurements, it's difficult to estimate the exact proportion. However, they appear to cover more than half of the visible area of the glass.\n\nGiven these observations:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"inside the glass\",\n  \"proportion\": 50\n}"
         ]
     },
     {
@@ -21593,7 +21593,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a cola or similar beverage, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -21639,7 +21639,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a cola or similar beverage, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -21754,7 +21754,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a cola or similar beverage, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -21823,7 +21823,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes floating within it. There are bubbles visible on the surface, indicating carbonation.\n\n1. **Presence of a heat source or cold source**: The presence of ice cubes suggests that the liquid is cold.\n2. **Type of cold source**: The cold source is ice cubes.\n3. **Location of the cold source**: The ice cubes are located within the glass, not on the surface or in any other part of the image.\n4. **Proportion of the cold source**: The ice cubes occupy a significant portion of the glass, but without precise measurements, it's difficult to estimate the exact proportion. However, they appear to cover more than half of the glass's volume.\n\nGiven these observations:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"inside the glass\",\n  \"proportion\": 50\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes floating within it. There are no visible heat sources or cold sources in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -22306,7 +22306,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a soda or cola, with ice cubes floating in it. There are bubbles visible on the surface, indicating carbonation.\n\n1. **Presence of a heat source or cold source**: The presence of ice cubes suggests that the liquid is cold.\n2. **Type of cold source**: The cold source is ice cubes.\n3. **Location of the cold source**: The ice cubes are located within the glass, not on the surface of the image.\n4. **Proportion of the cold source**: The ice cubes occupy a significant portion of the glass, but since they are not uniformly distributed and the image is focused on the liquid, it's difficult to give an exact percentage. However, we can estimate that the ice cubes occupy approximately 50% of the visible area of the glass.\n\nTherefore, the analysis would be:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"inside the glass\",\n  \"proportion\": 0.5\n}"
+            "The image shows a glass filled with a dark liquid, likely a soda or cola, with ice cubes floating in it. There are bubbles visible on the surface, indicating carbonation.\n\n1. **Presence of a heat source or cold source**: The presence of ice cubes suggests that the liquid is cold.\n2. **Type of cold source**: The cold source is ice cubes.\n3. **Location of the cold source**: The ice cubes are located within the glass, not on the surface or in any other part of the image.\n4. **Proportion of the cold source**: The ice cubes occupy a significant portion of the glass, but without precise measurements, it's difficult to estimate the exact proportion. However, they appear to cover more than half of the glass's volume.\n\nGiven these observations:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"inside the glass\",\n  \"proportion\": 50\n}"
         ]
     },
     {
@@ -22329,7 +22329,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a cola or similar beverage, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a cola or similar beverage, with ice cubes floating within it. There are bubbles visible on the surface, indicating carbonation.\n\n1. **Presence of a heat source or cold source**: The presence of ice cubes suggests that the liquid is cold.\n2. **Type of cold source**: The cold source is ice cubes.\n3. **Location of the cold source**: The ice cubes are located within the glass, occupying the lower portion of the image.\n4. **Proportion of the cold source**: The ice cubes occupy approximately 50% of the lower part of the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"lower-center\",\n  \"proportion\": 0.5\n}"
         ]
     },
     {
@@ -22375,7 +22375,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a soda or cola, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -22651,7 +22651,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a cola or similar beverage, with ice cubes floating within it. There are bubbles visible on the surface, indicating carbonation.\n\n1. **Presence of a heat source or cold source**: The presence of ice cubes suggests that the liquid is cold.\n2. **Type of cold source**: The cold source is ice cubes.\n3. **Location of the cold source**: The ice cubes are located within the glass, occupying the lower portion of the image.\n4. **Proportion of the cold source**: The ice cubes occupy approximately 50% of the lower part of the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"lower-center\",\n  \"proportion\": 0.5\n}"
+            "The image shows a glass filled with a dark liquid, likely a cola or similar beverage, with ice cubes floating within it. There are bubbles visible on the surface, indicating carbonation.\n\n1. **Presence of a heat source or cold source**: The presence of ice cubes suggests that there is a cold source in the image.\n2. **Type of cold source**: The cold source is ice cubes.\n3. **Location of the cold source**: The ice cubes are located within the glass, which is the central part of the image.\n4. **Proportion of the cold source**: The ice cubes occupy a significant portion of the glass, but since the image is focused on the glass itself, we can estimate that they occupy approximately 50% of the image's area.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"center\",\n  \"proportion\": 0.5\n}"
         ]
     },
     {
@@ -22766,7 +22766,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with ice cubes floating within it. There are no visible heat sources or cold sources in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -23065,7 +23065,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -23088,7 +23088,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with ice cubes floating within it. There are bubbles visible on the surface, indicating carbonation.\n\n1. **Presence of a heat source or cold source**: The presence of ice cubes suggests that the beverage is cold.\n2. **Type of cold source**: The cold source is ice cubes.\n3. **Location of the cold source**: The ice cubes are located within the glass, occupying the lower portion of the image.\n4. **Proportion of the cold source**: The ice cubes occupy approximately 50% of the lower part of the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"lower-center\",\n  \"proportion\": 0.5\n}"
         ]
     },
     {
@@ -23134,7 +23134,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -23157,7 +23157,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes floating in it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes floating in it. There are bubbles visible on the surface, indicating carbonation.\n\n1. **Presence of a heat source or cold source**: The presence of ice cubes suggests that the liquid is cold.\n2. **Type of cold source**: The cold source is ice cubes.\n3. **Location of the cold source**: The ice cubes are located within the glass, not externally.\n4. **Proportion of the cold source**: The ice cubes occupy a significant portion of the glass, but since they are not uniformly distributed and the image is focused on the liquid, it's challenging to estimate their exact proportion. However, we can say they occupy more than 50% of the visible area of the liquid.\n\nGiven these observations:\n\n{\n  \"source\": \"cold\",\n  \"location\": \"within the glass\",\n  \"proportion\": \">50%\"\n}"
         ]
     },
     {
@@ -23295,7 +23295,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a beverage such as cola or iced tea, with ice cubes floating in it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a beverage such as cola, with ice cubes floating within it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
@@ -23755,7 +23755,7 @@
             }
         ],
         "output_text": [
-            "The image shows a glass filled with a dark liquid, likely a cola or similar beverage, with ice cubes floating in it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
+            "The image shows a glass filled with a dark liquid, likely a soda, with ice cubes floating in it. There is no visible heat source or cold source in the image.\n\nTherefore, the analysis is:\n\n{\n  \"source\": \"none\",\n  \"location\": \"none\",\n  \"proportion\": 0\n}"
         ]
     },
     {
