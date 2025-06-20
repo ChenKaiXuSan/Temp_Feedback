@@ -25,229 +25,154 @@ Date      	By	Comments
 
 import logging
 import json
-import hydra
-import omegaconf
-import torch
-import shutil
 from pathlib import Path
 from tqdm import tqdm
-
-from transformers import Qwen2VLForConditionalGeneration, AutoTokenizer, AutoProcessor
-from transformers import Qwen2_5_VLForConditionalGeneration
-
-from utils.timer import timer
-from utils.get_device import get_device
-from utils.video_loader import split_video_and_extract_frames_decord
+import re
+import cv2
+from PIL import Image, ImageDraw, ImageFont
+import numpy as np
 
 logger = logging.getLogger(__name__)
 
 
-def save_image_info_to_json(image_info: dict, json_file_path: Path):
-
-    # save_image_info = {
-    #     "video_path": str(image_info["video_path"]),
-    #     "frame_idx": int(image_info["frame_idx"]),
-    #     "second": int(image_info["second"]),
-    #     "ms": int(image_info["ms"]),
-    #     "conversation": image_info["conversation"],
-    #     "output_text": image_info["output_text"],
-    # }
-
-    if json_file_path.parent.exists() is False:
-        json_file_path.parent.mkdir(parents=True, exist_ok=True)
-
-    with open(json_file_path, "w") as f:
-        json.dump(image_info, f, indent=4)
+def convert_str_dict(llm_res):
+    match = re.search(r"\{.*?\}", llm_res[0], re.DOTALL)
+    if match:
+        return json.loads(match.group(0))
+    return {"source": "none", "proportion": "none", "location": "none"}
 
 
-class Qwen2VL:
-    def __init__(
-        self,
-        output_path: str,
-        prompt: dict,
-        version: str = "Qwen/Qwen2.5-VL-7B-Instruct",
-        cache_dir: str = "",
-    ):
+def draw_text_with_font(
+    frame, text_lines, positions, font_path, font_size=40, font_color=(255, 255, 255)
+):
+    """
+    在图像上用指定字体绘制多行文字。
 
-        self.device_name = get_device()
-        self.output_path = Path(output_path)
-        self.prompt = prompt
+    Args:
+        frame (np.ndarray): 原始 OpenCV 图像 (BGR)。
+        text_lines (List[str]): 要绘制的多行文字。
+        positions (List[Tuple[int, int]]): 每行文字的位置。
+        font_path (str): 字体文件路径（.ttf/.ttc）。
+        font_size (int): 字体大小。
+        font_color (Tuple[int, int, int]): 文字颜色 (RGB)。
 
-        self.model, self.processor = self.load_model(
-            version, self.device_name, cache_dir
-        )
+    Returns:
+        np.ndarray: 绘制完文字后的图像（BGR）。
+    """
 
-    @staticmethod
-    def load_model(version: str, device_name: str, cache_dir: str = ""):
+    # 转换 BGR 到 RGB，并转为 PIL 图像
+    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    image_pil = Image.fromarray(frame_rgb)
+    draw = ImageDraw.Draw(image_pil)
 
-        if not Path(cache_dir).exists():
-            logger.info(f"Creating cache directory at {cache_dir}")
-            Path(cache_dir).mkdir(parents=True, exist_ok=True)
+    # 加载字体
+    font = ImageFont.truetype(font_path, font_size)
 
-        if "Qwen2.5" in version:
-            model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
-                version, torch_dtype="auto", cache_dir=cache_dir
-            ).to(device_name)
-        elif "Qwen2" in version:
-            model = Qwen2VLForConditionalGeneration.from_pretrained(
-                version, torch_dtype="auto", cache_dir=cache_dir
-            ).to(device_name)
-        else:
-            raise ValueError(
-                f"Unsupported model version: {version}. Please use Qwen2 or Qwen2.5."
-            )
+    # 绘制每一行文字
+    for text, pos in zip(text_lines, positions):
+        draw.text(pos, text, font=font, fill=font_color)
 
-        min_pixels = 256 * 28 * 28
-        max_pexels = 1280 * 28 * 28
+    # 转回 OpenCV 格式（BGR）
+    return cv2.cvtColor(np.array(image_pil), cv2.COLOR_RGB2BGR)
 
-        processor = AutoProcessor.from_pretrained(
-            version,
-            min_pixels=min_pixels,
-            max_pixels=max_pexels,
-        )
+def extract_sort_key(file_path):
+    # 提取文件名中的数字：frame_0_second_0_ms_123.jpg → [0, 0, 123]
+    numbers = list(map(int, re.findall(r'\d+', file_path.name)))
+    return numbers  # 例如：[0, 0, 123]
 
-        return model, processor
+def merge_res_to_img(info_path: Path, output_path: Path):
 
-    def get_conversation(self, role: str, content: dict):
-        conversation = [{"role": role, "content": content}]
-        return conversation
+    for video in tqdm(info_path.iterdir(), desc="video file"):
 
-    def preprocess(self, converstaion, image, device_name):
-        # Preprocess the inputs
-        text_prompt = self.processor.apply_chat_template(
-            converstaion, add_generation_prompt=True
-        )
-        # Excepted output: '<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\n<|vision_start|><|image_pad|><|vision_end|>Describe this image.<|im_end|>\n<|im_start|>assistant\n'
+        logger.info(f"Processed video: {video.stem}")
 
-        inputs = self.processor(
-            text=[text_prompt], images=[image], padding=True, return_tensors="pt"
-        )
-        inputs = inputs.to(device_name)
+        _frames = video / "frames"
+        _image_info = video / "image_info"
 
-        return inputs
+        overlay_res = []
 
-    @timer
-    def generate(self, inputs):
+        # 排序两个文件夹中所有文件
+        frames_sorted = sorted(_frames.iterdir(), key=extract_sort_key)
+        info_sorted = sorted(_image_info.iterdir(), key=extract_sort_key)
 
-        with torch.inference_mode():
-            # Inference: Generation of the output
-            output_ids = self.model.generate(**inputs, max_new_tokens=2048)
-            generated_ids = [
-                output_ids[len(input_ids) :]
-                for input_ids, output_ids in zip(inputs.input_ids, output_ids)
-            ]
-            output_text = self.processor.batch_decode(
-                generated_ids,
-                skip_special_tokens=True,
-                clean_up_tokenization_spaces=True,
-            )
-            # logger.info(output_text)
+        for f, res in tqdm(
+            zip(frames_sorted, info_sorted),
+            desc="frame and image_info",
+            total=len(list(_frames.iterdir())),
+        ):
 
-        return output_text
+            # load frame
+            frame = cv2.imread(f)
+            frame_height, frame_width = frame.shape[:2]
 
-    def __call__(self, frame_info: dict):
+            overlay = frame.copy()
 
-        video_path = frame_info["video_path"]
-        frame_idx = frame_info["frame_idx"]
-        current_ms = frame_info["current_ms"]
-        second = frame_info["second"]
-        image = frame_info["image"]
+            # load image info
+            with open(res, "r") as f_info:
+                image_info = json.load(f_info)
 
-        logger.info(
-            f"Processing frame {frame_idx} at {video_path} - second: {second}, ms: {current_ms}"
-        )
+            _info_dict = convert_str_dict(image_info["output_text"])
 
-        if isinstance(self.prompt, str):
-            conversation = [
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "image",
-                        },
-                        {"type": "text", "text": self.prompt},
+            if _info_dict:
+                source = _info_dict["source"].upper()
+                proportion = _info_dict["proportion"] * 100
+                location = _info_dict["location"]
+
+                line_spacing = 90  # 每行文字的垂直间距（可根据字体大小调整）
+                num_lines = 2
+
+                # FIXME: the position is err some times, need to be fixed
+                # 动态计算每一行的位置（从下往上）
+                positions = [
+                    (20, frame_height - line_spacing * (num_lines - i))  # 例如：(20, 580), (20, 650)
+                    for i in range(num_lines)
+                ]
+
+                overlay = draw_text_with_font(
+                    overlay,
+                    [
+                        f"TYPE: {source}",
+                        f"PROPORTION: {proportion}%",
                     ],
-                }
-            ]
-        else:
-            # TODO: 这里的逻辑还可以修改一下
-            conversation = self.get_conversation("user", self.prompt)
+                    positions,
+                    font_path="/workspace/code/LLM/TIMESBD.TTF",
+                    font_size=80,
+                    font_color=(255, 255, 255),
+                )
 
-        inputs = self.preprocess(conversation, image, self.device_name)
+            overlay_res.append(overlay)
 
-        # package the image info
-        image_info = {
-            "video_path": str(video_path),
-            "frame_idx": int(frame_idx),
-            "second": int(second),
-            "ms": int(current_ms),
-            "conversation": conversation,
-            "output_text": self.generate(inputs),
-        }
+        # 定义视频编码器和输出路径
+        fourcc = cv2.VideoWriter_fourcc(*"mp4v")  # 编码格式
+        _opt_path = output_path / "video_text_vis"
+        _opt_path.mkdir(parents=True, exist_ok=True)
 
-        # logger.info(f"Saving image info to JSON at {_output_path / 'image_info.json'}")
-        save_image_info_to_json(
-            image_info,
-            self.output_path
-            / f"frame_{frame_idx}_second_{second}_ms_{current_ms}.json",
+        out = cv2.VideoWriter(
+            f"{_opt_path}/{video.stem}_text.mp4",
+            fourcc,
+            30.0,
+            (frame_width, frame_height),
         )
 
-        return image_info
+        for f in tqdm(overlay_res, desc="write video"):
+            # 将处理后的帧写入视频
+            out.write(f)
 
+        out.release()
 
-@hydra.main(config_path="../../configs", config_name="qwen2")
-def load_config(cfg: omegaconf.DictConfig):
-
-    output_path = Path(cfg.output_path)
-    video_path = Path(cfg.video_path)
-    assets_path = Path(cfg.assets_path)
-
-    for pth in tqdm(video_path.iterdir(), desc="video file"):
-
-        res_imgae_info = []
-
-        _output_path = output_path / pth.stem
-
-        total_frame_list = split_video_and_extract_frames_decord(
-            pth, _output_path / "frames"
-        )
-
-        image_to_text = Qwen2VL(
-            output_path=_output_path / "image_info",
-            prompt=cfg.prompt_en,
-            version=cfg.version.model,
-            cache_dir=cfg.cache_path,
-        )
-
-        for frame_info in tqdm(total_frame_list, desc="Processing frames"):
-
-            _img_info = image_to_text(frame_info=frame_info)
-            res_imgae_info.append(_img_info)
-
-        # Save the results to a JSON file
-        logger.info(f"Results saved to {_output_path / f'{_output_path.stem}.json'}")
-
-        save_image_info_to_json(
-            res_imgae_info,
-            _output_path / f"{_output_path.stem}.json",
-        )
-
-        # copy the video file to the assets path 
-        if not (_output_path).exists():
-            _output_path.mkdir(parents=True, exist_ok=True)
-        
-        shutil.copy(_output_path / f"{_output_path.stem}.json", f"{assets_path / _output_path.stem}.json")
-
-        logger.info(f"Processed video: {pth.stem}")
-
-        # Clean up        
-        del image_to_text
-        del res_imgae_info
-        torch.cuda.empty_cache()
+        logger.info(f"Video saved: {_opt_path}/{video.stem}_text.mp4")
 
     logger.info("All done!")
 
 
 if __name__ == "__main__":
 
-    load_config()
+    info_path = Path(
+        "/workspace/code/logs/qwen2-vl_result/Qwen/Qwen2.5-VL-7B-Instruct/2025-06-19/20-59-38"
+    )
+    output_path = Path("logs")
+
+    merge_res_to_img(
+        info_path=info_path,
+        output_path=output_path,
+    )
