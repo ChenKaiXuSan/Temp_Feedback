@@ -22,13 +22,15 @@ pytubefix
 # video loader 
 decord
 
-vllm
+# vllm
 
 pyqt5 
-pyqt5-tools
+# pyqt5-tools
 
 pandas 
 
 pyserial
 
 opencv-python-headless
+
+tkinter
