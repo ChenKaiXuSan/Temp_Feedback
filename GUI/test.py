@@ -21,19 +21,34 @@ Modified By: the developer formerly known as Kaixu Chen at <chenkaixusan@gmail.c
 Copyright (c) 2025 The University of Tsukuba
 -----
 HISTORY:
-Date           	By	Comments
+Date          	By	Comments
 ----------	---	---------------------------------------------------------
 """
 
 import sys
+from tkinter.ttk import Combobox
+from turtle import window_height
 import cv2
 import json
 import re
 from pathlib import Path
 from PyQt5.QtWidgets import (
-    QApplication, QWidget, QVBoxLayout, QHBoxLayout,
-    QPushButton, QFileDialog, QLabel, QComboBox, QFrame, QSizePolicy
+    QApplication,
+    QWidget,
+    QVBoxLayout,
+    QHBoxLayout,
+    QPushButton,
+    QFileDialog,
+    QListWidget,
+    QLabel,
+    QSlider,
+    QComboBox,
+    QFrame,
+    QSizePolicy,
+    QProgressBar,  # 新增
 )
+from PyQt5.QtWidgets import QStackedLayout  # 新增
+
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtGui import QImage, QPixmap
 from arduino_serial import ArduinoSerial
@@ -43,72 +58,227 @@ class VideoPlayer(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Thermal Feedback GUI")
-        self.setGeometry(100, 100, 1280, 720)
+        self.setGeometry(100, 100, 1920, 1080)
+        self.setMinimumSize(1280, 720)
         self.setStyleSheet("background-color: black; color: white; font-weight: bold;")
 
         self.arduino = ArduinoSerial()
 
         # Top control bar
-        self.refresh_btn = QPushButton("Refresh")
-        self.refresh_btn.setStyleSheet("font-size: 1.5em;")
+        self.refresh_box = QComboBox()
+        self.refresh_box.addItems(["Refresh", "Option 1", "Option 2"])
+        # self.refresh_box.setStyleSheet("font-size: 10em;")
+        # self.refresh_box.setFixedWidth(300)
+        # self.refresh_box.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
         self.port_box = QComboBox()
-        self.port_box.addItems(["COM4", "COM5", "COM6"])
-        self.port_box.setStyleSheet("font-size: 1.5em;")
+        _items = self.arduino.list_available_ports()
+        self.port_box.addItems(_items if _items else ["No serial devices detected"])
+        # self.port_box.setStyleSheet("font-size: 10em;")
+        # self.port_box.setFixedWidth(300)
 
-        self.connect_btn = QPushButton("Connect")
-        self.connect_btn.setStyleSheet("font-size: 1.5em;")
+        self.button_btn = QPushButton("Connect")
+        # self.button_btn.setStyleSheet("font-size: 10em;")
+        # self.button_btn.setFixedWidth(300)
+        # self.button_btn.clicked.connect(self.arduino.open_serial(port_name=self.port_box.currentText))
+        # self.button_btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
-        self.status_label = QLabel("status")
-        self.status_label.setStyleSheet("font-size: 1.5em;")
+        # self.status_label = QLabel("Status")
+        # self.status_label.setStyleSheet("font-size: 2em;")
 
         self.exit_btn = QPushButton("Exit")
-        self.exit_btn.setStyleSheet("font-size: 1.5em;")
         self.exit_btn.clicked.connect(self.close)
+        # self.exit_btn.setStyleSheet("font-size: 4em;")
+        # self.exit_btn.setFixedWidth(300)
+        # self.exit_btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
+        for widget in [self.refresh_box, self.port_box, self.button_btn, self.exit_btn]:
+            widget.setFixedHeight(100)
+            widget.setMinimumWidth(300)
+            widget.setFixedWidth(300)
+
+            widget.setStyleSheet(
+                """
+                QComboBox {
+                    font-size: 40px;
+                    background-color: white;
+                    color: black;
+                    padding: 8px;
+                    border: 2px solid gray;
+                    border-radius: 6px;
+                }
+                QComboBox::drop-down {
+                    subcontrol-origin: padding;
+                    subcontrol-position: top right;
+                    width: 30px;
+                    border-left-width: 1px;
+                    border-left-color: darkgray;
+                    border-left-style: solid;
+                    border-top-right-radius: 3px;
+                    border-bottom-right-radius: 3px;
+                }
+                QComboBox::down-arrow {
+                    image: none;
+                }
+                QPushButton {
+                    font-size: 40px;
+                    background-color: white;
+                    color: black;
+                    border: 2px solid gray;
+                    border-radius: 10px;
+                    padding: 10px;
+                }
+                QPushButton:hover {
+                    background-color: #dddddd;
+                }
+            """
+            )
+
+        # Top bar layout
         top_bar = QHBoxLayout()
-        for w in [self.refresh_btn, self.port_box, self.connect_btn, self.status_label, self.exit_btn]:
-            top_bar.addWidget(w)
+
+        top_bar.addWidget(self.refresh_box)
+        top_bar.addWidget(self.port_box)
+        top_bar.addWidget(self.button_btn)
+        top_bar.addStretch()
+        top_bar.addWidget(self.exit_btn)
 
         # Left control panel
-        self.select_label = QLabel("Select video")
-        self.select_label.setStyleSheet("font-size: 1.5em;")
 
+        # 设置白底黑字样式
+        common_button_style = """
+            QPushButton {
+                font-size: 40px;
+                background-color: white;
+                color: black;
+                border: 2px solid gray;
+                border-radius: 8px;
+                padding: 8px;
+            }
+            QPushButton:hover {
+                background-color: #dddddd;
+            }
+        """
+
+        combo_box_style = """
+            QComboBox {
+                font-size: 40px;
+                background-color: white;
+                color: black;
+                border: 2px solid gray;
+                border-radius: 8px;
+                padding: 4px;
+            }
+            QComboBox QAbstractItemView {
+                font-size: 1.5px;
+                background-color: white;
+                color: black;
+                selection-background-color: #bbbbbb;
+            }
+        """
+
+        label_style = """
+            QLabel {
+                font-size: 40px;
+                color: white;
+                padding: 8px;
+                font-weight: bold;
+            }
+        """
+
+        self.select_label = QLabel("select video")
+        self.select_label.setStyleSheet(label_style)
         self.select_combo = QComboBox()
-        self.select_combo.setStyleSheet("font-size: 1.5em;")
         self.select_combo.currentIndexChanged.connect(self.load_selected_video)
+        self.select_combo.setStyleSheet(combo_box_style)
+        self.select_combo.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
         self.stimulus_label = QLabel("stimulus")
-        self.stimulus_label.setStyleSheet("font-size: 1.5em;")
+        self.stimulus_label.setStyleSheet(label_style)
         self.stimulus_btn = QPushButton("OFF")
-        self.stimulus_btn.setStyleSheet("font-size: 1.5em;")
+        self.stimulus_btn.setStyleSheet(common_button_style)
+        self.stimulus_btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
         self.video_label_title = QLabel("video")
-        self.video_label_title.setStyleSheet("font-size: 1.5em;")
+        self.video_label_title.setStyleSheet(label_style)
         self.video_control_btn = QPushButton("STOP")
-        self.video_control_btn.setStyleSheet("font-size: 1.5em;")
         self.video_control_btn.clicked.connect(self.toggle_video)
+        self.video_control_btn.setStyleSheet(common_button_style)
+        self.video_control_btn.setSizePolicy(
+            QSizePolicy.Expanding, QSizePolicy.Expanding
+        )
 
         left_panel = QVBoxLayout()
-        for widget in [self.select_label, self.select_combo, self.stimulus_label,
-                       self.stimulus_btn, self.video_label_title, self.video_control_btn]:
+        for widget in [
+            self.select_label,
+            self.select_combo,
+            self.stimulus_label,
+            self.stimulus_btn,
+            self.video_label_title,
+            self.video_control_btn,
+        ]:
             left_panel.addWidget(widget)
-            widget.setFixedWidth(120)
+            widget.setFixedWidth(350)
+            widget.setFixedHeight(100)
 
         left_frame = QFrame()
         left_frame.setLayout(left_panel)
         left_frame.setStyleSheet("background-color: #333333; padding: 10px;")
-        left_frame.setFixedWidth(150)
+        left_frame.setFixedWidth(400)
 
-        # Video area
-        self.video_label = QLabel()
+        # Video display (实际播放区域)
+        self.video_label = QLabel("Video Display")
         self.video_label.setAlignment(Qt.AlignCenter)
+        self.video_label.setMinimumSize(800, 600)
         self.video_label.setStyleSheet("border: 1px solid white;")
         self.video_label.setScaledContents(True)
 
+        # ---- 新增：加载中的界面 ----
+        self.loading_label = QLabel("Processing selected video...")
+        self.loading_label.setAlignment(Qt.AlignCenter)
+        self.loading_label.setStyleSheet("color: white; font-size: 32px;")
+
+        self.loading_bar = QProgressBar()
+        self.loading_bar.setRange(0, 0)  # 0,0 = 不确定进度的滚动条
+        self.loading_bar.setTextVisible(False)
+        self.loading_bar.setFixedHeight(40)
+        self.loading_bar.setStyleSheet("""
+            QProgressBar {
+                border: 2px solid gray;
+                border-radius: 5px;
+                background-color: #222222;
+            }
+            QProgressBar::chunk {
+                background-color: #00aa00;
+                width: 20px;
+            }
+        """)
+
+        loading_layout = QVBoxLayout()
+        loading_layout.addStretch()
+        loading_layout.addWidget(self.loading_label)
+        loading_layout.addWidget(self.loading_bar)
+        loading_layout.addStretch()
+
+        self.loading_widget = QWidget()
+        self.loading_widget.setLayout(loading_layout)
+
+        # 视频显示页
+        video_page_layout = QVBoxLayout()
+        video_page_layout.addWidget(self.video_label)
+        self.video_widget = QWidget()
+        self.video_widget.setLayout(video_page_layout)
+
+        # 用 QStackedLayout 切换两种界面
+        self.stack = QStackedLayout()
+        self.stack.addWidget(self.loading_widget)  # index 0
+        self.stack.addWidget(self.video_widget)  # index 1
+        self.stack.setCurrentIndex(1)  # 默认显示视频页（初始时无加载）
+
+        # Layouts
         content_layout = QHBoxLayout()
         content_layout.addWidget(left_frame)
-        content_layout.addWidget(self.video_label)
+        content_layout.addLayout(self.stack)
 
         main_layout = QVBoxLayout()
         main_layout.addLayout(top_bar)
@@ -116,34 +286,75 @@ class VideoPlayer(QWidget):
 
         self.setLayout(main_layout)
 
-        # Video playback logic
-        self.cap = None
         self.timer = QTimer()
         self.timer.timeout.connect(self.next_frame)
+
+        self.cap = None
         self.fps = 30
         self.current_frame = 0
         self.annotations = []
+        self.video_paths = []
+        self.current_index = -1
+        self.playing = False
 
-        self.video_files = sorted((Path(__file__).parent / "assets" / "videos").glob("*.mp4"))
+        self.video_files = list(
+            (Path(__file__).parent / "assets" / "videos").glob("*.mp4")
+        )
+        self.video_files = sorted(self.video_files)
         self.load_video_list()
+
+    def show_loading(self, loading: bool):
+        """
+        True: 显示“Processing...”界面
+        False: 显示视频播放界面
+        """
+        if loading:
+            self.stack.setCurrentIndex(0)
+        else:
+            self.stack.setCurrentIndex(1)
+
+    def pause_video(self):
+        self.playing = False
+        self.timer.stop()
 
     def load_video_list(self):
         self.select_combo.clear()
         for p in self.video_files:
             self.select_combo.addItem(p.name)
         if self.video_files:
+            self.select_combo.setCurrentIndex(0)
             self.load_selected_video()
 
     def load_selected_video(self):
         index = self.select_combo.currentIndex()
         if 0 <= index < len(self.video_files):
-            if self.cap:
-                self.cap.release()
+            # 先切到“Processing...”界面
+            self.show_loading(True)
+
             path = str(self.video_files[index])
-            self.cap = cv2.VideoCapture(path)
-            self.fps = self.cap.get(cv2.CAP_PROP_FPS) or 30
-            self.timer.start(int(1000 / self.fps))
-            self.load_llm_res(path)
+
+            # 用 singleShot 把真正的工作放到事件循环的下一拍执行
+            # 这样界面会先刷新出 loading 画面
+            # 这里控制延时 2 秒模拟处理时间
+            QTimer.singleShot(2000, lambda p=path: self._open_video(p))
+
+    def _open_video(self, path: str):
+        # 真正的“加载视频 + 初始化播放”的逻辑
+        if self.cap:
+            self.cap.release()
+
+        self.cap = cv2.VideoCapture(path)
+        self.fps = self.cap.get(cv2.CAP_PROP_FPS) or 30
+
+        # （如果后面你有更重的预处理，比如读取所有帧、跑推理，
+        #  可以在这里加入循环，同时适当手动更新一个百分比进度）
+
+        self.load_llm_res(path)
+        self.timer.start(int(1000 / self.fps))
+
+        # 加载完成，切回视频界面
+        self.show_loading(False)
+
 
     def load_llm_res(self, path):
         json_file = Path(path).stem + ".json"
@@ -153,14 +364,6 @@ class VideoPlayer(QWidget):
                 self.annotations = json.load(f)
         except:
             self.annotations = []
-
-    def toggle_video(self):
-        if self.timer.isActive():
-            self.timer.stop()
-            self.video_control_btn.setText("PLAY")
-        else:
-            self.timer.start(int(1000 / self.fps))
-            self.video_control_btn.setText("STOP")
 
     def next_frame(self):
         if not self.cap:
@@ -173,22 +376,28 @@ class VideoPlayer(QWidget):
         self.current_frame = int(self.cap.get(cv2.CAP_PROP_POS_FRAMES))
         rgb_image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         h, w, ch = rgb_image.shape
-        qt_image = QImage(rgb_image.data, w, h, ch * w, QImage.Format_RGB888)
-        self.video_label.setPixmap(QPixmap.fromImage(qt_image.scaled(
-            self.video_label.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation)))
+        bytes_per_line = ch * w
+        qt_image = QImage(rgb_image.data, w, h, bytes_per_line, QImage.Format_RGB888)
+        scaled_image = qt_image.scaled(
+            self.video_label.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation
+        )
+        self.video_label.setPixmap(QPixmap.fromImage(scaled_image))
 
         if self.current_frame % int(self.fps) == 0:
             result = self.find_res_with_position(self.current_frame)
             if result:
                 source = result["source"][0]
                 proportion = result["proportion"]
+
                 if source == "h":
                     val = int(proportion * 255)
                 elif source == "c":
                     val = int(proportion * 70 + 185)
                 else:
                     val = 0
-                msg = f"{source}{max(0, min(255, val))}"
+
+                val = max(0, min(255, val))
+                msg = f"{source}{round(val)}"
                 self.arduino(msg)
 
     def find_res_with_position(self, frame_idx):
@@ -202,6 +411,14 @@ class VideoPlayer(QWidget):
         if match:
             return json.loads(match.group(0))
         return {"source": "none", "proportion": "none", "location": "none"}
+
+    def toggle_video(self):
+        if self.timer.isActive():
+            self.timer.stop()
+            self.video_control_btn.setText("PLAY")
+        else:
+            self.timer.start(int(1000 / self.fps))
+            self.video_control_btn.setText("STOP")
 
 
 if __name__ == "__main__":
