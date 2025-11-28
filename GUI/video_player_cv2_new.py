@@ -45,7 +45,10 @@ from PyQt5.QtWidgets import (
     QComboBox,
     QFrame,
     QSizePolicy,
+    QProgressBar,  # 新增
 )
+from PyQt5.QtWidgets import QStackedLayout  # 新增
+
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtGui import QImage, QPixmap
 from arduino_serial import ArduinoSerial
@@ -89,7 +92,6 @@ class VideoPlayer(QWidget):
         # self.exit_btn.setFixedWidth(300)
         # self.exit_btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
-
         for widget in [self.refresh_box, self.port_box, self.button_btn, self.exit_btn]:
             widget.setFixedHeight(100)
             widget.setMinimumWidth(300)
@@ -131,7 +133,7 @@ class VideoPlayer(QWidget):
                 }
             """
             )
-            
+
         # Top bar layout
         top_bar = QHBoxLayout()
 
@@ -183,7 +185,7 @@ class VideoPlayer(QWidget):
                 font-weight: bold;
             }
         """
-        
+
         self.select_label = QLabel("select video")
         self.select_label.setStyleSheet(label_style)
         self.select_combo = QComboBox()
@@ -224,17 +226,59 @@ class VideoPlayer(QWidget):
         left_frame.setStyleSheet("background-color: #333333; padding: 10px;")
         left_frame.setFixedWidth(400)
 
-        # Video display
+        # Video display (实际播放区域)
         self.video_label = QLabel("Video Display")
         self.video_label.setAlignment(Qt.AlignCenter)
         self.video_label.setMinimumSize(800, 600)
         self.video_label.setStyleSheet("border: 1px solid white;")
         self.video_label.setScaledContents(True)
 
+        # ---- 新增：加载中的界面 ----
+        self.loading_label = QLabel("Processing selected video...")
+        self.loading_label.setAlignment(Qt.AlignCenter)
+        self.loading_label.setStyleSheet("color: white; font-size: 32px;")
+
+        self.loading_bar = QProgressBar()
+        self.loading_bar.setRange(0, 0)  # 0,0 = 不确定进度的滚动条
+        self.loading_bar.setTextVisible(False)
+        self.loading_bar.setFixedHeight(40)
+        self.loading_bar.setStyleSheet("""
+            QProgressBar {
+                border: 2px solid gray;
+                border-radius: 5px;
+                background-color: #222222;
+            }
+            QProgressBar::chunk {
+                background-color: #00aa00;
+                width: 20px;
+            }
+        """)
+
+        loading_layout = QVBoxLayout()
+        loading_layout.addStretch()
+        loading_layout.addWidget(self.loading_label)
+        loading_layout.addWidget(self.loading_bar)
+        loading_layout.addStretch()
+
+        self.loading_widget = QWidget()
+        self.loading_widget.setLayout(loading_layout)
+
+        # 视频显示页
+        video_page_layout = QVBoxLayout()
+        video_page_layout.addWidget(self.video_label)
+        self.video_widget = QWidget()
+        self.video_widget.setLayout(video_page_layout)
+
+        # 用 QStackedLayout 切换两种界面
+        self.stack = QStackedLayout()
+        self.stack.addWidget(self.loading_widget)  # index 0
+        self.stack.addWidget(self.video_widget)  # index 1
+        self.stack.setCurrentIndex(1)  # 默认显示视频页（初始时无加载）
+
         # Layouts
         content_layout = QHBoxLayout()
         content_layout.addWidget(left_frame)
-        content_layout.addWidget(self.video_label)
+        content_layout.addLayout(self.stack)
 
         main_layout = QVBoxLayout()
         main_layout.addLayout(top_bar)
@@ -259,6 +303,16 @@ class VideoPlayer(QWidget):
         self.video_files = sorted(self.video_files)
         self.load_video_list()
 
+    def show_loading(self, loading: bool):
+        """
+        True: 显示“Processing...”界面
+        False: 显示视频播放界面
+        """
+        if loading:
+            self.stack.setCurrentIndex(0)
+        else:
+            self.stack.setCurrentIndex(1)
+
     def pause_video(self):
         self.playing = False
         self.timer.stop()
@@ -274,13 +328,33 @@ class VideoPlayer(QWidget):
     def load_selected_video(self):
         index = self.select_combo.currentIndex()
         if 0 <= index < len(self.video_files):
-            if self.cap:
-                self.cap.release()
+            # 先切到“Processing...”界面
+            self.show_loading(True)
+
             path = str(self.video_files[index])
-            self.cap = cv2.VideoCapture(path)
-            self.fps = self.cap.get(cv2.CAP_PROP_FPS) or 30
-            self.timer.start(int(1000 / self.fps))
-            self.load_llm_res(path)
+
+            # 用 singleShot 把真正的工作放到事件循环的下一拍执行
+            # 这样界面会先刷新出 loading 画面
+            # 这里控制延时 2 秒模拟处理时间
+            QTimer.singleShot(2000, lambda p=path: self._open_video(p))
+
+    def _open_video(self, path: str):
+        # 真正的“加载视频 + 初始化播放”的逻辑
+        if self.cap:
+            self.cap.release()
+
+        self.cap = cv2.VideoCapture(path)
+        self.fps = self.cap.get(cv2.CAP_PROP_FPS) or 30
+
+        # （如果后面你有更重的预处理，比如读取所有帧、跑推理，
+        #  可以在这里加入循环，同时适当手动更新一个百分比进度）
+
+        self.load_llm_res(path)
+        self.timer.start(int(1000 / self.fps))
+
+        # 加载完成，切回视频界面
+        self.show_loading(False)
+
 
     def load_llm_res(self, path):
         json_file = Path(path).stem + ".json"
