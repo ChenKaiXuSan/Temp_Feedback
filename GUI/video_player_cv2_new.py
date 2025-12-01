@@ -390,7 +390,8 @@ class VideoPlayer(QWidget):
                 proportion = result["proportion"]
 
                 if source == "h":
-                    val = int(proportion * 255)
+                    # val = int(proportion * 255)
+                    val = int(proportion * 80 + 150 ) 
                 elif source == "c":
                     val = int(proportion * 70 + 185)
                 else:
