@@ -355,7 +355,6 @@ class VideoPlayer(QWidget):
         # 加载完成，切回视频界面
         self.show_loading(False)
 
-
     def load_llm_res(self, path):
         json_file = Path(path).stem + ".json"
         json_path = Path(__file__).parent / "assets" / "llm_res" / json_file
@@ -391,7 +390,7 @@ class VideoPlayer(QWidget):
 
                 if source == "h":
                     # val = int(proportion * 255)
-                    val = int(proportion * 80 + 150 ) 
+                    val = int(proportion * 80 + 150)
                 elif source == "c":
                     val = int(proportion * 70 + 185)
                 else:
