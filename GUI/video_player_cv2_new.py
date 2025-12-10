@@ -298,10 +298,26 @@ class VideoPlayer(QWidget):
         self.playing = False
 
         self.video_files = list(
-            (Path(__file__).parent / "assets" / "videos").glob("*.mp4")
+            # (Path(__file__).parent / "assets" / "videos").glob("*.mp4")
+            (self.resource_path("assets") / "videos").glob("*.mp4")
         )
         self.video_files = sorted(self.video_files)
         self.load_video_list()
+
+    def resource_path(self, rel_path: str | Path) -> Path:
+        """
+        返回打包后可用的资源绝对路径。
+        - onefile: 使用 sys._MEIPASS
+        - 开发时: 相对当前文件所在目录
+        """
+        base_path = getattr(sys, "_MEIPASS", None)
+        if base_path:
+            base = Path(base_path)
+        else:
+            # 根据你的需要选择项目根或当前文件目录
+            base = Path(__file__).resolve().parent
+
+        return base / rel_path
 
     def show_loading(self, loading: bool):
         """
