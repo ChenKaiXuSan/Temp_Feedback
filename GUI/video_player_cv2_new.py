@@ -37,7 +37,6 @@ from io import BytesIO
 
 import cv2
 import matplotlib.pyplot as plt
-import numpy as np
 from arduino_serial import ArduinoSerial
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtGui import QImage, QPixmap
@@ -46,11 +45,10 @@ from PyQt5.QtWidgets import (
     QComboBox,
     QHBoxLayout,
     QLabel,
-    QProgressBar,  # 新增
+    QProgressBar, 
     QPushButton,
     QSizePolicy,
-    QStackedLayout,  # 新增
-    QVBoxLayout,
+    QStackedLayout, QVBoxLayout,
     QWidget,
 )
 
@@ -62,8 +60,6 @@ class VideoPlayer(QWidget):
         self.setGeometry(100, 100, 1920, 1080)
         self.setMinimumSize(1280, 720)
         self.setStyleSheet("background-color: black; color: white; font-weight: bold;")
-
-        self.arduino = ArduinoSerial()
 
         # top control panel
 
@@ -112,6 +108,7 @@ class VideoPlayer(QWidget):
                     border-left-style: solid;
                     border-top-right-radius: 3px;
                     border-bottom-right-radius: 3px;
+                    background-color: lightgray;
                 }
                 QComboBox::down-arrow {
                     image: none;
@@ -293,20 +290,36 @@ class VideoPlayer(QWidget):
         # （如果后面你有更重的预处理，比如读取所有帧、跑推理，
         #  可以在这里加入循环，同时适当手动更新一个百分比进度）
 
-        self.load_llm_res(path)
+        self.all_temp = self.load_llm_res(path)
         self.timer.start(int(1000 / self.fps))
 
         # 加载完成，切回视频界面
         self.show_loading(False)
 
+        # 重置分析结果
+        self.analysis_res_draw = []
+
     def load_llm_res(self, path):
+        all_temp = {}
+
         json_file = Path(path).stem + ".json"
         json_path = Path(__file__).parent / "assets" / "llm_res" / json_file
         try:
             with open(json_path, "r", encoding="utf-8") as f:
                 self.annotations = json.load(f)
+
+                for info in self.annotations:
+                    frame_idx = info.get("frame_idx")
+                    value = self.convert_str_dict(info.get("output_text"))
+                    source = value["source"]
+                    proportion = value["proportion"]
+                    all_temp[frame_idx] = proportion
+
         except:
             self.annotations = []
+            all_temp = {}
+
+        return all_temp
 
     def next_frame(self):
         if not self.cap:
@@ -314,7 +327,11 @@ class VideoPlayer(QWidget):
         ret, frame = self.cap.read()
         if not ret:
             self.cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
+            self.analysis_res_draw = []  # 重置分析结果
             return
+
+        max_temp = max(self.all_temp.values()) if self.all_temp else None
+        min_temp = min(self.all_temp.values()) if self.all_temp else None
 
         self.current_frame = int(self.cap.get(cv2.CAP_PROP_POS_FRAMES))
         rgb_image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -332,20 +349,14 @@ class VideoPlayer(QWidget):
                 source = result["source"][0]
                 proportion = result["proportion"]
 
-                if source == "h":
-                    # val = int(proportion * 255)
-                    val = int(proportion * 80 + 150)
-                elif source == "c":
-                    val = int(proportion * 70 + 185)
-                else:
-                    val = 0
+                # 按照最大值扩大比例
+                if max_temp and max_temp != 0:
+                    proportion = proportion / max_temp
 
-                val = max(0, min(255, val))
-                msg = f"{source}{round(val)}"
+                val = proportion if source == "h" else -proportion
+                self.analysis_res_draw.append(val)
 
-                self.analysis_res_draw.append(source)
-
-                self.arduino(msg)
+            self.draw_analysis_result()
 
     def draw_analysis_result(self):
         data = self.analysis_res_draw
@@ -353,44 +364,52 @@ class VideoPlayer(QWidget):
             self.analysis_label.setText("No data")
             return
 
-        # ------------------ 1. 用 Matplotlib 画图 ------------------
         fig, ax = plt.subplots(figsize=(8, 4), dpi=100)
 
-        ax.plot(data, color="green", linewidth=3)
-        ax.set_facecolor("black")
+        # x 轴 = 数据数量（从 1 到 N）
+        x = list(range(1, len(data) + 1))
+
+        # y = 数据内容
+        ax.plot(x, data, color="green", linewidth=3)
+
+        # -------------------------- 新增：Y轴中心为0 --------------------------
+        ax.set_ylim(-1, 1)  # 让 0 在中间
+        ax.axhline(0, color="white", linewidth=2)  # 加一条水平 0 线
+
+        # 颜色视觉提示（可选：热/冷区域背景）
+        ax.axhspan(0, 1, facecolor="red", alpha=0.15)  # 热
+        ax.axhspan(-1, 0, facecolor="blue", alpha=0.15)  # 冷
+        # ----------------------------------------------------------------------
+
+        # 背景和样式
+        ax.set_facecolor("white")
         fig.patch.set_facecolor("black")
 
         ax.tick_params(colors="white")
-        ax.spines["bottom"].set_color("white")
-        ax.spines["top"].set_color("white")
-        ax.spines["left"].set_color("white")
-        ax.spines["right"].set_color("white")
+        for side in ["bottom", "top", "left", "right"]:
+            ax.spines[side].set_color("white")
 
-        ax.set_title("Analysis Curve", color="white")
-        ax.set_xlabel("Index", color="white")
-        ax.set_ylabel("Value", color="white")
+        ax.set_title("Thermal Feedback Curve", color="white")
+        ax.set_xlabel("Frame", color="white")
+        ax.set_ylabel("Heat (+) / Cold (-)", color="white")
 
         fig.tight_layout()
 
-        # ------------------ 2. 保存到内存 Buffer ------------------
+        # 转 QPixmap
         buf = BytesIO()
         fig.savefig(buf, format="png")
         buf.seek(0)
-        plt.close(fig)  # 关闭 Matplotlib 图形窗口
+        plt.close(fig)
 
-        # ------------------ 3. 转成 QImage / QPixmap ------------------
         qimg = QImage.fromData(buf.getvalue(), "PNG")
         pixmap = QPixmap.fromImage(qimg)
 
-        # 自动缩放到 QLabel 大小
         pixmap = pixmap.scaled(
             self.analysis_label.width(),
             self.analysis_label.height(),
             aspectRatioMode=Qt.KeepAspectRatio,
             transformMode=Qt.SmoothTransformation,
         )
-
-        # ------------------ 4. 显示到 QLabel ------------------
         self.analysis_label.setPixmap(pixmap)
 
     def find_res_with_position(self, frame_idx):
