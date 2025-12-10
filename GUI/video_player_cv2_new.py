@@ -25,33 +25,34 @@ Date          	By	Comments
 ----------	---	---------------------------------------------------------
 """
 
-import sys
-from tkinter.ttk import Combobox
-from turtle import window_height
-import cv2
 import json
 import re
+import sys
 from pathlib import Path
-from PyQt5.QtWidgets import (
-    QApplication,
-    QWidget,
-    QVBoxLayout,
-    QHBoxLayout,
-    QPushButton,
-    QFileDialog,
-    QListWidget,
-    QLabel,
-    QSlider,
-    QComboBox,
-    QFrame,
-    QSizePolicy,
-    QProgressBar,  # 新增
-)
-from PyQt5.QtWidgets import QStackedLayout  # 新增
 
+import matplotlib
+
+matplotlib.use("Agg")  # 不使用 GUI backend
+from io import BytesIO
+
+import cv2
+import matplotlib.pyplot as plt
+import numpy as np
+from arduino_serial import ArduinoSerial
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtGui import QImage, QPixmap
-from arduino_serial import ArduinoSerial
+from PyQt5.QtWidgets import (
+    QApplication,
+    QComboBox,
+    QHBoxLayout,
+    QLabel,
+    QProgressBar,  # 新增
+    QPushButton,
+    QSizePolicy,
+    QStackedLayout,  # 新增
+    QVBoxLayout,
+    QWidget,
+)
 
 
 class VideoPlayer(QWidget):
@@ -64,35 +65,30 @@ class VideoPlayer(QWidget):
 
         self.arduino = ArduinoSerial()
 
-        # Top control bar
-        self.refresh_box = QComboBox()
-        self.refresh_box.addItems(["Refresh", "Option 1", "Option 2"])
-        # self.refresh_box.setStyleSheet("font-size: 10em;")
-        # self.refresh_box.setFixedWidth(300)
-        # self.refresh_box.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        # top control panel
 
-        self.port_box = QComboBox()
-        _items = self.arduino.list_available_ports()
-        self.port_box.addItems(_items if _items else ["No serial devices detected"])
-        # self.port_box.setStyleSheet("font-size: 10em;")
-        # self.port_box.setFixedWidth(300)
+        self.select_label = QLabel("select video")
+        self.select_label.setStyleSheet("font-size: 10em;")
 
-        self.button_btn = QPushButton("Connect")
-        # self.button_btn.setStyleSheet("font-size: 10em;")
-        # self.button_btn.setFixedWidth(300)
-        # self.button_btn.clicked.connect(self.arduino.open_serial(port_name=self.port_box.currentText))
-        # self.button_btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.select_combo = QComboBox()
+        self.select_combo.currentIndexChanged.connect(self.load_selected_video)
+        self.select_combo.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
-        # self.status_label = QLabel("Status")
-        # self.status_label.setStyleSheet("font-size: 2em;")
+        self.video_control_btn = QPushButton("STOP")
+        self.video_control_btn.clicked.connect(self.toggle_video)
+        self.video_control_btn.setSizePolicy(
+            QSizePolicy.Expanding, QSizePolicy.Expanding
+        )
 
         self.exit_btn = QPushButton("Exit")
         self.exit_btn.clicked.connect(self.close)
-        # self.exit_btn.setStyleSheet("font-size: 4em;")
-        # self.exit_btn.setFixedWidth(300)
-        # self.exit_btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
-        for widget in [self.refresh_box, self.port_box, self.button_btn, self.exit_btn]:
+        for widget in [
+            self.exit_btn,
+            self.select_label,
+            self.select_combo,
+            self.video_control_btn,
+        ]:
             widget.setFixedHeight(100)
             widget.setMinimumWidth(300)
             widget.setFixedWidth(300)
@@ -137,94 +133,11 @@ class VideoPlayer(QWidget):
         # Top bar layout
         top_bar = QHBoxLayout()
 
-        top_bar.addWidget(self.refresh_box)
-        top_bar.addWidget(self.port_box)
-        top_bar.addWidget(self.button_btn)
         top_bar.addStretch()
+        top_bar.addWidget(self.select_label)
+        top_bar.addWidget(self.select_combo)
+        top_bar.addWidget(self.video_control_btn)
         top_bar.addWidget(self.exit_btn)
-
-        # Left control panel
-
-        # 设置白底黑字样式
-        common_button_style = """
-            QPushButton {
-                font-size: 40px;
-                background-color: white;
-                color: black;
-                border: 2px solid gray;
-                border-radius: 8px;
-                padding: 8px;
-            }
-            QPushButton:hover {
-                background-color: #dddddd;
-            }
-        """
-
-        combo_box_style = """
-            QComboBox {
-                font-size: 40px;
-                background-color: white;
-                color: black;
-                border: 2px solid gray;
-                border-radius: 8px;
-                padding: 4px;
-            }
-            QComboBox QAbstractItemView {
-                font-size: 1.5px;
-                background-color: white;
-                color: black;
-                selection-background-color: #bbbbbb;
-            }
-        """
-
-        label_style = """
-            QLabel {
-                font-size: 40px;
-                color: white;
-                padding: 8px;
-                font-weight: bold;
-            }
-        """
-
-        self.select_label = QLabel("select video")
-        self.select_label.setStyleSheet(label_style)
-        self.select_combo = QComboBox()
-        self.select_combo.currentIndexChanged.connect(self.load_selected_video)
-        self.select_combo.setStyleSheet(combo_box_style)
-        self.select_combo.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-
-        self.stimulus_label = QLabel("stimulus")
-        self.stimulus_label.setStyleSheet(label_style)
-        self.stimulus_btn = QPushButton("OFF")
-        self.stimulus_btn.setStyleSheet(common_button_style)
-        self.stimulus_btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-
-        self.video_label_title = QLabel("video")
-        self.video_label_title.setStyleSheet(label_style)
-        self.video_control_btn = QPushButton("STOP")
-        self.video_control_btn.clicked.connect(self.toggle_video)
-        self.video_control_btn.setStyleSheet(common_button_style)
-        self.video_control_btn.setSizePolicy(
-            QSizePolicy.Expanding, QSizePolicy.Expanding
-        )
-
-        left_panel = QVBoxLayout()
-        for widget in [
-            self.select_label,
-            self.select_combo,
-            self.stimulus_label,
-            self.stimulus_btn,
-            self.video_label_title,
-            self.video_control_btn,
-        ]:
-            left_panel.addWidget(widget)
-            widget.setFixedWidth(350)
-            widget.setFixedHeight(100)
-
-        left_frame = QFrame()
-        left_frame.setLayout(left_panel)
-        left_frame.setStyleSheet("background-color: #333333; padding: 10px;")
-        left_frame.setFixedWidth(400)
 
         # Video display (实际播放区域)
         self.video_label = QLabel("Video Display")
@@ -232,6 +145,13 @@ class VideoPlayer(QWidget):
         self.video_label.setMinimumSize(800, 600)
         self.video_label.setStyleSheet("border: 1px solid white;")
         self.video_label.setScaledContents(True)
+
+        # analysis display
+        self.analysis_label = QLabel("Analysis Display")
+        self.analysis_label.setAlignment(Qt.AlignCenter)
+        self.analysis_label.setMinimumSize(800, 600)
+        self.analysis_label.setStyleSheet("border: 1px solid white;")
+        self.analysis_label.setScaledContents(True)
 
         # ---- 新增：加载中的界面 ----
         self.loading_label = QLabel("Processing selected video...")
@@ -269,6 +189,12 @@ class VideoPlayer(QWidget):
         self.video_widget = QWidget()
         self.video_widget.setLayout(video_page_layout)
 
+        # 分析结果显示页
+        analysis_page_layout = QVBoxLayout()
+        analysis_page_layout.addWidget(self.analysis_label)
+        self.analysis_widget = QWidget()
+        self.analysis_widget.setLayout(analysis_page_layout)
+
         # 用 QStackedLayout 切换两种界面
         self.stack = QStackedLayout()
         self.stack.addWidget(self.loading_widget)  # index 0
@@ -277,8 +203,8 @@ class VideoPlayer(QWidget):
 
         # Layouts
         content_layout = QHBoxLayout()
-        content_layout.addWidget(left_frame)
         content_layout.addLayout(self.stack)
+        content_layout.addWidget(self.analysis_widget)
 
         main_layout = QVBoxLayout()
         main_layout.addLayout(top_bar)
@@ -303,6 +229,8 @@ class VideoPlayer(QWidget):
         )
         self.video_files = sorted(self.video_files)
         self.load_video_list()
+
+        self.analysis_res_draw = []
 
     def resource_path(self, rel_path: str | Path) -> Path:
         """
@@ -414,7 +342,56 @@ class VideoPlayer(QWidget):
 
                 val = max(0, min(255, val))
                 msg = f"{source}{round(val)}"
+
+                self.analysis_res_draw.append(source)
+
                 self.arduino(msg)
+
+    def draw_analysis_result(self):
+        data = self.analysis_res_draw
+        if not data or len(data) < 2:
+            self.analysis_label.setText("No data")
+            return
+
+        # ------------------ 1. 用 Matplotlib 画图 ------------------
+        fig, ax = plt.subplots(figsize=(8, 4), dpi=100)
+
+        ax.plot(data, color="green", linewidth=3)
+        ax.set_facecolor("black")
+        fig.patch.set_facecolor("black")
+
+        ax.tick_params(colors="white")
+        ax.spines["bottom"].set_color("white")
+        ax.spines["top"].set_color("white")
+        ax.spines["left"].set_color("white")
+        ax.spines["right"].set_color("white")
+
+        ax.set_title("Analysis Curve", color="white")
+        ax.set_xlabel("Index", color="white")
+        ax.set_ylabel("Value", color="white")
+
+        fig.tight_layout()
+
+        # ------------------ 2. 保存到内存 Buffer ------------------
+        buf = BytesIO()
+        fig.savefig(buf, format="png")
+        buf.seek(0)
+        plt.close(fig)  # 关闭 Matplotlib 图形窗口
+
+        # ------------------ 3. 转成 QImage / QPixmap ------------------
+        qimg = QImage.fromData(buf.getvalue(), "PNG")
+        pixmap = QPixmap.fromImage(qimg)
+
+        # 自动缩放到 QLabel 大小
+        pixmap = pixmap.scaled(
+            self.analysis_label.width(),
+            self.analysis_label.height(),
+            aspectRatioMode=Qt.KeepAspectRatio,
+            transformMode=Qt.SmoothTransformation,
+        )
+
+        # ------------------ 4. 显示到 QLabel ------------------
+        self.analysis_label.setPixmap(pixmap)
 
     def find_res_with_position(self, frame_idx):
         for info in self.annotations:
