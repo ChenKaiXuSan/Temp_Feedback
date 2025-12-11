@@ -318,12 +318,10 @@ class VideoPlayer(QWidget):
                 self.annotations = json.load(f)
 
                 for info in self.annotations:
-                    frame_idx = info.get("frame_idx")
-                    value = self.convert_str_dict(info.get("output_text"))
-                    _source = value["source"]
+                    _source = info.get("source", "none")
                     _proportion = (
-                        value["proportion"]
-                        if isinstance(value["proportion"], (int, float))
+                        info.get("proportion", 0.0)
+                        if isinstance(info.get("proportion", 0.0), (int, float))
                         else 0.0
                     )
 

@@ -1,0 +1,991 @@
+[
+  {
+    "second": 0,
+    "ms": 0,
+    "source": "heat",
+    "proportion": 0.5789,
+    "frame_idx": 0
+  },
+  {
+    "second": 0,
+    "ms": 16,
+    "source": "heat",
+    "proportion": 0.6316,
+    "frame_idx": 1
+  },
+  {
+    "second": 0,
+    "ms": 33,
+    "source": "heat",
+    "proportion": 0.6842,
+    "frame_idx": 2
+  },
+  {
+    "second": 0,
+    "ms": 50,
+    "source": "heat",
+    "proportion": 0.7263,
+    "frame_idx": 3
+  },
+  {
+    "second": 0,
+    "ms": 66,
+    "source": "heat",
+    "proportion": 0.7789,
+    "frame_idx": 4
+  },
+  {
+    "second": 0,
+    "ms": 83,
+    "source": "heat",
+    "proportion": 0.8105,
+    "frame_idx": 5
+  },
+  {
+    "second": 0,
+    "ms": 100,
+    "source": "heat",
+    "proportion": 0.8526,
+    "frame_idx": 6
+  },
+  {
+    "second": 0,
+    "ms": 116,
+    "source": "heat",
+    "proportion": 0.8842,
+    "frame_idx": 7
+  },
+  {
+    "second": 0,
+    "ms": 133,
+    "source": "heat",
+    "proportion": 0.9053,
+    "frame_idx": 8
+  },
+  {
+    "second": 0,
+    "ms": 150,
+    "source": "heat",
+    "proportion": 0.9158,
+    "frame_idx": 9
+  },
+  {
+    "second": 0,
+    "ms": 166,
+    "source": "heat",
+    "proportion": 0.9368,
+    "frame_idx": 10
+  },
+  {
+    "second": 0,
+    "ms": 183,
+    "source": "heat",
+    "proportion": 0.9368,
+    "frame_idx": 11
+  },
+  {
+    "second": 0,
+    "ms": 200,
+    "source": "heat",
+    "proportion": 0.9368,
+    "frame_idx": 12
+  },
+  {
+    "second": 0,
+    "ms": 216,
+    "source": "heat",
+    "proportion": 0.9368,
+    "frame_idx": 13
+  },
+  {
+    "second": 0,
+    "ms": 233,
+    "source": "heat",
+    "proportion": 0.9263,
+    "frame_idx": 14
+  },
+  {
+    "second": 0,
+    "ms": 250,
+    "source": "heat",
+    "proportion": 0.9158,
+    "frame_idx": 15
+  },
+  {
+    "second": 0,
+    "ms": 266,
+    "source": "heat",
+    "proportion": 0.9158,
+    "frame_idx": 16
+  },
+  {
+    "second": 0,
+    "ms": 283,
+    "source": "heat",
+    "proportion": 0.9053,
+    "frame_idx": 17
+  },
+  {
+    "second": 0,
+    "ms": 300,
+    "source": "heat",
+    "proportion": 0.8947,
+    "frame_idx": 18
+  },
+  {
+    "second": 0,
+    "ms": 316,
+    "source": "heat",
+    "proportion": 0.8842,
+    "frame_idx": 19
+  },
+  {
+    "second": 0,
+    "ms": 333,
+    "source": "heat",
+    "proportion": 0.8737,
+    "frame_idx": 20
+  },
+  {
+    "second": 0,
+    "ms": 350,
+    "source": "heat",
+    "proportion": 0.8737,
+    "frame_idx": 21
+  },
+  {
+    "second": 0,
+    "ms": 366,
+    "source": "heat",
+    "proportion": 0.8632,
+    "frame_idx": 22
+  },
+  {
+    "second": 0,
+    "ms": 383,
+    "source": "heat",
+    "proportion": 0.8632,
+    "frame_idx": 23
+  },
+  {
+    "second": 0,
+    "ms": 400,
+    "source": "heat",
+    "proportion": 0.8737,
+    "frame_idx": 24
+  },
+  {
+    "second": 0,
+    "ms": 416,
+    "source": "heat",
+    "proportion": 0.8737,
+    "frame_idx": 25
+  },
+  {
+    "second": 0,
+    "ms": 433,
+    "source": "heat",
+    "proportion": 0.8842,
+    "frame_idx": 26
+  },
+  {
+    "second": 0,
+    "ms": 450,
+    "source": "heat",
+    "proportion": 0.8842,
+    "frame_idx": 27
+  },
+  {
+    "second": 0,
+    "ms": 466,
+    "source": "heat",
+    "proportion": 0.8947,
+    "frame_idx": 28
+  },
+  {
+    "second": 0,
+    "ms": 483,
+    "source": "heat",
+    "proportion": 0.9053,
+    "frame_idx": 29
+  },
+  {
+    "second": 0,
+    "ms": 500,
+    "source": "heat",
+    "proportion": 1.0,
+    "frame_idx": 30
+  },
+  {
+    "second": 0,
+    "ms": 516,
+    "source": "heat",
+    "proportion": 1.0,
+    "frame_idx": 31
+  },
+  {
+    "second": 0,
+    "ms": 533,
+    "source": "heat",
+    "proportion": 1.0,
+    "frame_idx": 32
+  },
+  {
+    "second": 0,
+    "ms": 550,
+    "source": "heat",
+    "proportion": 1.0,
+    "frame_idx": 33
+  },
+  {
+    "second": 0,
+    "ms": 566,
+    "source": "heat",
+    "proportion": 1.0,
+    "frame_idx": 34
+  },
+  {
+    "second": 0,
+    "ms": 583,
+    "source": "heat",
+    "proportion": 0.9895,
+    "frame_idx": 35
+  },
+  {
+    "second": 0,
+    "ms": 600,
+    "source": "heat",
+    "proportion": 0.9684,
+    "frame_idx": 36
+  },
+  {
+    "second": 0,
+    "ms": 616,
+    "source": "heat",
+    "proportion": 0.9474,
+    "frame_idx": 37
+  },
+  {
+    "second": 0,
+    "ms": 633,
+    "source": "heat",
+    "proportion": 0.9158,
+    "frame_idx": 38
+  },
+  {
+    "second": 0,
+    "ms": 650,
+    "source": "heat",
+    "proportion": 0.8737,
+    "frame_idx": 39
+  },
+  {
+    "second": 0,
+    "ms": 666,
+    "source": "heat",
+    "proportion": 0.8421,
+    "frame_idx": 40
+  },
+  {
+    "second": 0,
+    "ms": 683,
+    "source": "heat",
+    "proportion": 0.8,
+    "frame_idx": 41
+  },
+  {
+    "second": 0,
+    "ms": 700,
+    "source": "heat",
+    "proportion": 0.7579,
+    "frame_idx": 42
+  },
+  {
+    "second": 0,
+    "ms": 716,
+    "source": "heat",
+    "proportion": 0.7158,
+    "frame_idx": 43
+  },
+  {
+    "second": 0,
+    "ms": 726,
+    "source": "heat",
+    "proportion": 0.7158,
+    "frame_idx": 44
+  },
+  {
+    "second": 0,
+    "ms": 760,
+    "source": "heat",
+    "proportion": 0.7158,
+    "frame_idx": 45
+  },
+  {
+    "second": 0,
+    "ms": 793,
+    "source": "heat",
+    "proportion": 0.7158,
+    "frame_idx": 46
+  },
+  {
+    "second": 0,
+    "ms": 826,
+    "source": "heat",
+    "proportion": 0.7158,
+    "frame_idx": 47
+  },
+  {
+    "second": 1,
+    "ms": 1865,
+    "source": "nan",
+    "proportion": 0.9474,
+    "frame_idx": 48
+  },
+  {
+    "second": 1,
+    "ms": 1566,
+    "source": "cold",
+    "proportion": 0.9579,
+    "frame_idx": 49
+  },
+  {
+    "second": 1,
+    "ms": 1583,
+    "source": "cold",
+    "proportion": 0.9579,
+    "frame_idx": 50
+  },
+  {
+    "second": 1,
+    "ms": 1600,
+    "source": "cold",
+    "proportion": 0.9579,
+    "frame_idx": 51
+  },
+  {
+    "second": 1,
+    "ms": 1616,
+    "source": "cold",
+    "proportion": 0.9579,
+    "frame_idx": 52
+  },
+  {
+    "second": 1,
+    "ms": 1633,
+    "source": "cold",
+    "proportion": 0.9684,
+    "frame_idx": 53
+  },
+  {
+    "second": 1,
+    "ms": 1650,
+    "source": "cold",
+    "proportion": 0.9684,
+    "frame_idx": 54
+  },
+  {
+    "second": 1,
+    "ms": 1666,
+    "source": "cold",
+    "proportion": 0.9684,
+    "frame_idx": 55
+  },
+  {
+    "second": 1,
+    "ms": 1683,
+    "source": "cold",
+    "proportion": 0.9684,
+    "frame_idx": 56
+  },
+  {
+    "second": 1,
+    "ms": 1700,
+    "source": "cold",
+    "proportion": 0.9684,
+    "frame_idx": 57
+  },
+  {
+    "second": 1,
+    "ms": 1716,
+    "source": "cold",
+    "proportion": 0.9684,
+    "frame_idx": 58
+  },
+  {
+    "second": 1,
+    "ms": 1733,
+    "source": "cold",
+    "proportion": 0.9789,
+    "frame_idx": 59
+  },
+  {
+    "second": 1,
+    "ms": 1750,
+    "source": "cold",
+    "proportion": 0.9789,
+    "frame_idx": 60
+  },
+  {
+    "second": 1,
+    "ms": 1766,
+    "source": "cold",
+    "proportion": 0.9789,
+    "frame_idx": 61
+  },
+  {
+    "second": 1,
+    "ms": 1783,
+    "source": "cold",
+    "proportion": 0.9789,
+    "frame_idx": 62
+  },
+  {
+    "second": 1,
+    "ms": 1800,
+    "source": "cold",
+    "proportion": 0.9789,
+    "frame_idx": 63
+  },
+  {
+    "second": 1,
+    "ms": 1816,
+    "source": "cold",
+    "proportion": 0.9789,
+    "frame_idx": 64
+  },
+  {
+    "second": 1,
+    "ms": 1833,
+    "source": "cold",
+    "proportion": 0.9789,
+    "frame_idx": 65
+  },
+  {
+    "second": 1,
+    "ms": 1850,
+    "source": "cold",
+    "proportion": 0.9789,
+    "frame_idx": 66
+  },
+  {
+    "second": 1,
+    "ms": 1866,
+    "source": "cold",
+    "proportion": 0.9789,
+    "frame_idx": 67
+  },
+  {
+    "second": 1,
+    "ms": 1883,
+    "source": "cold",
+    "proportion": 0.9789,
+    "frame_idx": 68
+  },
+  {
+    "second": 1,
+    "ms": 1900,
+    "source": "cold",
+    "proportion": 0.9789,
+    "frame_idx": 69
+  },
+  {
+    "second": 1,
+    "ms": 1916,
+    "source": "cold",
+    "proportion": 0.9789,
+    "frame_idx": 70
+  },
+  {
+    "second": 1,
+    "ms": 1933,
+    "source": "cold",
+    "proportion": 0.9789,
+    "frame_idx": 71
+  },
+  {
+    "second": 1,
+    "ms": 1950,
+    "source": "cold",
+    "proportion": 0.9684,
+    "frame_idx": 72
+  },
+  {
+    "second": 1,
+    "ms": 1966,
+    "source": "cold",
+    "proportion": 0.9684,
+    "frame_idx": 73
+  },
+  {
+    "second": 1,
+    "ms": 1983,
+    "source": "cold",
+    "proportion": 0.9684,
+    "frame_idx": 74
+  },
+  {
+    "second": 2,
+    "ms": 2000,
+    "source": "cold",
+    "proportion": 0.9684,
+    "frame_idx": 75
+  },
+  {
+    "second": 2,
+    "ms": 2016,
+    "source": "cold",
+    "proportion": 0.9684,
+    "frame_idx": 76
+  },
+  {
+    "second": 2,
+    "ms": 2033,
+    "source": "cold",
+    "proportion": 0.9684,
+    "frame_idx": 77
+  },
+
+  {
+    "second": 3,
+    "ms": 3000,
+    "source": "nan",
+    "proportion": 0.8211,
+    "frame_idx": 93,
+    "_t": 3000
+  },
+  {
+    "second": 3,
+    "ms": 3000,
+    "source": "heat",
+    "proportion": 0.8526,
+    "frame_idx": 94
+  },
+  {
+    "second": 3,
+    "ms": 3016,
+    "source": "heat",
+    "proportion": 0.8632,
+    "frame_idx": 95
+  },
+  {
+    "second": 3,
+    "ms": 3033,
+    "source": "heat",
+    "proportion": 0.8632,
+    "frame_idx": 96
+  },
+  {
+    "second": 3,
+    "ms": 3050,
+    "source": "heat",
+    "proportion": 0.8737,
+    "frame_idx": 97
+  },
+  {
+    "second": 3,
+    "ms": 3066,
+    "source": "heat",
+    "proportion": 0.8737,
+    "frame_idx": 98
+  },
+  {
+    "second": 3,
+    "ms": 3083,
+    "source": "heat",
+    "proportion": 0.8737,
+    "frame_idx": 99
+  },
+  {
+    "second": 3,
+    "ms": 3100,
+    "source": "heat",
+    "proportion": 0.8632,
+    "frame_idx": 100
+  },
+  {
+    "second": 3,
+    "ms": 3116,
+    "source": "heat",
+    "proportion": 0.8632,
+    "frame_idx": 101
+  },
+  {
+    "second": 3,
+    "ms": 3133,
+    "source": "heat",
+    "proportion": 0.8526,
+    "frame_idx": 102
+  },
+  {
+    "second": 3,
+    "ms": 3150,
+    "source": "heat",
+    "proportion": 0.8421,
+    "frame_idx": 103
+  },
+  {
+    "second": 3,
+    "ms": 3166,
+    "source": "heat",
+    "proportion": 0.8316,
+    "frame_idx": 104
+  },
+  {
+    "second": 3,
+    "ms": 3183,
+    "source": "heat",
+    "proportion": 0.8105,
+    "frame_idx": 105
+  },
+  {
+    "second": 3,
+    "ms": 3200,
+    "source": "heat",
+    "proportion": 0.8,
+    "frame_idx": 106
+  },
+  {
+    "second": 3,
+    "ms": 3216,
+    "source": "heat",
+    "proportion": 0.7895,
+    "frame_idx": 107
+  },
+  {
+    "second": 3,
+    "ms": 3233,
+    "source": "heat",
+    "proportion": 0.7684,
+    "frame_idx": 108
+  },
+  {
+    "second": 3,
+    "ms": 3250,
+    "source": "heat",
+    "proportion": 0.4842,
+    "frame_idx": 109
+  },
+  {
+    "second": 3,
+    "ms": 3266,
+    "source": "heat",
+    "proportion": 0.4421,
+    "frame_idx": 110
+  },
+  {
+    "second": 3,
+    "ms": 3283,
+    "source": "heat",
+    "proportion": 0.4105,
+    "frame_idx": 111
+  },
+  {
+    "second": 3,
+    "ms": 3300,
+    "source": "heat",
+    "proportion": 0.3684,
+    "frame_idx": 112
+  },
+  {
+    "second": 3,
+    "ms": 3316,
+    "source": "heat",
+    "proportion": 0.3474,
+    "frame_idx": 113
+  },
+  {
+    "second": 3,
+    "ms": 3333,
+    "source": "heat",
+    "proportion": 0.3263,
+    "frame_idx": 114
+  },
+  {
+    "second": 3,
+    "ms": 3350,
+    "source": "heat",
+    "proportion": 0.3053,
+    "frame_idx": 115
+  },
+  {
+    "second": 3,
+    "ms": 3366,
+    "source": "heat",
+    "proportion": 0.2842,
+    "frame_idx": 116
+  },
+  {
+    "second": 3,
+    "ms": 3383,
+    "source": "heat",
+    "proportion": 0.2737,
+    "frame_idx": 117
+  },
+  {
+    "second": 3,
+    "ms": 3400,
+    "source": "heat",
+    "proportion": 0.2737,
+    "frame_idx": 118
+  },
+  {
+    "second": 3,
+    "ms": 3416,
+    "source": "heat",
+    "proportion": 0.2632,
+    "frame_idx": 119
+  },
+  {
+    "second": 3,
+    "ms": 3433,
+    "source": "heat",
+    "proportion": 0.2632,
+    "frame_idx": 120
+  },
+  {
+    "second": 3,
+    "ms": 3450,
+    "source": "heat",
+    "proportion": 0.2526,
+    "frame_idx": 121
+  },
+  {
+    "second": 3,
+    "ms": 3466,
+    "source": "heat",
+    "proportion": 0.2526,
+    "frame_idx": 122
+  },
+  {
+    "second": 3,
+    "ms": 3483,
+    "source": "heat",
+    "proportion": 0.2526,
+    "frame_idx": 123
+  },
+  {
+    "second": 3,
+    "ms": 3500,
+    "source": "heat",
+    "proportion": 0.2421,
+    "frame_idx": 124
+  },
+  {
+    "second": 3,
+    "ms": 3516,
+    "source": "heat",
+    "proportion": 0.2316,
+    "frame_idx": 125
+  },
+  {
+    "second": 3,
+    "ms": 3533,
+    "source": "heat",
+    "proportion": 0.2316,
+    "frame_idx": 126
+  },
+  {
+    "second": 3,
+    "ms": 3550,
+    "source": "heat",
+    "proportion": 0.2211,
+    "frame_idx": 127
+  },
+  {
+    "second": 3,
+    "ms": 3566,
+    "source": "heat",
+    "proportion": 0.2,
+    "frame_idx": 128
+  },
+  {
+    "second": 3,
+    "ms": 3583,
+    "source": "heat",
+    "proportion": 0.1895,
+    "frame_idx": 129
+  },
+  {
+    "second": 3,
+    "ms": 3600,
+    "source": "heat",
+    "proportion": 0.1789,
+    "frame_idx": 130
+  },
+  {
+    "second": 3,
+    "ms": 3616,
+    "source": "heat",
+    "proportion": 0.1684,
+    "frame_idx": 131
+  },
+  {
+    "second": 3,
+    "ms": 3633,
+    "source": "heat",
+    "proportion": 0.1474,
+    "frame_idx": 132
+  },
+  {
+    "second": 3,
+    "ms": 3650,
+    "source": "heat",
+    "proportion": 0.1368,
+    "frame_idx": 133
+  },
+  {
+    "second": 3,
+    "ms": 3666,
+    "source": "heat",
+    "proportion": 0.1263,
+    "frame_idx": 134
+  },
+  {
+    "second": 3,
+    "ms": 3683,
+    "source": "heat",
+    "proportion": 0.1263,
+    "frame_idx": 135
+  },
+  {
+    "second": 3,
+    "ms": 3700,
+    "source": "heat",
+    "proportion": 0.1263,
+    "frame_idx": 136
+  },
+  {
+    "second": 3,
+    "ms": 3716,
+    "source": "heat",
+    "proportion": 0.1263,
+    "frame_idx": 137
+  },
+  {
+    "second": 3,
+    "ms": 3733,
+    "source": "heat",
+    "proportion": 0.1368,
+    "frame_idx": 138
+  },
+  {
+    "second": 3,
+    "ms": 3750,
+    "source": "heat",
+    "proportion": 0.2421,
+    "frame_idx": 139
+  },
+  {
+    "second": 3,
+    "ms": 3766,
+    "source": "heat",
+    "proportion": 0.2421,
+    "frame_idx": 140
+  },
+  {
+    "second": 3,
+    "ms": 3783,
+    "source": "heat",
+    "proportion": 0.2632,
+    "frame_idx": 141
+  },
+  {
+    "second": 3,
+    "ms": 3800,
+    "source": "heat",
+    "proportion": 0.2737,
+    "frame_idx": 142
+  },
+  {
+    "second": 3,
+    "ms": 3816,
+    "source": "heat",
+    "proportion": 0.2947,
+    "frame_idx": 143
+  },
+  {
+    "second": 3,
+    "ms": 3833,
+    "source": "heat",
+    "proportion": 0.3158,
+    "frame_idx": 144
+  },
+  {
+    "second": 3,
+    "ms": 3850,
+    "source": "heat",
+    "proportion": 0.3368,
+    "frame_idx": 145
+  },
+  {
+    "second": 3,
+    "ms": 3866,
+    "source": "heat",
+    "proportion": 0.3684,
+    "frame_idx": 146
+  },
+  {
+    "second": 3,
+    "ms": 3883,
+    "source": "heat",
+    "proportion": 0.3895,
+    "frame_idx": 147
+  },
+  {
+    "second": 3,
+    "ms": 3900,
+    "source": "heat",
+    "proportion": 0.4211,
+    "frame_idx": 148
+  },
+  {
+    "second": 3,
+    "ms": 3916,
+    "source": "heat",
+    "proportion": 0.4421,
+    "frame_idx": 149
+  },
+  {
+    "second": 3,
+    "ms": 3933,
+    "source": "heat",
+    "proportion": 0.4632,
+    "frame_idx": 150
+  },
+  {
+    "second": 3,
+    "ms": 3950,
+    "source": "heat",
+    "proportion": 0.4842,
+    "frame_idx": 151
+  },
+  {
+    "second": 3,
+    "ms": 3966,
+    "source": "heat",
+    "proportion": 0.4947,
+    "frame_idx": 152
+  },
+  {
+    "second": 3,
+    "ms": 3983,
+    "source": "heat",
+    "proportion": 0.5158,
+    "frame_idx": 153
+  },
+  {
+    "second": 4,
+    "ms": 4000,
+    "source": "heat",
+    "proportion": 0.5263,
+    "frame_idx": 154
+  },
+  {
+    "second": 4,
+    "ms": 4016,
+    "source": "heat",
+    "proportion": 0.5368,
+    "frame_idx": 155
+  }
+]
