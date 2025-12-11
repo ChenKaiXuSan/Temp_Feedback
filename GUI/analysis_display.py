@@ -31,13 +31,13 @@ import sys
 from pathlib import Path
 
 import matplotlib
+from numpy import isin
 
 matplotlib.use("Agg")  # 不使用 GUI backend
 from io import BytesIO
 
 import cv2
 import matplotlib.pyplot as plt
-from arduino_serial import ArduinoSerial
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtWidgets import (
@@ -45,10 +45,11 @@ from PyQt5.QtWidgets import (
     QComboBox,
     QHBoxLayout,
     QLabel,
-    QProgressBar, 
+    QProgressBar,
     QPushButton,
     QSizePolicy,
-    QStackedLayout, QVBoxLayout,
+    QStackedLayout,
+    QVBoxLayout,
     QWidget,
 )
 
@@ -62,9 +63,6 @@ class VideoPlayer(QWidget):
         self.setStyleSheet("background-color: black; color: white; font-weight: bold;")
 
         # top control panel
-
-        self.select_label = QLabel("select video")
-        self.select_label.setStyleSheet("font-size: 10em;")
 
         self.select_combo = QComboBox()
         self.select_combo.currentIndexChanged.connect(self.load_selected_video)
@@ -81,13 +79,12 @@ class VideoPlayer(QWidget):
 
         for widget in [
             self.exit_btn,
-            self.select_label,
             self.select_combo,
             self.video_control_btn,
         ]:
             widget.setFixedHeight(100)
-            widget.setMinimumWidth(300)
-            widget.setFixedWidth(300)
+            widget.setMinimumWidth(400)
+            widget.setFixedWidth(400)
 
             widget.setStyleSheet(
                 """
@@ -121,6 +118,11 @@ class VideoPlayer(QWidget):
                     border-radius: 10px;
                     padding: 10px;
                 }
+                QComboBox QAbstractItemView {
+    background-color: white;   /* 下拉框背景 */
+    color: black;              /* 下拉选项字体颜色 */
+    selection-background-color: #bbbbbb; /* 选中项颜色 */
+}
                 QPushButton:hover {
                     background-color: #dddddd;
                 }
@@ -130,10 +132,9 @@ class VideoPlayer(QWidget):
         # Top bar layout
         top_bar = QHBoxLayout()
 
-        top_bar.addStretch()
-        top_bar.addWidget(self.select_label)
         top_bar.addWidget(self.select_combo)
         top_bar.addWidget(self.video_control_btn)
+        top_bar.addStretch()
         top_bar.addWidget(self.exit_btn)
 
         # Video display (实际播放区域)
@@ -198,10 +199,15 @@ class VideoPlayer(QWidget):
         self.stack.addWidget(self.video_widget)  # index 1
         self.stack.setCurrentIndex(1)  # 默认显示视频页（初始时无加载）
 
+        self.analaysis_stack = QStackedLayout()
+        self.analaysis_stack.addWidget(self.loading_widget)  # index 0
+        self.analaysis_stack.addWidget(self.analysis_widget)  # index 1
+        self.analaysis_stack.setCurrentIndex(1)  # 默认显示分析页
+
         # Layouts
         content_layout = QHBoxLayout()
         content_layout.addLayout(self.stack)
-        content_layout.addWidget(self.analysis_widget)
+        content_layout.addLayout(self.analaysis_stack)
 
         main_layout = QVBoxLayout()
         main_layout.addLayout(top_bar)
@@ -251,8 +257,10 @@ class VideoPlayer(QWidget):
         """
         if loading:
             self.stack.setCurrentIndex(0)
+            self.analaysis_stack.setCurrentIndex(0)
         else:
             self.stack.setCurrentIndex(1)
+            self.analaysis_stack.setCurrentIndex(1)
 
     def pause_video(self):
         self.playing = False
@@ -277,7 +285,7 @@ class VideoPlayer(QWidget):
             # 用 singleShot 把真正的工作放到事件循环的下一拍执行
             # 这样界面会先刷新出 loading 画面
             # 这里控制延时 2 秒模拟处理时间
-            QTimer.singleShot(2000, lambda p=path: self._open_video(p))
+            QTimer.singleShot(3000, lambda p=path: self._open_video(p))
 
     def _open_video(self, path: str):
         # 真正的“加载视频 + 初始化播放”的逻辑
@@ -290,17 +298,18 @@ class VideoPlayer(QWidget):
         # （如果后面你有更重的预处理，比如读取所有帧、跑推理，
         #  可以在这里加入循环，同时适当手动更新一个百分比进度）
 
-        self.all_temp = self.load_llm_res(path)
+        self.source, self.temp = self.load_llm_res(path)
         self.timer.start(int(1000 / self.fps))
-
-        # 加载完成，切回视频界面
-        self.show_loading(False)
 
         # 重置分析结果
         self.analysis_res_draw = []
 
+        # 加载完成，切回视频界面
+        self.show_loading(False)
+
     def load_llm_res(self, path):
-        all_temp = {}
+        source = []
+        temp = []
 
         json_file = Path(path).stem + ".json"
         json_path = Path(__file__).parent / "assets" / "llm_res" / json_file
@@ -311,15 +320,21 @@ class VideoPlayer(QWidget):
                 for info in self.annotations:
                     frame_idx = info.get("frame_idx")
                     value = self.convert_str_dict(info.get("output_text"))
-                    source = value["source"]
-                    proportion = value["proportion"]
-                    all_temp[frame_idx] = proportion
+                    _source = value["source"]
+                    _proportion = (
+                        value["proportion"]
+                        if isinstance(value["proportion"], (int, float))
+                        else 0.0
+                    )
 
+                    temp.append(_proportion)
+                    source.append(_source)
         except:
             self.annotations = []
-            all_temp = {}
+            source = []
+            temp = []
 
-        return all_temp
+        return source, temp
 
     def next_frame(self):
         if not self.cap:
@@ -330,8 +345,8 @@ class VideoPlayer(QWidget):
             self.analysis_res_draw = []  # 重置分析结果
             return
 
-        max_temp = max(self.all_temp.values()) if self.all_temp else None
-        min_temp = min(self.all_temp.values()) if self.all_temp else None
+        # find max temp
+        max_temp = max(self.temp) if self.temp else None
 
         self.current_frame = int(self.cap.get(cv2.CAP_PROP_POS_FRAMES))
         rgb_image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -343,20 +358,16 @@ class VideoPlayer(QWidget):
         )
         self.video_label.setPixmap(QPixmap.fromImage(scaled_image))
 
-        if self.current_frame % int(self.fps) == 0:
-            result = self.find_res_with_position(self.current_frame)
-            if result:
-                source = result["source"][0]
-                proportion = result["proportion"]
+        # if self.current_frame % int(self.fps) == 0:
+        source = self.source[self.current_frame - 1]
+        temp = self.temp[self.current_frame - 1]
 
-                # 按照最大值扩大比例
-                if max_temp and max_temp != 0:
-                    proportion = proportion / max_temp
+        proportion = temp / max_temp
+        val = proportion if source[0] == "h" else -proportion
 
-                val = proportion if source == "h" else -proportion
-                self.analysis_res_draw.append(val)
+        self.analysis_res_draw.append(val)
 
-            self.draw_analysis_result()
+        self.draw_analysis_result()
 
     def draw_analysis_result(self):
         data = self.analysis_res_draw
