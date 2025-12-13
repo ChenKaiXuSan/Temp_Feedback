@@ -16,3 +16,5 @@ opencv-python-headless
 opencv-python
 
 pyinstaller
+
+matplotlib
